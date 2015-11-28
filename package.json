@@ -1,0 +1,26 @@
+{
+  "name": "xmasxp2015",
+  "version": "1.0.0",
+  "description": "Christmas Experiment by @eddietree\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D 2015",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddietree/xmasxp2015.git"
+  },
+  "author": "Eddie Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eddietree/xmasxp2015/issues"
+  },
+  "homepage": "https://github.com/eddietree/xmasxp2015#readme"
+}
