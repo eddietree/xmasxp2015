@@ -67,7 +67,7 @@ gulp.task('build-clean', function () {
 });
 
 gulp.task('build' , function() {
-	return runSequence(
+	runSequence(
 		'build-clean',
 		['build-scss', 'build-js'],
 		 'build-html'
@@ -77,12 +77,11 @@ gulp.task('build' , function() {
 // configure which files to watch and what tasks to use on file changes
 gulp.task('watch', function() {
   gulp.watch(pathsSrc.html, ['build-html']);
-  gulp.watch(pathsSrc.js, ['build-js']);
-  gulp.watch(pathsSrc.scss, ['build-scss']);
-  gulp.watch([pathsSrc.js, ], ['inject-index']);
+  gulp.watch(pathsSrc.js, function() { runSequence('build-js', 'build-html'); });
+  gulp.watch(pathsSrc.scss, function() { runSequence('build-scss', 'build-html'); });
 });
 
-gulp.task('serve', function() {
+gulp.task('serve',  function() {
   browserSync({
     server: {
       baseDir: 'public'
@@ -94,5 +93,6 @@ gulp.task('serve', function() {
 
 // create a default task and just log a message
 gulp.task('default', function() {
+	//return gulp.src('build');//.src('serve');
 	runSequence( 'build', 'serve' );
 });
