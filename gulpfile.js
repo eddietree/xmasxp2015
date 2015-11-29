@@ -66,11 +66,12 @@ gulp.task('build-clean', function () {
     .pipe(clean());
 });
 
-gulp.task('build' , function() {
+gulp.task('build' , function(callback) {
 	runSequence(
 		'build-clean',
 		['build-scss', 'build-js'],
-		 'build-html'
+		 'build-html',
+		 callback
 	);
 });
 
@@ -92,7 +93,15 @@ gulp.task('serve',  function() {
 });
 
 // create a default task and just log a message
-gulp.task('default', function() {
+gulp.task('default', function(callback) {
 	//return gulp.src('build');//.src('serve');
-	runSequence( 'build', 'serve' );
+	//runSequence( 'build', 'serve', callback );
+
+	runSequence(
+		'build-clean',
+		['build-scss', 'build-js'],
+		 'build-html',
+		 'serve',
+		 callback
+	);
 });
