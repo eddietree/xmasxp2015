@@ -15,7 +15,7 @@ var reload = browserSync.reload;
 
 var pathsSrc = {
 	html: 'source/index.html',
-	js: ['source/js/**/*.js'],
+	js: ['source/js/**/**/*.js'],
 	lib: ['source/lib/*.js'],
 	scss: ['source/scss/**/*.scss'],
 };
@@ -88,7 +88,7 @@ gulp.task('serve',  function() {
     }
   });
 
-  gulp.watch(['*.html', 'css/*.css', 'js/**/*.js'], {cwd: 'public'}, reload);
+  gulp.watch(['*.html', 'css/*.css', 'js/**/**/*.js'], {cwd: 'public'}, reload);
 });
 
 // create a default task and just log a message

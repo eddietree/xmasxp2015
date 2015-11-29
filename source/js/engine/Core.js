@@ -1,8 +1,8 @@
-var App = function(firstName) {
+var Core = function(firstName) {
 	this.firstName = firstName;
 };
 
-App.prototype.Init = function() {
+Core.prototype.Init = function() {
 
 	this.scene = new THREE.Scene();
 	this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -15,7 +15,7 @@ App.prototype.Init = function() {
 	// test cube
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
 	var material = new THREE.MeshBasicMaterial({
-		color: 0x00ff00
+		color: new THREE.Color( 0xff00ff)
 	});
 	this.cube = new THREE.Mesh(geometry, material);
 	this.scene.add(this.cube);
@@ -23,26 +23,33 @@ App.prototype.Init = function() {
 	this.camera.position.z = 5;
 
 	var tween = new TWEEN.Tween(this.cube.position)
-        .to({ x: 1, y: 1, z: 1 }, 500)
-        //.delay(1000)
-        .easing(TWEEN.Easing.Back.In)
-        .start();
+		.to({
+			x: 1,
+			y: 1,
+			z: 1
+		}, 500)
+		//.delay(1000)
+		.easing(TWEEN.Easing.Back.In)
+		.start();
 
-     var test = v3(1,2,3);
+	var test = v3(1, 2);
+	test.add(v3(2, 2, 2));
+	LOG(test);
+	//ASSERT(false);
 };
 
-App.prototype.Update = function() {
+Core.prototype.Update = function() {
 	//this.cube.rotation.x += 0.1;
 	//this.cube.rotation.y += 0.1;
 
 	TWEEN.update();
 };
 
-App.prototype.Render = function() {
+Core.prototype.Render = function() {
 	this.renderer.render(this.scene, this.camera);
 };
 
-App.prototype.ResizeToFitScreen = function() {
+Core.prototype.ResizeToFitScreen = function() {
 	this.renderer.setSize(window.innerWidth, window.innerHeight);
 	this.camera.aspect = window.innerWidth / window.innerHeight;
 	this.camera.updateProjectionMatrix();
