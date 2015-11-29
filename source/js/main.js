@@ -1,8 +1,8 @@
 var render = function() {
 	requestAnimationFrame(render);
 
-	g_core.Update();
-	g_core.Draw();
+	g_core.update();
+	g_core.draw();
 };
 
 $(window).load(function() {
@@ -12,6 +12,6 @@ $(window).load(function() {
 	});
 
 	g_core = new Core();
-	g_core.Init();
+	g_core.init();
 	render();
 });

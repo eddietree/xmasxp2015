@@ -34,10 +34,11 @@ Core.prototype = {
 			.easing(TWEEN.Easing.Back.In)
 			.start();
 
-		var test = v3(1, 2);
+		/*var test = v3(1, 2);
 		test.add(v3(2, 2, 2));
 		LOG(test);
 		//ASSERT(false);
+		*/
 	}, 
 
 	update : function() {
