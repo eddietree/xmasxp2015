@@ -1,5 +1,8 @@
 /* File: gulpfile.js */
 
+// the main game directory to use
+var gameDir = 'source/js/game/xmas2015';
+
 // grab our gulp packages
 var gulp  = require('gulp'),
     gutil = require('gulp-util'),
@@ -101,7 +104,7 @@ gulp.task('default', function(callback) {
 		'build-clean',
 		['build-scss', 'build-js'],
 		 'build-html',
-		 'serve',
+		['serve', 'watch'],
 		 callback
 	);
 });
