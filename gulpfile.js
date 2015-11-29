@@ -33,7 +33,7 @@ var pathsDst = {
 gulp.task('build-html', function(){
 
 	var target = pathsDst.html;
-	var sources = gulp.src([pathsDst.js+'*.js', pathsDst.scss+'*.css'], {read: false});
+	var sources = gulp.src([pathsDst.js+'**/*.js', pathsDst.scss+'*.css'], {read: false});
 	var sourcesLib = gulp.src(pathsDst.lib+'*.js', {read: false});
 
     return gulp.src(pathsSrc.html)
@@ -88,7 +88,7 @@ gulp.task('serve',  function() {
     }
   });
 
-  gulp.watch(['*.html', 'css/*.css', 'js/*.js'], {cwd: 'public'}, reload);
+  gulp.watch(['*.html', 'css/*.css', 'js/**/*.js'], {cwd: 'public'}, reload);
 });
 
 // create a default task and just log a message

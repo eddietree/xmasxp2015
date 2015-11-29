@@ -21,11 +21,21 @@ App.prototype.Init = function() {
 	this.scene.add(this.cube);
 
 	this.camera.position.z = 5;
+
+	var tween = new TWEEN.Tween(this.cube.position)
+        .to({ x: 1, y: 1, z: 1 }, 500)
+        //.delay(1000)
+        .easing(TWEEN.Easing.Back.In)
+        .start();
+
+     var test = v3(1,2,3);
 };
 
 App.prototype.Update = function() {
-	this.cube.rotation.x += 0.1;
-	this.cube.rotation.y += 0.1;
+	//this.cube.rotation.x += 0.1;
+	//this.cube.rotation.y += 0.1;
+
+	TWEEN.update();
 };
 
 App.prototype.Render = function() {
