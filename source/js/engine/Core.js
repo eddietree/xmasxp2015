@@ -45,7 +45,7 @@ Core.prototype.Update = function() {
 	TWEEN.update();
 };
 
-Core.prototype.Render = function() {
+Core.prototype.Draw = function() {
 	this.renderer.render(this.scene, this.camera);
 };
 

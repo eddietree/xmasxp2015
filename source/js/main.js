@@ -2,7 +2,7 @@ var render = function() {
 	requestAnimationFrame(render);
 
 	g_core.Update();
-	g_core.Render();
+	g_core.Draw();
 };
 
 $(window).load(function() {
