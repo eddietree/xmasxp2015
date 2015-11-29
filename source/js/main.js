@@ -8,7 +8,7 @@ var render = function() {
 $(window).load(function() {
 	// add event listener to resize
 	window.addEventListener('resize', function() {
-		g_core.ResizeToFitScreen();
+		g_core.resizeToFitScreen();
 	});
 
 	g_core = new Core();
