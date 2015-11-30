@@ -1,18 +1,11 @@
 var BaseObj = function(firstName) {
+	THREE.Object3D.call(this);
 	this.firstName = firstName;
-	this.init();
 };
 
 BaseObj.prototype = Object.create( THREE.Object3D.prototype );
 BaseObj.prototype.constructor = BaseObj;
 
-BaseObj.prototype = {
-	init: function() {
-	},
-
-	update: function() {
-	},
-
-	draw: function() {
-	},
-};
+BaseObj.prototype.test = function() {
+	
+}

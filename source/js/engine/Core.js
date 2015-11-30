@@ -1,7 +1,4 @@
-var Core = function(firstName) {
-	this.firstName = firstName;
-};
-
+var Core = function() {
 };
 
 Core.prototype = {
@@ -15,7 +12,7 @@ Core.prototype = {
 		document.body.appendChild(this.renderer.domElement);
 
 		this.camera.position.z = 5;
-		
+
 		// test cube
 		this.game = new Game();
 		this.game.init();

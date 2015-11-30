@@ -1,31 +1,27 @@
-var Game = function(firstName) {
-	this.firstName = firstName;
-};
+var Game = function() {};
 
 Game.prototype = {
-	
+
+	initSceneObjects: function() {
+		this.sceneObjs = {
+			box: new TestBox(),
+		};
+
+		for (key in this.sceneObjs) {
+			var obj = this.sceneObjs[key];
+			obj.init();
+		}
+	},
+
 	init: function() {
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
-		var material = new THREE.MeshBasicMaterial({
-			color: new THREE.Color(0xff00ff)
-		});
-		this.cube = new THREE.Mesh(geometry, material);
-
-		var tween = new TWEEN.Tween(this.cube.position)
-			.to({
-				x: 1,
-				y: 1,
-				z: 1
-			}, 500)
-			//.delay(1000)
-			.easing(TWEEN.Easing.Back.In)
-			.start();
-
-		g_core.scene.add(this.cube);
+		this.initSceneObjects();
 	},
 
 	update: function() {
-
+		for (key in this.sceneObjs) {
+			var obj = this.sceneObjs[key];
+			obj.update();
+		}
 	},
 
 	draw: function() {
