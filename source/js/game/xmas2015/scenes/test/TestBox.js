@@ -1,9 +1,9 @@
 var TestBox = function(firstName) {
-	BaseObj.call(this);
-	LOG("TESTBOX");
+	SceneObj.call(this);
+	LOG("Creating TestBox");
 };
 
-TestBox.prototype = Object.create(BaseObj.prototype);
+TestBox.prototype = Object.create(SceneObj.prototype);
 TestBox.prototype.constructor = TestBox;
 
 TestBox.prototype.init = function() {
@@ -24,6 +24,11 @@ TestBox.prototype.init = function() {
 	this.cube2.position.z = 1;
 	this.cube.add(this.cube2);
 
+	this.add(this.cube);
+	//g_core.scene.add(this);
+};
+
+TestBox.prototype.start = function() {
 	var tween = new TWEEN.Tween(this.cube.position)
 		.to({
 			x: 1,
@@ -33,15 +38,10 @@ TestBox.prototype.init = function() {
 		//.delay(1000)
 		.easing(TWEEN.Easing.Back.In)
 		.start();
-
-	this.add(this.cube);
-	g_core.scene.add(this);
 };
 
 TestBox.prototype.update = function() {
-
 };
 
 TestBox.prototype.draw = function() {
-
 };

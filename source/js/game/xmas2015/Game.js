@@ -1,30 +1,18 @@
-var Game = function() {};
+var Game = function() {
+};
 
-Game.prototype = {
+Game.prototype.init = function() {
+	this.sceneManager = new SceneManager();
+	this.sceneManager.addScene('SceneTestBox', new SceneTestBox());
+};
 
-	initSceneObjects: function() {
-		this.sceneObjs = {
-			box: new TestBox(),
-		};
+Game.prototype.start = function() {
+	this.sceneManager.changeSceneTo('SceneTestBox');
+};
 
-		for (key in this.sceneObjs) {
-			var obj = this.sceneObjs[key];
-			obj.init();
-		}
-	},
+Game.prototype.update = function() {
+	this.sceneManager.update();
+};
 
-	init: function() {
-		this.initSceneObjects();
-	},
-
-	update: function() {
-		for (key in this.sceneObjs) {
-			var obj = this.sceneObjs[key];
-			obj.update();
-		}
-	},
-
-	draw: function() {
-
-	},
+Game.prototype.draw = function() {
 };

@@ -13,19 +13,15 @@ Core.prototype = {
 
 		this.camera.position.z = 5;
 
-		// test cube
 		this.game = new Game();
 		this.game.init();
-
-		/*var test = v3(1, 2);
-		test.add(v3(2, 2, 2));
-		LOG(test);
-		//ASSERT(false);
-		*/
+		this.game.start();
 	},
 
 	update: function() {
 		TWEEN.update();
+
+		this.game.update();
 	},
 
 	draw: function() {
