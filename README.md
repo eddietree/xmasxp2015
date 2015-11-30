@@ -4,6 +4,8 @@ Christmas Experiments 2015 by @eddietree
 How to setup:
 
 + Install [node.js](https://nodejs.org/en/download/)
-+ Install Sublime Text with gulp plugin.
++ npm install -g gulp
 + Add Windows Environment Variable *NODE_PATH* as *%AppData%\npm\node_modules*
-+ run: gulp default (this will build and run the server/watcher)
+
++ Install Sublime Text with Gulp plugin.
++ Run Gulp -> default (or run: *gulp default* from command line in dir), this will build and run the reloaded/server
