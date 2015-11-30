@@ -17,7 +17,7 @@ SceneManager.prototype.changeSceneTo = function(name) {
 	LOG("Changing scene to: " + name );
 
 	if ( this.currScene !== null) {
-		g_core.scene.remove(this.currScene);
+		this.remove(this.currScene);
 	}
 
 	var scene = this.scenes[name];
@@ -26,7 +26,7 @@ SceneManager.prototype.changeSceneTo = function(name) {
 	this.currScene = scene;
 	this.currScene.start();
 
-	g_core.scene.add(scene);
+	this.add(scene);
 };
 
 SceneManager.prototype.update = function() {

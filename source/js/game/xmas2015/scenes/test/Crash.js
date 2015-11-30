@@ -12,8 +12,7 @@ Crash.prototype.init = function() {
 
 	var that = this;
 
-	var loader = new THREE.OBJMTLLoader();
-
+	/*var loader = new THREE.OBJMTLLoader();
 	loader.load(
 
 		// resource URL
@@ -35,20 +34,30 @@ Crash.prototype.init = function() {
 		function ( xhr ) {
 			console.log( 'An error happened' );
 		}
-	);
+	);*/
 
-	/*
+	
 	var loader = new THREE.OBJLoader();
+
 	// load a resource
 	loader.load(
+
 		// resource URL
 		'resource/obj/crash.obj',
+
 		// Function when resource is loaded
 		function ( object ) {
 			LOG(object);
 			that.add( object );
+
+			object.scale.multiplyScalar(3.0);
+
+			for( var i = 0; i < object.children.length; i+=1 ) {
+				var child = object.children[i];
+				child.material = new THREE.MeshNormalMaterial( {});
+			}
 		}
-	);*/
+	);
 };
 
 Crash.prototype.start = function() {

@@ -11,6 +11,12 @@ Core.prototype = {
 		this.renderer.setClearColor(0xAAAAAA, 1);
 		document.body.appendChild(this.renderer.domElement);
 
+		controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+		//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+		controls.enableDamping = true;
+		controls.dampingFactor = 0.25;
+		controls.enableZoom = false;
+
 		this.camera.position.z = 5;
 
 		this.game = new Game();
