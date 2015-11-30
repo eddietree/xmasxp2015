@@ -18,6 +18,7 @@ var reload = browserSync.reload;
 var pathsSrc = {
 	html: 'source/index.html',
 	js: ['source/js/**/*.js'],
+	resource: ['source/resource/**/*.*'],
 	lib: ['source/lib/*.js'],
 	scss: ['source/scss/**/*.scss'],
 };
@@ -26,6 +27,7 @@ var pathsDst = {
 	root: 'public/',
 	html: 'public/',
 	js: 'public/js/',
+	resource: 'public/resource/',
 	lib: 'public/lib/',
 	scss: 'public/css/',
 };
@@ -72,6 +74,12 @@ gulp.task('build-scss', function() {
 		.pipe(gulp.dest(pathsDst.scss));
 });
 
+gulp.task('build-resource', function() {
+	return gulp.src(pathsSrc.resource)
+		.pipe(gulp.dest(pathsDst.resource));
+});
+
+
 gulp.task('build-clean', function() {
 	return gulp.src(pathsDst.root, {
 			read: false
@@ -97,7 +105,9 @@ gulp.task('serve', function() {
 
 	gulp.watch(pathsSrc.html, ['build-html', reload]);
 	gulp.watch(pathsSrc.js, function() {runSequence('build-js', 'build-html', reload); });
+	gulp.watch(pathsSrc.lib, function() {runSequence('build-js', 'build-html', reload); });
 	gulp.watch(pathsSrc.scss, function() {runSequence('build-scss', 'build-html', reload); });
+	gulp.watch(pathsSrc.resource, function() {runSequence('build-resource', reload); });
 });
 
 // create a default task and just log a message
@@ -107,7 +117,7 @@ gulp.task('default', function(callback) {
 
 	runSequence(
 		'build-clean', 
-		['build-scss', 'build-js'],
+		['build-scss', 'build-js', 'build-resource'],
 		'build-html',
 		'serve',
 		callback

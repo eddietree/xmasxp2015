@@ -6,6 +6,9 @@ var Scene = function() {
 Scene.prototype = Object.create( THREE.Object3D.prototype );
 Scene.prototype.constructor = Scene;
 
+Scene.prototype.init = function() {
+};
+
 Scene.prototype.addSceneObj = function(name, obj) {
 	this.sceneObjs[name] = obj;
 	this.add(obj);

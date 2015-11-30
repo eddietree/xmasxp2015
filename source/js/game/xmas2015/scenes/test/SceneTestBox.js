@@ -6,10 +6,12 @@ SceneTestBox.prototype = Object.create(Scene.prototype);
 SceneTestBox.prototype.constructor = SceneTestBox;
 
 SceneTestBox.prototype.init = function() {
-	// tood: call parent init
+	Scene.prototype.init.call(this);
+
 	this.addSceneObj('box', new TestBox());
+	this.addSceneObj('crash', new Crash());
 };
 
 SceneTestBox.prototype.update = function() {
-	// tood: call parent update
+	Scene.prototype.update.call(this);
 };
