@@ -25,7 +25,18 @@ TestBox.prototype.init = function() {
 	this.cube.add(this.cube2);
 
 	this.add(this.cube);
+
+	this.initLight();
 	//g_core.scene.add(this);
+};
+
+TestBox.prototype.initLight = function() {
+	var spotLight = new THREE.SpotLight( 0xffffff );
+	spotLight.position.set( 5, 5, 0 );
+	g_core.scene.add( spotLight );
+
+	var spotLightHelper = new THREE.SpotLightHelper( spotLight );
+	g_core.scene.add( spotLightHelper );
 };
 
 TestBox.prototype.start = function() {

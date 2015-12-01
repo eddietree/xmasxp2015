@@ -43,18 +43,19 @@ Crash.prototype.init = function() {
 	loader.load(
 
 		// resource URL
-		'resource/obj/crash.obj',
+		'resource/obj/cliff.obj',
 
 		// Function when resource is loaded
 		function ( object ) {
 			LOG(object);
 			that.add( object );
 
-			object.scale.multiplyScalar(3.0);
+			//object.scale.multiplyScalar(1.0);
 
 			for( var i = 0; i < object.children.length; i+=1 ) {
 				var child = object.children[i];
-				child.material = new THREE.MeshNormalMaterial( {});
+				//child.material = new THREE.MeshNormalMaterial( {});
+				child.material = new THREE.MeshPhongMaterial( {color:0xffffff} );
 			}
 		}
 	);
