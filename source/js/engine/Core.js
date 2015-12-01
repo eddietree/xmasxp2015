@@ -14,10 +14,13 @@ Core.prototype = {
 		controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
 		//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
 		controls.enableDamping = true;
-		controls.dampingFactor = 0.25;
-		controls.enableZoom = false;
+		controls.dampingFactor = 0.8;
+		controls.enableZoom = true;
 
-		this.camera.position.z = 5;
+		this.camera.position.x = 1;
+		this.camera.position.y = 3;
+		this.camera.position.z = 15;
+		//this.camera.position = v3(10);
 
 		this.game = new Game();
 		this.game.init();
