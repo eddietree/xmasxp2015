@@ -11,54 +11,100 @@ Crash.prototype.constructor = Crash;
 Crash.prototype.init = function() {
 
 	var that = this;
+/*
+	if ( true ) {
+		var loader = new THREE.OBJMTLLoader();
+		loader.load(
 
-	/*var loader = new THREE.OBJMTLLoader();
+			// resource URL
+			'resource/obj/cliff.obj',
+			'resource/obj/cliff.mtl',
+
+			// Function when resource is loaded
+			function ( object ) {
+				console.log(object);
+				that.add( object );
+
+				for( var i = 0; i < object.children.length; i+=1 ) {
+					var child = object.children[i];
+					that.add(child);
+
+					for( var j = 0; j < child.children.length; j+=1 ) {
+						var grandChild = child.children[j];
+						grandChild.material = new THREE.MeshPhongMaterial( {color:0xffffff} );
+						that.add(grandChild);
+					}
+					//child.material = new THREE.MeshNormalMaterial( {});
+					//child.material = new THREE.MeshPhongMaterial( {color:0xffffff} );
+				}
+			},
+
+			// Function called when downloads progress
+			function ( xhr ) {
+				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+			},
+
+			// Function called when downloads error
+			function ( xhr ) {
+				console.log( 'An error happened' );
+			}
+		);
+	}
+	else {
+
+		var loader = new THREE.OBJLoader();
+
+		// load a resource
+		loader.load(
+
+			// resource URL
+			'resource/obj/cliff.obj',
+
+			// Function when resource is loaded
+			function ( object ) {
+				LOG(object);
+				that.add( object );
+
+				//object.scale.multiplyScalar(1.0);
+
+				for( var i = 0; i < object.children.length; i+=1 ) {
+					var child = object.children[i];
+					that.add(child);
+					//child.material = new THREE.MeshNormalMaterial( {});
+					child.material = new THREE.MeshPhongMaterial( {color:0xffffff} );
+				}
+			}
+		);
+	}
+	*/
+
+	function onAddMesh( child ) {
+		LOG(" ON ADD ");
+		LOG(child);
+	};
+
+	function traverseFamily( child ) {
+		onAddMesh(child);
+	}
+
+	var loader = new THREE.ColladaLoader();
+
 	loader.load(
-
 		// resource URL
-		'resource/obj/crash.obj',
-		'resource/obj/crash.mtl',
-
+		'resource/obj/cliff.dae',
 		// Function when resource is loaded
-		function ( object ) {
-			console.log(object);
-			that.add( object );
-		},
+		function ( collada ) {
+			LOG(collada.scene);
 
-		// Function called when downloads progress
+			//traverseFamily(collada.scene );
+			that.add( collada.scene );
+		},
+		// Function called when download progresses
 		function ( xhr ) {
 			console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-		},
-
-		// Function called when downloads error
-		function ( xhr ) {
-			console.log( 'An error happened' );
-		}
-	);*/
-
-	
-	var loader = new THREE.OBJLoader();
-
-	// load a resource
-	loader.load(
-
-		// resource URL
-		'resource/obj/cliff.obj',
-
-		// Function when resource is loaded
-		function ( object ) {
-			LOG(object);
-			that.add( object );
-
-			//object.scale.multiplyScalar(1.0);
-
-			for( var i = 0; i < object.children.length; i+=1 ) {
-				var child = object.children[i];
-				//child.material = new THREE.MeshNormalMaterial( {});
-				child.material = new THREE.MeshPhongMaterial( {color:0xffffff} );
-			}
 		}
 	);
+
 };
 
 Crash.prototype.start = function() {

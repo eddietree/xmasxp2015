@@ -32,11 +32,14 @@ TestBox.prototype.init = function() {
 
 TestBox.prototype.initLight = function() {
 	var spotLight = new THREE.SpotLight( 0xffffff );
-	spotLight.position.set( 5, 5, 0 );
+	spotLight.position.set( 2, 2, 0 );
 	g_core.scene.add( spotLight );
 
 	var spotLightHelper = new THREE.SpotLightHelper( spotLight );
 	g_core.scene.add( spotLightHelper );
+
+	var ambient = new THREE.AmbientLight( 0x444444 );
+	g_core.scene.add( ambient );
 };
 
 TestBox.prototype.start = function() {
