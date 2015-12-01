@@ -11,8 +11,8 @@ SceneTestBox.prototype.init = function() {
 	//this.addSceneObj('box', new TestBox());
 	this.addSceneObj('crash', new Crash());
 
-	//var ambient = new THREE.AmbientLight( 0x112211 );
-	//this.add( ambient );
+	var ambient = new THREE.AmbientLight( 0x222211 );
+	this.add( ambient );
 };
 
 SceneTestBox.prototype.update = function() {
