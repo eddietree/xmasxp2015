@@ -11,14 +11,17 @@ App.prototype = {
 		this.renderer.setClearColor(0xAAAAAA, 1);
 		document.body.appendChild(this.renderer.domElement);
 
+		this.camera.position.z = 15;
+		//this.camera.position = v3(10);
+	},
+
+	startGame : function() {
+
 		controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
 		//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
 		controls.enableDamping = true;
 		controls.dampingFactor = 0.8;
 		controls.enableZoom = true;
-
-		this.camera.position.z = 15;
-		//this.camera.position = v3(10);
 
 		this.game = new Game();
 		this.game.init();
@@ -28,7 +31,8 @@ App.prototype = {
 	update: function() {
 		TWEEN.update();
 
-		this.game.update();
+		if ( this.game )
+			this.game.update();
 	},
 
 	draw: function() {

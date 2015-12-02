@@ -4,7 +4,7 @@ var Resources = function() {
 	this.textures = {};
 	this.audio = {};
 
-	this.loadingTrackedItems = {};
+	this.loadingTrackedItems = [];
 };
 
 Resources.prototype.load = function() {
@@ -13,6 +13,44 @@ Resources.prototype.load = function() {
 	this.loadAudio();
 };
 
+Resources.prototype.getPercentageLoaded = function() {
+	var loadedBytes = 1;
+	var totalSizeBytes = 1;
+
+	for( var i = 0; i < this.loadingTrackedItems.length; i+=1 ) {
+		var item = this.loadingTrackedItems[i];
+
+		loadedBytes += item.loadedBytes;
+		totalSizeBytes += item.totalSizeBytes;
+	}
+
+	return loadedBytes / totalSizeBytes;
+};
+
+Resources.prototype.getNumTrackedItems = function() {
+	return this.loadingTrackedItems.length;
+};
+
+Resources.prototype.isLoadingFinished = function() {
+	if (this.loadingTrackedItems.length == 0) {
+		return true;
+	}
+
+	var loadedBytes = 0;
+	var totalSizeBytes = 0;
+
+	for( var i = 0; i < this.loadingTrackedItems.length; i+=1 ) {
+		var item = this.loadingTrackedItems[i];
+
+		loadedBytes += item.loadedBytes;
+		totalSizeBytes += item.totalSizeBytes;
+	}
+
+	if ( totalSizeBytes == 0 )
+		return false;
+
+	return loadedBytes == totalSizeBytes;
+};
 
 Resources.prototype.loadTextures = function() {
 
@@ -32,7 +70,7 @@ Resources.prototype.loadModels = function() {
 		var val = defs[key];
 		var filename = key;
 
-		var loadingTrackedData = {loaded:0, totalSize: 1<<14};
+		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
 		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
 
 		var loader = new THREE.ColladaLoader();
@@ -45,15 +83,15 @@ Resources.prototype.loadModels = function() {
 				LOG("Loaded Collada file: " + filename );
 				LOG(collada.scene);
 
-				that.onLoadedCollada(collada.scene);
+				that.models[filename] = collada.scene;
 			},
 
 			// Function called when download progresses
 			function ( xhr ) {
 				LOG(xhr);
 
-				loadingTrackedData.loaded = xhr.loaded;
-				loadingTrackedData.totalSize = xhr.totalSize;
+				loadingTrackedData.loadedBytes = xhr.loaded;
+				loadingTrackedData.totalSizeBytes = xhr.total;
 
 				LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
 			},
@@ -69,22 +107,6 @@ Resources.prototype.loadModels = function() {
 
 Resources.prototype.loadAudio = function() {
 	// TODO:
-};
-
-Resources.prototype.onLoadedTexture = function(obj) {
-	LOG("Loaded Texture");
-
-	// TODO:
-};
-
-Resources.prototype.onLoadedCollada = function(obj) {
-
-	// TODO: need to parse model
-};
-Resources.prototype.onLoadedAudio = function(obj) {
-	LOG("Loaded Audio");
-
-	// TODO: 
 };
 
 Resources.prototype.start = function() {
