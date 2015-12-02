@@ -9,3 +9,8 @@ SceneObj.prototype.constructor = SceneObj;
 // override-able
 SceneObj.prototype.start = function() {
 };
+
+
+function GetObj(name) {
+	return APP.game.sceneManager.currScene.sceneObjs[name];
+}

@@ -13,7 +13,7 @@ $(window).load(function() {
 		APP.resizeToFitScreen();
 	});
 
-	APP = new Core();
+	APP = new App();
 	APP.init();
 	render();
 });

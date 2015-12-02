@@ -19,13 +19,14 @@ Game.prototype.init = function() {
 Game.prototype.start = function() {
 	this.sceneManager.changeSceneTo('SceneTestBox');
 
-	APP.camera.position.x = -8;
-	APP.camera.position.y = 6;
-	APP.camera.position.z = 30;
+	APP.camera.position.x = -3.285;
+	APP.camera.position.y = 4.75;
+	APP.camera.position.z = 27;
 };
 
 Game.prototype.update = function() {
 	this.sceneManager.update();
+
 };
 
 Game.prototype.draw = function() {
