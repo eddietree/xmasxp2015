@@ -32,6 +32,7 @@ Game.prototype.update = function() {
 };
 
 Game.prototype.draw = function() {
+	this.sceneManager.draw();
 };
 
 var FizzyText = function() {

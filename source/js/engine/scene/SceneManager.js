@@ -34,3 +34,9 @@ SceneManager.prototype.update = function() {
 		this.currScene.update();
 	}
 };
+
+SceneManager.prototype.draw = function() {
+	if ( this.currScene !== null) {
+		this.currScene.draw();
+	}
+};

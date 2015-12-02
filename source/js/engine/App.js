@@ -36,10 +36,14 @@ App.prototype = {
 	},
 
 	draw: function() {
+		if ( this.game ) {
+			this.game.draw();
+		}
+
 		this.renderer.render(this.scene, this.camera);
 	},
 
-	resizeToFitScreen: function() {
+	onWindowResized: function() {
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
 		this.camera.aspect = window.innerWidth / window.innerHeight;
 		this.camera.updateProjectionMatrix();

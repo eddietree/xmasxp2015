@@ -30,3 +30,10 @@ Scene.prototype.start = function() {
 		obj.start();
 	}
 };
+
+Scene.prototype.draw = function() {
+	for (var key in this.sceneObjs) {
+		var obj = this.sceneObjs[key];
+		obj.draw();
+	}
+};

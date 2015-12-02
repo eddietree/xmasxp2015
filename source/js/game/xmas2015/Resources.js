@@ -1,9 +1,18 @@
 var Resources = function() {
 
+	// textures!
+	this.defTextures = {
+		'resource/tex/cliff-test.png' : {param:null},
+	};
+
+	// dae files
+	this.defModels = {
+		'resource/obj/cliff.dae' : {param:null},
+	};
+
 	this.models = {};
 	this.textures = {};
 	this.audio = {};
-
 	this.loadingTrackedItems = [];
 };
 
@@ -14,8 +23,8 @@ Resources.prototype.load = function() {
 };
 
 Resources.prototype.getPercentageLoaded = function() {
-	var loadedBytes = 1;
-	var totalSizeBytes = 1;
+	var loadedBytes = 0;
+	var totalSizeBytes = 0;
 
 	for( var i = 0; i < this.loadingTrackedItems.length; i+=1 ) {
 		var item = this.loadingTrackedItems[i];
@@ -24,6 +33,9 @@ Resources.prototype.getPercentageLoaded = function() {
 		totalSizeBytes += item.totalSizeBytes;
 	}
 
+	if ( totalSizeBytes == 0 )
+		return 0.0;
+	
 	return loadedBytes / totalSizeBytes;
 };
 
@@ -54,16 +66,50 @@ Resources.prototype.isLoadingFinished = function() {
 
 Resources.prototype.loadTextures = function() {
 
-	// TODO:
+	LOG("Loading Textures");
+
+	var defs = this.defTextures;
+	var that = this;
+	
+	for( key in defs ) {
+		var val = defs[key];
+		var filename = key;
+
+		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
+		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
+
+		var loader = new THREE.TextureLoader();
+		loader.load(
+
+			filename, // resource URL
+
+			// Function when resource is loaded
+			function ( res ) {
+				LOG("Loaded Texture file: " + filename );
+				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+				that.textures[filename] = res;
+			},
+
+			// Function called when download progresses
+			function ( xhr ) {
+				loadingTrackedData.loadedBytes = xhr.loaded;
+				loadingTrackedData.totalSizeBytes = xhr.total;
+				//LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
+			},
+
+			// Function called when download progresses
+			function ( xhr ) {
+				LOG("ERROR loading Texture file: " + filename );
+				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+			}
+		);
+	}
 };
 
 Resources.prototype.loadModels = function() {
 	LOG("Loading models");
 
-	var defs = {
-		'resource/obj/cliff.dae' : {param:null},
-	};
-
+	var defs = this.defModels;
 	var that = this;
 	
 	for( key in defs ) {
@@ -79,17 +125,16 @@ Resources.prototype.loadModels = function() {
 			filename, // resource URL
 
 			// Function when resource is loaded
-			function ( collada ) {
+			function ( res ) {
 				LOG("Loaded Collada file: " + filename );
-				LOG(collada.scene);
+				LOG(res.scene);
 
-				that.models[filename] = collada.scene;
+				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+				that.models[filename] = res.scene;
 			},
 
 			// Function called when download progresses
 			function ( xhr ) {
-				LOG(xhr);
-
 				loadingTrackedData.loadedBytes = xhr.loaded;
 				loadingTrackedData.totalSizeBytes = xhr.total;
 
@@ -107,8 +152,4 @@ Resources.prototype.loadModels = function() {
 
 Resources.prototype.loadAudio = function() {
 	// TODO:
-};
-
-Resources.prototype.start = function() {
-
 };
