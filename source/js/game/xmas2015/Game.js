@@ -15,8 +15,8 @@ Game.prototype.init = function() {
 	this.sceneManager.add( arrowY );
 	this.sceneManager.add( arrowZ );
 
-	this.resources = new Resources();
-	this.resources.init();
+	//this.resources = new Resources();
+	//this.resources.load();
 };
 
 Game.prototype.start = function() {

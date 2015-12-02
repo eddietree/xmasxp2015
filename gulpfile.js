@@ -58,6 +58,11 @@ gulp.task('build-html', function() {
 });
 
 gulp.task('build-js', function() {
+
+	// clear old
+	//gulp.src(pathsDst.js, {read: false }) .pipe(clean());
+	//gulp.src(pathsDst.lib, {read: false }) .pipe(clean());
+
 	// pipe libs
 	gulp.src(pathsSrc.lib).pipe(gulp.dest(pathsDst.lib));
 

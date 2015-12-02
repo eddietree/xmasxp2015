@@ -13,6 +13,9 @@ $(window).load(function() {
 		APP.resizeToFitScreen();
 	});
 
+	RES = new Resources();
+	RES.load();
+
 	APP = new App();
 	APP.init();
 	render();
