@@ -13,8 +13,8 @@ Crash.prototype.init = function() {
 	var that = this;
 
 	function onAddObject( object ) {
-		LOG(" ON ADD ");
-		LOG(object);
+		//LOG(" ON ADD ");
+		//LOG(object);
 
 		if ( object.type == "Mesh" ) {
 			LOG("MESH");

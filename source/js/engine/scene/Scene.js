@@ -12,6 +12,8 @@ Scene.prototype.init = function() {
 Scene.prototype.addSceneObj = function(name, obj) {
 	this.sceneObjs[name] = obj;
 	this.add(obj);
+
+	obj.name = name;
 	obj.init();
 };
 
