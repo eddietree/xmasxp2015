@@ -4,7 +4,7 @@ var Game = function() {
 Game.prototype.init = function() {
 	this.sceneManager = new SceneManager();
 	this.sceneManager.addScene('SceneTestBox', new SceneTestBox());
-	g_core.scene.add(this.sceneManager);
+	APP.scene.add(this.sceneManager);
 
 	var origin = new THREE.Vector3( 0, 0, 0 );
 
@@ -18,6 +18,10 @@ Game.prototype.init = function() {
 
 Game.prototype.start = function() {
 	this.sceneManager.changeSceneTo('SceneTestBox');
+
+	APP.camera.position.x = -8;
+	APP.camera.position.y = 6;
+	APP.camera.position.z = 30;
 };
 
 Game.prototype.update = function() {
@@ -25,4 +29,21 @@ Game.prototype.update = function() {
 };
 
 Game.prototype.draw = function() {
+};
+
+var FizzyText = function() {
+  this.message = 'dat.gui';
+  this.speed = 0.8;
+  this.displayOutline = false;
+  this.explode = function() {  };
+  // Define render logic ...
+};
+
+window.onload = function() {
+  var text = new FizzyText();
+  var gui = new dat.GUI();
+  gui.add(text, 'message');
+  gui.add(text, 'speed', -5, 5);
+  gui.add(text, 'displayOutline');
+  gui.add(text, 'explode');
 };

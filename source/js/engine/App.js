@@ -1,7 +1,7 @@
-var Core = function() {
+var App = function() {
 };
 
-Core.prototype = {
+App.prototype = {
 	init: function() {
 
 		this.scene = new THREE.Scene();
@@ -17,8 +17,6 @@ Core.prototype = {
 		controls.dampingFactor = 0.8;
 		controls.enableZoom = true;
 
-		this.camera.position.x = 1;
-		this.camera.position.y = 3;
 		this.camera.position.z = 15;
 		//this.camera.position = v3(10);
 

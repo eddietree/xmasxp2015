@@ -27,19 +27,19 @@ TestBox.prototype.init = function() {
 	this.add(this.cube);
 
 	this.initLight();
-	//g_core.scene.add(this);
+	//APP.scene.add(this);
 };
 
 TestBox.prototype.initLight = function() {
 	var spotLight = new THREE.SpotLight( 0xffffff );
 	spotLight.position.set( 2, 2, 0 );
-	g_core.scene.add( spotLight );
+	APP.scene.add( spotLight );
 
 	var spotLightHelper = new THREE.SpotLightHelper( spotLight );
-	g_core.scene.add( spotLightHelper );
+	APP.scene.add( spotLightHelper );
 
 	var ambient = new THREE.AmbientLight( 0x444444 );
-	g_core.scene.add( ambient );
+	APP.scene.add( ambient );
 };
 
 TestBox.prototype.start = function() {

@@ -1,17 +1,19 @@
+var APP = {};
+
 var render = function() {
 	requestAnimationFrame(render);
 
-	g_core.update();
-	g_core.draw();
+	APP.update();
+	APP.draw();
 };
 
 $(window).load(function() {
 	// add event listener to resize
 	window.addEventListener('resize', function() {
-		g_core.resizeToFitScreen();
+		APP.resizeToFitScreen();
 	});
 
-	g_core = new Core();
-	g_core.init();
+	APP = new Core();
+	APP.init();
 	render();
 });
