@@ -2,6 +2,8 @@ var Game = function() {
 };
 
 Game.prototype.init = function() {
+	this.initGui();
+
 	this.sceneManager = new SceneManager();
 	this.sceneManager.addScene('SceneTestBox', new SceneTestBox());
 	APP.scene.add(this.sceneManager);
@@ -14,8 +16,6 @@ Game.prototype.init = function() {
 		this.sceneManager.add( arrowX );
 		this.sceneManager.add( arrowY );
 		this.sceneManager.add( arrowZ );
-
-		this.initGui();
 	}
 };
 

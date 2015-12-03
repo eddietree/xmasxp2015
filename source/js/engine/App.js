@@ -16,7 +16,6 @@ App.prototype = {
 		document.body.appendChild(this.renderer.domElement);
 
 		this.gui = new dat.GUI();
-
 		this.camera.position.z = 15;
 		//this.camera.position = v3(10);
 	},

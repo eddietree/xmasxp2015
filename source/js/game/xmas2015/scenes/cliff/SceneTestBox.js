@@ -12,14 +12,16 @@ SceneTestBox.prototype.init = function() {
 	//this.addSceneObj('TestBox', new TestBox());
 	this.addSceneObj('Crash', new Crash());
 
-	var ambient = new THREE.AmbientLight( 0x222211 );
-	this.add( ambient );
+	this.ambientLight = new THREE.AmbientLight( 0x222211 );
+	this.add( this.ambientLight );
+
+	LOG(this.ambientLight);
 
 	this.initGui();
 };
 
 SceneTestBox.prototype.initGui = function() {
-
+	APP.gui.addColor(SETTINGS, 'ambientColor');
 };
 
 SceneTestBox.prototype.onLoadObject = function(object) {
@@ -79,5 +81,7 @@ SceneTestBox.prototype.parseSceneCollada = function() {
 };
 
 SceneTestBox.prototype.update = function() {
+
+	this.ambientLight.color.setHex( SETTINGS.ambientColor );
 	Scene.prototype.update.call(this);
 };

@@ -10,13 +10,19 @@ var Resources = function() {
 		'resource/obj/cliff.dae' : {param:null},
 	};
 
+	this.defJSON = {
+		'resource/json/Settings.json' : {},
+	};
+
 	this.models = {};
 	this.textures = {};
 	this.audio = {};
+	this.json = {};
 	this.loadingTrackedItems = [];
 };
 
 Resources.prototype.load = function() {
+	this.loadJSON();
 	this.loadTextures();
 	this.loadModels();
 	this.loadAudio();
@@ -144,10 +150,31 @@ Resources.prototype.loadModels = function() {
 			// Function called when download progresses
 			function ( xhr ) {
 				LOG("ERROR loading Collada file: " + filename );
-				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+				LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
 			}
 		);
 	}
+};
+
+Resources.prototype.loadJSON = function() {
+	
+	var defs = this.defJSON;
+	var that = this;
+	
+	for( var key in defs ) {
+		var val = defs[key];
+		var filename = key;
+
+		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1};
+		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
+
+		$.getJSON(filename, function(json) {
+			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+			LOG("Loaded JSON file: " + filename);
+			that.json[filename] = json;
+		});
+	}
+		
 };
 
 Resources.prototype.loadAudio = function() {
