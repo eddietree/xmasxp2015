@@ -26,6 +26,17 @@ SceneTestBox.prototype.onLoadObject = function(object) {
 	else if ( name == "Light" ) {
 		LOG(object);
 		this.add(object);
+
+		var light = object.children[0];
+		light.intensity = 5;
+		light.distance = 35;
+
+		var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+		var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+		var sphere = new THREE.Mesh( geometry, material );
+		sphere.position.copy( object.position );
+		sphere.scale.multiplyScalar(0.1);
+		this.add(sphere);
 	}
 
 	else if ( name == "Cliff" ) {
