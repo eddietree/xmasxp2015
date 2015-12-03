@@ -20,7 +20,7 @@ Game.prototype.init = function() {
 };
 
 Game.prototype.initGui = function() {
-	APP.gui.addColor(SETTINGS, 'clearColor');
+	APP.gui.addColor(SETTINGS, 'ClearColor');
 };
 
 Game.prototype.start = function() {
@@ -32,7 +32,7 @@ Game.prototype.start = function() {
 };
 
 Game.prototype.update = function() {
-	APP.renderer.setClearColor( SETTINGS.clearColor, 1);
+	APP.renderer.setClearColor( SETTINGS.ClearColor, 1);
 	this.sceneManager.update();
 };
 

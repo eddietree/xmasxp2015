@@ -21,7 +21,7 @@ SceneTestBox.prototype.init = function() {
 };
 
 SceneTestBox.prototype.initGui = function() {
-	APP.gui.addColor(SETTINGS, 'ambientColor');
+	APP.gui.addColor(SETTINGS, 'AmbientLightColor');
 };
 
 SceneTestBox.prototype.onLoadObject = function(object) {
@@ -82,6 +82,6 @@ SceneTestBox.prototype.parseSceneCollada = function() {
 
 SceneTestBox.prototype.update = function() {
 
-	this.ambientLight.color.setHex( SETTINGS.ambientColor );
+	this.ambientLight.color.setHex( SETTINGS.AmbientLightColor );
 	Scene.prototype.update.call(this);
 };
