@@ -15,8 +15,8 @@ var Resources = function() {
 	];
 
 	this.defShaders = [
-		'test.fp',
-		'test.vp',
+		'basic.vp', 'basic.fp',
+		'diamond.vp', 'diamond.fp',
 	];
 
 	this.shaders = {};
