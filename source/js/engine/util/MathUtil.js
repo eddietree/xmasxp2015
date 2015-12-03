@@ -7,3 +7,8 @@ function v2(x, y)
 {
 	return new THREE.Vector2(x,y);
 }
+
+function randBetween(x,y)
+{
+	return x + (y-x)*Math.random();
+}
