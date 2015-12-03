@@ -8,18 +8,32 @@ App.prototype = {
 		this.fps = 60.0;
 		this.dt = 1.0/this.fps;
 
+		// scene
 		this.scene = new THREE.Scene();
+		
+		// scene's camera
 		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		this.camera.position.z = 15;
+
+		// renderer
 		this.renderer = new THREE.WebGLRenderer({canvas: canvas });
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
 		this.renderer.setClearColor(0xAAAAAA, 1);
 		document.body.appendChild(this.renderer.domElement);
 
+		// gui
 		this.gui = new dat.GUI();
-		if ( SETTINGS.debug == false ) dat.GUI.toggleHide();
+		if ( SETTINGS.debug  ) {
+			window.addEventListener("keypress", function(e) {
+				//LOG("Key pressed: " + e.charCode);
+				if ( e.charCode == 103 || e.charCode == 119 ) {
+					dat.GUI.toggleHide();
+				}
+			});
 
-		this.camera.position.z = 15;
-		//this.camera.position = v3(10);
+		} else {
+			dat.GUI.toggleHide();
+		}
 	},
 
 	startGame : function() {

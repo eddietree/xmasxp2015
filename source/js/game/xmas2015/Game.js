@@ -54,7 +54,7 @@ Game.prototype.initGui = function() {
 
 	var folderCam = APP.gui.addFolder('Camera');
 	folderCam.add(SETTINGS, 'cameraFOV', 0.0, 180.0);
-	folderCam.add(this.debugStr, 'cameraPos').listen();;
+	folderCam.add(this.debugStr, 'cameraPos').listen();
 };
 
 Game.prototype.start = function() {
