@@ -51,6 +51,7 @@ SceneTestBox.prototype.onLoadObject = function(object) {
 		sphere.scale.multiplyScalar(0.1);
 		APP.debugObjs.add(sphere);
 
+		// point light helper
 		var pointLightHelper = new THREE.PointLightHelper( light, light.distance );
 		APP.debugObjs.add( pointLightHelper );
 	}
