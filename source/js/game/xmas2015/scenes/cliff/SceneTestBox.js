@@ -13,16 +13,25 @@ SceneTestBox.prototype.init = function() {
 	this.addSceneObj('SnowParticles', new SnowParticles());
 
 	// ambient light
-	this.ambientLight = new THREE.AmbientLight( 0x222211 );
+	this.ambientLight = new THREE.AmbientLight( SETTINGS.ambientLightColor );
 	this.add( this.ambientLight );
 	LOG(this.ambientLight);
+
+	APP.renderer.setClearColor( SETTINGS.clearColor, 1);
+	if ( SETTINGS.fogEnabled) APP.scene.fog = new THREE.FogExp2( SETTINGS.clearColor, 0.03 );
 
 	this.initGui();
 };
 
 SceneTestBox.prototype.initGui = function() {
-	APP.gui.addColor(SETTINGS, 'ambientLightColor')
-	APP.gui.addColor(SETTINGS, 'clearColor');
+	var folder = APP.gui.addFolder("Environment");
+
+	folder.addColor(SETTINGS, 'ambientLightColor')
+	folder.addColor(SETTINGS, 'clearColor');
+
+	if ( APP.scene.fog ) {
+		folder.add(SETTINGS, 'fogDensity', 0.01, 0.1);
+	}
 };
 
 SceneTestBox.prototype.onLoadObject = function(object) {
@@ -89,7 +98,12 @@ SceneTestBox.prototype.parseSceneCollada = function() {
 };
 
 SceneTestBox.prototype.update = function() {
-	APP.renderer.setClearColor( SETTINGS.clearColor, 1);
-	this.ambientLight.color.setHex( SETTINGS.ambientLightColor );
+
+	if ( SETTINGS.debug ) {
+		APP.renderer.setClearColor( SETTINGS.clearColor, 1);
+		this.ambientLight.color.setHex( SETTINGS.ambientLightColor );
+		if ( APP.scene.fog ) { APP.scene.fog.density = SETTINGS.fogDensity; }
+	}
+
 	Scene.prototype.update.call(this);
 };

@@ -9,12 +9,11 @@ SnowParticles.prototype.constructor = SnowParticles;
 SnowParticles.prototype.init = function() {
 
 	var makeGeo = function() {
-		// lines
-		var geometry = new THREE.Geometry();
 
 		var numParticles = 256;
 		var spread = v3( 70.0, 30.0, 15.0 );
 
+		var geometry = new THREE.Geometry();
 		for( var i = 0; i < numParticles; i+=1 ) { 
 			var posX = randBetween(-spread.x, spread.x);
 			var posY = randBetween(-spread.y, spread.y);
