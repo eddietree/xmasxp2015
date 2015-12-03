@@ -1,7 +1,6 @@
 var Crash = function(firstName) {
 	SceneObj.call(this);
 
-	this.meshes = {};
 	LOG("Creating Crash");
 };
 
@@ -9,8 +8,8 @@ Crash.prototype = Object.create(SceneObj.prototype);
 Crash.prototype.constructor = Crash;
 
 Crash.prototype.init = function() {
-	var scene = RES.models['resource/obj/cliff.dae'];
-	this.add(scene);
+	//var scene = RES.models['resource/obj/cliff.dae'];
+	//this.add(scene);
 };
 
 Crash.prototype.start = function() {
