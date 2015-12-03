@@ -49,23 +49,28 @@ Game.prototype.initDebugGfx = function() {
 
 Game.prototype.initGui = function() {
 	APP.gui.add(SETTINGS, 'showDebugObjects');
-	APP.gui.add(SETTINGS, 'cameraFOV', 0.0, 180.0);
+
+	this.debugStr = {cameraPos:"(0,0,0)"}
+
+	var folderCam = APP.gui.addFolder('Camera');
+	folderCam.add(SETTINGS, 'cameraFOV', 0.0, 180.0);
+	folderCam.add(this.debugStr, 'cameraPos').listen();;
 };
 
 Game.prototype.start = function() {
 	this.sceneManager.changeSceneTo('SceneTestBox');
 
 	APP.camera.fov = SETTINGS.cameraFOV;
-	APP.camera.position.x = -3.285;
-	APP.camera.position.y = 4.75;
-	APP.camera.position.z = 27;
+	APP.camera.position.x = SETTINGS.cameraStartPos.x;
+	APP.camera.position.y = SETTINGS.cameraStartPos.y;
+	APP.camera.position.z = SETTINGS.cameraStartPos.z;
 };
 
 Game.prototype.update = function() {
 	if ( SETTINGS.debug ) {
 		this.debugObjects.visible = SETTINGS.showDebugObjects;
+		this.debugStr.cameraPos = "{x:" + Math.round(100*APP.camera.position.x)/100 + ", y:"+ Math.round(100*APP.camera.position.y)/100 + ", z:"+ Math.round(100*APP.camera.position.z)/100 + "}";
 	}
-
 	// did FOV change?
 	if ( APP.camera.fov != SETTINGS.cameraFOV ) {
 		APP.camera.fov = SETTINGS.cameraFOV;
