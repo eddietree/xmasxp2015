@@ -1,9 +1,9 @@
 var Settings = function() {
 
 	return {
-		debug:true,
+		debug : true,
 		
-		ClearColor:0xff0000,//0xAAAAAA
-		AmbientLightColor:0x222211,
+		ClearColor : 0xcf8c78,
+		AmbientLightColor : 0xa7992f,
 	};
 };

@@ -2,22 +2,29 @@ var Resources = function() {
 
 	// textures!
 	this.defTextures = {
-		'resource/tex/cliff-test.png' : {param:null},
+		'cliff-test.png' : {},
 	};
 
 	// dae files
 	this.defModels = {
-		'resource/obj/cliff.dae' : {param:null},
+		'cliff.dae' : {},
 	};
 
-	this.defJSON = {
-		'resource/json/Settings.json' : {},
-	};
+	this.defJSON = [
+		'Settings.json',
+	];
 
+	this.defShaders = [
+		'test.fp',
+		'test.vp',
+	];
+
+	this.shaders = {};
 	this.models = {};
 	this.textures = {};
 	this.audio = {};
 	this.json = {};
+
 	this.loadingTrackedItems = [];
 };
 
@@ -26,6 +33,7 @@ Resources.prototype.load = function() {
 	this.loadTextures();
 	this.loadModels();
 	this.loadAudio();
+	this.loadShaders();
 };
 
 Resources.prototype.getPercentageLoaded = function() {
@@ -80,6 +88,7 @@ Resources.prototype.loadTextures = function() {
 	for( var key in defs ) {
 		var val = defs[key];
 		var filename = key;
+		var filepath = 'resource/tex/' + filename;
 
 		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
 		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
@@ -87,11 +96,11 @@ Resources.prototype.loadTextures = function() {
 		var loader = new THREE.TextureLoader();
 		loader.load(
 
-			filename, // resource URL
+			filepath, // resource URL
 
 			// Function when resource is loaded
 			function ( res ) {
-				LOG("Loaded Texture file: " + filename );
+				LOG("Loaded Texture file: " + filepath );
 				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
 				that.textures[filename] = res;
 			},
@@ -105,7 +114,7 @@ Resources.prototype.loadTextures = function() {
 
 			// Function called when download progresses
 			function ( xhr ) {
-				LOG("ERROR loading Texture file: " + filename );
+				LOG("ERROR loading Texture file: " + filepath );
 				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
 			}
 		);
@@ -121,6 +130,7 @@ Resources.prototype.loadModels = function() {
 	for( var key in defs ) {
 		var val = defs[key];
 		var filename = key;
+		var filepath = 'resource/obj/' + filename;
 
 		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
 		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
@@ -128,11 +138,11 @@ Resources.prototype.loadModels = function() {
 		var loader = new THREE.ColladaLoader();
 		loader.load(
 
-			filename, // resource URL
+			filepath, // resource URL
 
 			// Function when resource is loaded
 			function ( res ) {
-				LOG("Loaded Collada file: " + filename );
+				LOG("Loaded Collada file: " + filepath );
 				LOG(res.scene);
 
 				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
@@ -149,7 +159,7 @@ Resources.prototype.loadModels = function() {
 
 			// Function called when download progresses
 			function ( xhr ) {
-				LOG("ERROR loading Collada file: " + filename );
+				LOG("ERROR loading Collada file: " + filepath );
 				LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
 			}
 		);
@@ -161,22 +171,57 @@ Resources.prototype.loadJSON = function() {
 	var defs = this.defJSON;
 	var that = this;
 	
-	for( var key in defs ) {
-		var val = defs[key];
-		var filename = key;
+	defs.forEach(function(filename) {
+		//var val = defs[key];
+		//var filename = key;
+		var filepath = 'resource/json/' + filename;
 
-		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1};
-		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
+		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 512};
+		that.loadingTrackedItems[that.loadingTrackedItems.length] = loadingTrackedData;
 
-		$.getJSON(filename, function(json) {
+		$.getJSON(filepath, function(json) {
 			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
 			LOG("Loaded JSON file: " + filename);
 			that.json[filename] = json;
 		});
-	}
-		
+	});
 };
 
 Resources.prototype.loadAudio = function() {
 	// TODO:
+};
+
+Resources.prototype.loadShaders = function() {
+
+	var defs = this.defShaders;
+	var that = this;
+	
+	defs.forEach(function(filename) {
+		var filepath = 'resource/shaders/' + filename;
+
+		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1024};
+		that.loadingTrackedItems[that.loadingTrackedItems.length] = loadingTrackedData;
+
+		var request = new XMLHttpRequest();
+		if (request.overrideMimeType) {
+			request.overrideMimeType('text/plain');
+		}
+
+		// success!
+		function handleLoad(e) {
+			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+			LOG("Loaded shader: " + filepath);
+			that.shaders[filename] = request.responseText;
+		}
+
+		// error
+		function handleError(e) {
+			LOG("Error loading shader: " + filepath);
+		}
+
+		request.open('get', filepath, true);
+		request.addEventListener('load', handleLoad, false);
+		request.addEventListener('error', handleError, false);
+		request.send();
+	});
 };

@@ -25,14 +25,17 @@ SceneTestBox.prototype.initGui = function() {
 };
 
 SceneTestBox.prototype.onLoadObject = function(object) {
+
+	String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+
 	var name = object.name;
 
-	if ( name == "Diamond" ) {
+	if ( name.contains("Diamond") ) {
 		//this.add(object);
 		this.addSceneObj('Diamond', new Diamond(object));
 	}
 
-	else if ( name == "Light" ) {
+	else if ( name.contains("Light") ) {
 		LOG(object);
 		this.add(object);
 
@@ -48,11 +51,11 @@ SceneTestBox.prototype.onLoadObject = function(object) {
 		this.add(sphere);
 	}
 
-	else if ( name == "Cliff" ) {
+	else if ( name.contains("Cliff") ) {
 		this.add(object);
 	}
 
-	else if ( name == "TreeTop" ) {
+	else if ( name.contains("TreeTop") ) {
 		this.add(object);
 	}
 	else {
@@ -76,7 +79,7 @@ SceneTestBox.prototype.parseSceneCollada = function() {
 		}
 	}
 
-	var colladaScene = RES.models['resource/obj/cliff.dae'];
+	var colladaScene = RES.models['cliff.dae'];
 	traverseObj(colladaScene);
 };
 
