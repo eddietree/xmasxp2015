@@ -14,13 +14,20 @@ SceneTestBox.prototype.init = function() {
 
 	var ambient = new THREE.AmbientLight( 0x222211 );
 	this.add( ambient );
+
+	this.initGui();
+};
+
+SceneTestBox.prototype.initGui = function() {
+
 };
 
 SceneTestBox.prototype.onLoadObject = function(object) {
 	var name = object.name;
 
 	if ( name == "Diamond" ) {
-		this.add(object);
+		//this.add(object);
+		this.addSceneObj('Diamond', new Diamond(object));
 	}
 
 	else if ( name == "Light" ) {

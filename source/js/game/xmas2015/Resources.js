@@ -33,7 +33,7 @@ Resources.prototype.getPercentageLoaded = function() {
 		totalSizeBytes += item.totalSizeBytes;
 	}
 
-	if ( totalSizeBytes == 0 )
+	if ( totalSizeBytes === 0 )
 		return 0.0;
 	
 	return loadedBytes / totalSizeBytes;
@@ -44,7 +44,7 @@ Resources.prototype.getNumTrackedItems = function() {
 };
 
 Resources.prototype.isLoadingFinished = function() {
-	if (this.loadingTrackedItems.length == 0) {
+	if (this.loadingTrackedItems.length === 0) {
 		return true;
 	}
 
@@ -58,7 +58,7 @@ Resources.prototype.isLoadingFinished = function() {
 		totalSizeBytes += item.totalSizeBytes;
 	}
 
-	if ( totalSizeBytes == 0 )
+	if ( totalSizeBytes === 0 )
 		return false;
 
 	return loadedBytes == totalSizeBytes;
@@ -71,7 +71,7 @@ Resources.prototype.loadTextures = function() {
 	var defs = this.defTextures;
 	var that = this;
 	
-	for( key in defs ) {
+	for( var key in defs ) {
 		var val = defs[key];
 		var filename = key;
 
@@ -112,7 +112,7 @@ Resources.prototype.loadModels = function() {
 	var defs = this.defModels;
 	var that = this;
 	
-	for( key in defs ) {
+	for( var key in defs ) {
 		var val = defs[key];
 		var filename = key;
 

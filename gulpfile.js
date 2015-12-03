@@ -17,10 +17,10 @@ var reload = browserSync.reload;
 
 var pathsSrc = {
 	html: 'source/index.html',
-	js: ['source/js/**/*.js'],
-	resource: ['source/resource/**/*.*'],
-	lib: ['source/lib/*.js'],
-	scss: ['source/scss/**/*.scss'],
+	js: 'source/js/**/*.js',
+	resource: 'source/resource/**/*.*',
+	lib: 'source/lib/*.js',
+	scss: 'source/scss/**/*.scss',
 };
 
 var pathsDst = {
@@ -60,8 +60,7 @@ gulp.task('build-html', function() {
 gulp.task('build-js', function() {
 
 	// clear old
-	//gulp.src(pathsDst.js, {read: false }) .pipe(clean());
-	//gulp.src(pathsDst.lib, {read: false }) .pipe(clean());
+	//gulp.src([pathsDst.js,pathsDst.lib], {read: false }) .pipe(clean());	
 
 	// pipe libs
 	gulp.src(pathsSrc.lib).pipe(gulp.dest(pathsDst.lib));

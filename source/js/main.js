@@ -1,11 +1,16 @@
 var APP;
+var RES;
+var SETTINGS;
 
 // this .load function gets called when all the javascript has been loaded
 $(window).load(function() {
 
+	SETTINGS = new Settings();
+
 	// load app (which has WebGL renderer)
 	APP = new App();
 	APP.init();
+
 
 	// preload resources
 	RES = new Resources();
