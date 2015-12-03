@@ -10,11 +10,11 @@ SceneTestBox.prototype.init = function() {
 	this.parseSceneCollada();
 	
 	//this.addSceneObj('TestBox', new TestBox());
-	this.addSceneObj('Crash', new Crash());
+	this.addSceneObj('SnowParticles', new SnowParticles());
 
+	// ambient light
 	this.ambientLight = new THREE.AmbientLight( 0x222211 );
 	this.add( this.ambientLight );
-
 	LOG(this.ambientLight);
 
 	this.initGui();
