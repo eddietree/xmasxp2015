@@ -45,11 +45,14 @@ SceneTestBox.prototype.onLoadObject = function(object) {
 		light.distance = 35;
 
 		var geometry = new THREE.SphereGeometry( 5, 32, 32 );
-		var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+		var material = new THREE.MeshBasicMaterial( {color: light.color} );
 		var sphere = new THREE.Mesh( geometry, material );
 		sphere.position.copy( object.position );
 		sphere.scale.multiplyScalar(0.1);
-		this.add(sphere);
+		APP.debugObjs.add(sphere);
+
+		var pointLightHelper = new THREE.PointLightHelper( light, light.distance );
+		APP.debugObjs.add( pointLightHelper );
 	}
 
 	else if ( name.contains("Cliff") ) {

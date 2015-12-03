@@ -21,9 +21,16 @@ App.prototype = {
 		this.renderer.setClearColor(0xAAAAAA, 1);
 		document.body.appendChild(this.renderer.domElement);
 
+		this.debugObjs = new THREE.Object3D;
+
 		// gui
 		this.gui = new dat.GUI();
 		if ( SETTINGS.debug  ) {
+
+			// add debug objs into scene
+			this.scene.add(this.debugObjs);
+
+			// handle keypress
 			window.addEventListener("keypress", function(e) {
 				//LOG("Key pressed: " + e.charCode);
 				if ( e.charCode == 103 || e.charCode == 119 ) {

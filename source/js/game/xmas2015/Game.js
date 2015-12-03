@@ -13,16 +13,15 @@ Game.prototype.init = function() {
 };
 
 Game.prototype.initDebugGfx = function() {
-	this.debugObjects = new THREE.Object3D;
 
 	// arrows
 	var origin = new THREE.Vector3( 0, 0, 0 );
 	var arrowX = new THREE.ArrowHelper( v3(1,0,0), origin, 1, 0xff0000 );
 	var arrowY = new THREE.ArrowHelper( v3(0,1,0), origin, 1, 0x00ff00 );
 	var arrowZ = new THREE.ArrowHelper( v3(0,0,1), origin, 1, 0x00ff00 );
-	this.debugObjects.add( arrowX );
-	this.debugObjects.add( arrowY );
-	this.debugObjects.add( arrowZ );
+	APP.debugObjs.add( arrowX );
+	APP.debugObjs.add( arrowY );
+	APP.debugObjs.add( arrowZ );
 
 	// lines
 	var geometry = new THREE.Geometry();
@@ -42,9 +41,8 @@ Game.prototype.initDebugGfx = function() {
     lineMaterial.transparent = true;
     lineMaterial.opacity = 0.25;
     var line = new THREE.LineSegments(geometry, lineMaterial);
-   	this.debugObjects.add(line);
+   	APP.debugObjs.add(line);
 
-   	APP.scene.add(this.debugObjects);
 };
 
 Game.prototype.initGui = function() {
@@ -68,7 +66,7 @@ Game.prototype.start = function() {
 
 Game.prototype.update = function() {
 	if ( SETTINGS.debug ) {
-		this.debugObjects.visible = SETTINGS.showDebugObjects;
+		APP.debugObjs.visible = SETTINGS.showDebugObjects;
 		this.debugStr.cameraPos = "{x:" + Math.round(100*APP.camera.position.x)/100 + ", y:"+ Math.round(100*APP.camera.position.y)/100 + ", z:"+ Math.round(100*APP.camera.position.z)/100 + "}";
 	}
 	// did FOV change?
