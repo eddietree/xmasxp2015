@@ -16,6 +16,8 @@ App.prototype = {
 		document.body.appendChild(this.renderer.domElement);
 
 		this.gui = new dat.GUI();
+		if ( SETTINGS.debug == false ) dat.GUI.toggleHide();
+
 		this.camera.position.z = 15;
 		//this.camera.position = v3(10);
 	},
