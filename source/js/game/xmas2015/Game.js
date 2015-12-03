@@ -8,13 +8,14 @@ Game.prototype.init = function() {
 	this.sceneManager.addScene('SceneTestBox', new SceneTestBox());
 	APP.scene.add(this.sceneManager);
 
-	this.debugObjects = new THREE.Object3D;
 	if ( SETTINGS.debug ) {
 		this.initDebugGfx();
 	}
 };
 
 Game.prototype.initDebugGfx = function() {
+	this.debugObjects = new THREE.Object3D;
+
 	// arrows
 	var origin = new THREE.Vector3( 0, 0, 0 );
 	var arrowX = new THREE.ArrowHelper( v3(1,0,0), origin, 1, 0xff0000 );
@@ -45,7 +46,7 @@ Game.prototype.initDebugGfx = function() {
 };
 
 Game.prototype.initGui = function() {
-	APP.gui.addColor(SETTINGS, 'ClearColor');
+	APP.gui.add(SETTINGS, 'showDebugObjects');
 };
 
 Game.prototype.start = function() {
@@ -57,7 +58,11 @@ Game.prototype.start = function() {
 };
 
 Game.prototype.update = function() {
-	APP.renderer.setClearColor( SETTINGS.ClearColor, 1);
+
+	if ( SETTINGS.debug ) {
+		this.debugObjects.visible = SETTINGS.showDebugObjects;
+	}
+	
 	this.sceneManager.update();
 };
 
