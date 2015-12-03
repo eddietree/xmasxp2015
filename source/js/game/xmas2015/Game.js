@@ -2,13 +2,12 @@ var Game = function() {
 };
 
 Game.prototype.init = function() {
-	this.initGui();
-
 	this.sceneManager = new SceneManager();
 	this.sceneManager.addScene('SceneTestBox', new SceneTestBox());
 	APP.scene.add(this.sceneManager);
 
 	if ( SETTINGS.debug ) {
+		this.initGui();
 		this.initDebugGfx();
 	}
 };
@@ -29,7 +28,7 @@ Game.prototype.initDebugGfx = function() {
 	var geometry = new THREE.Geometry();
 
 	var numLinesPerSide = 100;
-	var step = 10;
+	var step = 5;
 	for( var x = -numLinesPerSide; x <= numLinesPerSide; x+=step)
 	{
     	geometry.vertices.push( v3(x, 0, -numLinesPerSide) );
@@ -38,7 +37,10 @@ Game.prototype.initDebugGfx = function() {
     	geometry.vertices.push( v3(+numLinesPerSide, 0, x) );
     }
 
+    // add line object
     var lineMaterial = new THREE.LineBasicMaterial({color:0xffffff});
+    lineMaterial.transparent = true;
+    lineMaterial.opacity = 0.25;
     var line = new THREE.LineSegments(geometry, lineMaterial);
    	this.debugObjects.add(line);
 
