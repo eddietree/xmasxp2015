@@ -4,6 +4,7 @@ varying float vTime;
 varying vec3 vNormal;
 varying vec3 vPosWorld;
 varying vec3 vPosWorldPreMove;
+varying float vMoveDelta;
 
 vec3 mod289(vec3 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -111,10 +112,11 @@ void main() {
 	vec3 color = mix( color0, color1, phong);
 
 	//color.xyz = snoise(vNormal);
-	float noise = snoise(vPosWorldPreMove*4.0);
+	float noise = snoise(vPosWorld*2.0);
+	color.xyz += vMoveDelta*0.05;
 
-	if ( noise > 0.7)
-		color.xyz += vec3(0.2);
+	if ( noise > 0.75)
+		color.xyz *= 1.2;
 
   	gl_FragColor = vec4( color, 1.0);
 }

@@ -110,7 +110,11 @@ SceneCliff.prototype.update = function() {
 	if ( SETTINGS.debug ) {
 		APP.renderer.setClearColor( SETTINGS.clearColor, 1);
 		this.ambientLight.color.setHex( SETTINGS.ambientLightColor );
-		if ( APP.scene.fog ) { APP.scene.fog.density = SETTINGS.fogDensity; }
+
+		if ( APP.scene.fog ) { 
+			APP.scene.fog.density = SETTINGS.fogDensity; 
+			APP.scene.fog.color.setHex(SETTINGS.clearColor);
+		}
 	}
 
 	Scene.prototype.update.call(this);
