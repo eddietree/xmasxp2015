@@ -102,18 +102,19 @@ float snoise(vec3 v)
 void main() {
 
 	vec3 vecToLight = vec3(0,1,0);
-	vec3 vecToCamera = normalize(cameraPosition - vPosWorld);
+	vec3 vecToCamera = cameraPosition - vPosWorld;
+	vec3 vecToCameraNormalized = normalize(vecToCamera);
 
-	vec3 color0 = pow(uColorSky, vec3(2.0));
-	vec3 color1 = mix(vec3(1.0), uColorSky, 0.07);
+	vec3 color0 = uColorSky;
+	vec3 color1 = mix(vec3(1.0), uColorSky, 0.1);
 
 
 	float phong = dot( vecToLight, vNormal );
-	vec3 color = mix( color0, color1, phong);
+	vec3 color = mix( color0, color1, phong*phong);
 
 	//color.xyz = snoise(vNormal);
 	float noise = snoise(vPosWorld*2.0);
-	color.xyz += vMoveDelta*0.05;
+	color.xyz += vMoveDelta*0.04;
 
 	if ( noise > 0.75)
 		color.xyz *= 1.2;
