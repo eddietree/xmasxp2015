@@ -11,11 +11,11 @@ SceneCliff.prototype.init = function() {
 	
 	//this.addSceneObj('TestBox', new TestBox());
 	this.addSceneObj('SnowParticles', new SnowParticles());
+	this.addSceneObj('SnowObjects', new SnowObjects());
 
 	// ambient light
 	this.ambientLight = new THREE.AmbientLight( SETTINGS.ambientLightColor );
 	this.add( this.ambientLight );
-	LOG(this.ambientLight);
 
 	APP.renderer.setClearColor( SETTINGS.clearColor, 1);
 	if ( SETTINGS.fogEnabled) APP.scene.fog = new THREE.FogExp2( SETTINGS.clearColor, 0.03 );
@@ -88,7 +88,6 @@ SceneCliff.prototype.parseSceneCollada = function() {
 	}
 
 	var colladaScene = RES.models['cliff.dae'];
-	this.colladaScene = colladaScene;
 
 	// remove the "ignore" tag
 	for( var i = 0; i < colladaScene.children.length; i+=1 ) {
@@ -100,6 +99,10 @@ SceneCliff.prototype.parseSceneCollada = function() {
 
 	this.add(colladaScene);
 	traverseObj(colladaScene);
+
+	LOG(colladaScene);
+
+	var results = getMeshesUsingMaterial( colladaScene, "Snow");
 };
 
 SceneCliff.prototype.update = function() {

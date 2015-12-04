@@ -7,10 +7,9 @@ SceneManager.prototype = Object.create(THREE.Object3D.prototype);
 SceneManager.prototype.constructor = SceneManager;
 
 SceneManager.prototype.addScene = function(name, scene) {
+	this.scenes[name] = scene;
 	scene.name = name;
 	scene.init();
-
-	this.scenes[name] = scene;
 };
 
 SceneManager.prototype.changeSceneTo = function(name) {
@@ -41,6 +40,6 @@ SceneManager.prototype.draw = function() {
 	}
 };
 
-function GetCurrentScene(name) {
+function getCurrentScene(name) {
 	return APP.game.sceneManager.currScene;
 }

@@ -1,6 +1,5 @@
 var Diamond = function(model) {
 	LOG("Creating Diamond");
-	LOG(model);
 
 	SceneObj.call(this);
 	this.add(model);
