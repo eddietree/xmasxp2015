@@ -103,21 +103,25 @@ void main() {
 
 	vec3 vecToLight = vec3(0,1,0);
 	vec3 vecToCamera = cameraPosition - vPosWorld;
-	vec3 vecToCameraNormalized = normalize(vecToCamera);
+	float distToCamera = length(vecToCamera);
+	vec3 vecToCameraNormalized = vecToCamera/distToCamera;
 
 	vec3 color0 = uColorSky;
-	vec3 color1 = mix(vec3(1.0), uColorSky, 0.1);
+	vec3 color1 = mix(vec3(1.0), uColorSky, 0.0);
 
 
 	float phong = dot( vecToLight, vNormal );
 	vec3 color = mix( color0, color1, phong*phong);
 
-	//color.xyz = snoise(vNormal);
 	float noise = snoise(vPosWorld*2.0);
 	color.xyz += vMoveDelta*0.04;
 
+	// TODO: optimize this
 	if ( noise > 0.75)
 		color.xyz *= 1.2;
+
+	// fog
+	color.xyz = mix( color.xyz, uColorSky, clamp(distToCamera*0.003,0.0,1.0) );
 
   	gl_FragColor = vec4( color, 1.0);
 }
