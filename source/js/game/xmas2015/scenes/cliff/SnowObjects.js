@@ -19,6 +19,7 @@ SnowObjects.prototype.init = function() {
 		    	fragmentShader: RES.shaders['snow.fp'],
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
+			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 			    },
 			});
 	});
@@ -32,10 +33,13 @@ SnowObjects.prototype.start = function() {
 SnowObjects.prototype.update = function() {
 
 	var time = APP.time;
+	var colorSky = new THREE.Color( SETTINGS.clearColor );
+	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);
 
 	this.meshesSnow.forEach( function(mesh) {
 		var mat = mesh.material;
 		mat.uniforms.uTime.value = time;
+		mat.uniforms.uColorSky.value = colorSky;
 	});
 };
 
