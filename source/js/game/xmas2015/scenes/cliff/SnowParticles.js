@@ -26,7 +26,7 @@ SnowParticles.prototype.init = function() {
 	    var points = new THREE.Points(geometry, material);
 
 	   	this.add(points);
-	}
+	};
 
 	makeGeo.call(this);
 };

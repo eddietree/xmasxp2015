@@ -26,10 +26,10 @@ CameraControllerC4D.prototype.init = function() {
 		that.mousePos = {x:e.x,y:e.y};
 		that.mousePosPrev = {x:e.x,y:e.y};
 
-		if ( button == 0 ) {
+		if ( button === 0 ) {
 			that.mouseState = "downBtnRotate";
 		}
-		if ( button == 1 ) {
+		if ( button === 1 ) {
 			that.mouseState = "downBtnPan";
 		}
 	});
@@ -51,16 +51,16 @@ CameraControllerC4D.prototype.init = function() {
 	});
 
 	window.addEventListener("wheel", function(e) {
-		that.radius = clamp( 1.0, 100.0, that.radius + e.deltaY*0.02 );
+		that.radius = clamp( 1.0, 100.0, that.radius + e.deltaY*0.015 );
 	});
 };
 
 CameraControllerC4D.prototype.update = function() {
-	if ( this.mouseState == "downBtnRotate") {
+	if ( this.mouseState === "downBtnRotate") {
 		this.updateRotation();
 	}
 
-	if ( this.mouseState == "downBtnPan") {
+	if ( this.mouseState === "downBtnPan") {
 		this.updatePan();
 	}
 
@@ -86,7 +86,7 @@ CameraControllerC4D.prototype.updateRotation = function() {
 	var mousePosRelX = this.mousePos.x - this.mousePosPrev.x;
 	var mousePosRelY = this.mousePos.y - this.mousePosPrev.y;
 
-	this.theta += mousePosRelX*0.01;
+	this.theta += mousePosRelX*0.015;
 	this.phi = clamp( this.phi - mousePosRelY*0.01, -Math.PI*0.5, Math.PI*0.5)
 };
 

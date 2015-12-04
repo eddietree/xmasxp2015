@@ -21,7 +21,7 @@ App.prototype = {
 		this.renderer.setClearColor(0xAAAAAA, 1);
 		document.body.appendChild(this.renderer.domElement);
 
-		this.debugObjs = new THREE.Object3D;
+		this.debugObjs = new THREE.Object3D();
 
 		// gui
 		this.gui = new dat.GUI();

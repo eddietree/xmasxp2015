@@ -26,7 +26,7 @@ SceneTestBox.prototype.init = function() {
 SceneTestBox.prototype.initGui = function() {
 	var folder = APP.gui.addFolder("Environment");
 
-	folder.addColor(SETTINGS, 'ambientLightColor')
+	folder.addColor(SETTINGS, 'ambientLightColor');
 	folder.addColor(SETTINGS, 'clearColor');
 
 	if ( APP.scene.fog ) {
