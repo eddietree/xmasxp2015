@@ -44,13 +44,6 @@ App.prototype = {
 	},
 
 	startGame : function() {
-
-		controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
-		//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-		controls.enableDamping = true;
-		controls.dampingFactor = 0.8;
-		controls.enableZoom = true;
-
 		this.game = new Game();
 		this.game.init();
 		this.game.start();

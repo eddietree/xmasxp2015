@@ -12,3 +12,8 @@ function randBetween(x,y)
 {
 	return x + (y-x)*Math.random();
 }
+
+function clamp(minVal, maxVal, val)
+{
+	return Math.max(minVal, Math.min(val, maxVal));
+}

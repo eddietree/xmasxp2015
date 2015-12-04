@@ -10,6 +10,16 @@ Game.prototype.init = function() {
 		this.initGui();
 		this.initDebugGfx();
 	}
+
+	this.camController = new CameraControllerC4D();
+	this.camController.init();
+
+	/*	
+	controls = new THREE.OrbitControls( APP.camera, APP.renderer.domElement );
+	//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+	controls.enableDamping = true;
+	controls.dampingFactor = 0.8;
+	controls.enableZoom = true;*/
 };
 
 Game.prototype.initDebugGfx = function() {
@@ -73,6 +83,10 @@ Game.prototype.update = function() {
 	if ( APP.camera.fov != SETTINGS.cameraFOV ) {
 		APP.camera.fov = SETTINGS.cameraFOV;
 		APP.camera.updateProjectionMatrix();
+	}
+
+	if ( this.camController ) {
+		this.camController.update();
 	}
 	
 	this.sceneManager.update();
