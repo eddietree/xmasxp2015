@@ -17,6 +17,9 @@ SnowObjects.prototype.init = function() {
 			new THREE.ShaderMaterial({
 		    	vertexShader:   RES.shaders['snow.vp'],
 		    	fragmentShader: RES.shaders['snow.fp'],
+		    	uniforms: { 
+			        uTime: {type: "f", value: 0.0},
+			    },
 			});
 	});
 
@@ -27,8 +30,12 @@ SnowObjects.prototype.start = function() {
 };
 
 SnowObjects.prototype.update = function() {
+
+	var time = APP.time;
+
 	this.meshesSnow.forEach( function(mesh) {
 		var mat = mesh.material;
+		mat.uniforms.uTime.value = time;
 	});
 };
 
