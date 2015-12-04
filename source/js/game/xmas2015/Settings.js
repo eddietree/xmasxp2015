@@ -12,8 +12,8 @@ var Settings = function() {
 		cameraC4dPhi: 1.5,
 		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},
 
-		fogEnabled: false,
-		fogDensity: 0.03,
+		fogEnabled: true,
+		fogDensity: 0.015,
 
 		clearColor : 0xcf8c78,
 		ambientLightColor : 0xa7992f,

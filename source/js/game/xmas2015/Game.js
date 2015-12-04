@@ -66,12 +66,14 @@ Game.prototype.initGui = function() {
 };
 
 Game.prototype.start = function() {
-	this.sceneManager.changeSceneTo('SceneTestBox');
 
 	APP.camera.fov = SETTINGS.cameraFOV;
+	APP.camera.updateProjectionMatrix();
 	APP.camera.position.x = SETTINGS.cameraStartPos.x;
 	APP.camera.position.y = SETTINGS.cameraStartPos.y;
 	APP.camera.position.z = SETTINGS.cameraStartPos.z;
+
+	this.sceneManager.changeSceneTo('SceneTestBox');
 };
 
 Game.prototype.update = function() {

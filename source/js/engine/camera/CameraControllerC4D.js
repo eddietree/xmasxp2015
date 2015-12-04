@@ -17,12 +17,17 @@ CameraControllerC4D.prototype = Object.create( THREE.Object3D.prototype );
 CameraControllerC4D.prototype.constructor = CameraControllerC4D;
 
 CameraControllerC4D.prototype.init = function() {
+	this.initSettings();
+	this.initControls();
+};
 
+CameraControllerC4D.prototype.initControls = function() {
 	var that = this;
 
 	window.addEventListener("mousedown", function(e) {
-		var button = e.button;
+		if ( !e.altKey ) return;
 
+		var button = e.button;
 		that.mousePos = {x:e.x,y:e.y};
 		that.mousePosPrev = {x:e.x,y:e.y};
 
@@ -51,10 +56,9 @@ CameraControllerC4D.prototype.init = function() {
 	});
 
 	window.addEventListener("wheel", function(e) {
+		if ( !e.altKey ) return;
 		that.radius = clamp( 1.0, 100.0, that.radius + e.deltaY*0.015 );
 	});
-
-	this.initSettings();
 };
 
 CameraControllerC4D.prototype.initSettings = function() {
