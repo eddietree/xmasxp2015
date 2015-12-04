@@ -113,15 +113,19 @@ void main() {
 	float phong = dot( vecToLight, vNormal );
 	vec3 color = mix( color0, color1, phong*phong);
 
+	float fogCoeff = clamp(distToCamera*0.002,0.0,1.0);
+
 	float noise = snoise(vPosWorld*2.0);
 	color.xyz += vMoveDelta*0.04;
 
 	// TODO: optimize this
 	if ( noise > 0.75)
 		color.xyz *= 1.2;
+	else if ( noise < 0.0)
+		color.xyz *= 1.01;
 
 	// fog
-	color.xyz = mix( color.xyz, uColorSky, clamp(distToCamera*0.003,0.0,1.0) );
+	color.xyz = mix( color.xyz, uColorSky, fogCoeff );
 
   	gl_FragColor = vec4( color, 1.0);
 }
