@@ -4,15 +4,15 @@ var Settings = function() {
 		debug : true,
 		showDebugObjects : true,
 
-		cameraFOV: 65.0,
-		cameraStartPos : {x:-5.5, y:4.0, z:23.7},
+		cameraFOV: 50.0,
+		cameraStartPos : {x:6.82, y:2.1, z:36.95},
 
-		cameraC4dRadius: 23.0,
-		cameraC4dTheta: 7.9,
+		cameraC4dRadius: 38.0,
+		cameraC4dTheta: 7.7,
 		cameraC4dPhi: 1.5,
-		cameraC4dPosLookAt: {x:6.5,y:3.34,z:0},
+		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},
 
-		fogEnabled: true,
+		fogEnabled: false,
 		fogDensity: 0.03,
 
 		clearColor : 0xcf8c78,

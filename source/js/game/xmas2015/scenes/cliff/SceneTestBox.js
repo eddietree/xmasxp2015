@@ -94,7 +94,8 @@ SceneTestBox.prototype.parseSceneCollada = function() {
 	}
 
 	var colladaScene = RES.models['cliff.dae'];
-	traverseObj(colladaScene);
+	this.add(colladaScene);
+	//traverseObj(colladaScene);
 };
 
 SceneTestBox.prototype.update = function() {
