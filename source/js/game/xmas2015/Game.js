@@ -3,7 +3,7 @@ var Game = function() {
 
 Game.prototype.init = function() {
 	this.sceneManager = new SceneManager();
-	this.sceneManager.addScene('SceneTestBox', new SceneTestBox());
+	this.sceneManager.addScene('SceneCliff', new SceneCliff());
 	APP.scene.add(this.sceneManager);
 
 	if ( SETTINGS.debug ) {
@@ -73,7 +73,7 @@ Game.prototype.start = function() {
 	APP.camera.position.y = SETTINGS.cameraStartPos.y;
 	APP.camera.position.z = SETTINGS.cameraStartPos.z;
 
-	this.sceneManager.changeSceneTo('SceneTestBox');
+	this.sceneManager.changeSceneTo('SceneCliff');
 };
 
 Game.prototype.update = function() {

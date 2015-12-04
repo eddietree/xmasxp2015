@@ -143,7 +143,7 @@ Resources.prototype.loadModels = function() {
 			// Function when resource is loaded
 			function ( res ) {
 				LOG("Loaded Collada file: " + filepath );
-				LOG(res.scene);
+				//LOG(res.scene);
 
 				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
 				that.models[filename] = res.scene;

@@ -1,11 +1,11 @@
-var SceneTestBox = function(firstName) {
+var SceneCliff = function(firstName) {
 	Scene.call(this);
 };
 
-SceneTestBox.prototype = Object.create(Scene.prototype);
-SceneTestBox.prototype.constructor = SceneTestBox;
+SceneCliff.prototype = Object.create(Scene.prototype);
+SceneCliff.prototype.constructor = SceneCliff;
 
-SceneTestBox.prototype.init = function() {
+SceneCliff.prototype.init = function() {
 	Scene.prototype.init.call(this);
 	this.parseSceneCollada();
 	
@@ -23,7 +23,7 @@ SceneTestBox.prototype.init = function() {
 	this.initGui();
 };
 
-SceneTestBox.prototype.initGui = function() {
+SceneCliff.prototype.initGui = function() {
 	var folder = APP.gui.addFolder("Environment");
 
 	folder.addColor(SETTINGS, 'ambientLightColor');
@@ -34,20 +34,17 @@ SceneTestBox.prototype.initGui = function() {
 	}
 };
 
-SceneTestBox.prototype.onLoadObject = function(object) {
+SceneCliff.prototype.onLoadObject = function(object) {
 
 	String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
 
 	var name = object.name;
 
 	if ( name.contains("Diamond") ) {
-		//this.add(object);
 		this.addSceneObj('Diamond', new Diamond(object));
 	}
 
 	else if ( name.contains("Light") ) {
-		LOG(object);
-		this.add(object);
 
 		var light = object.children[0];
 		light.intensity = 5;
@@ -66,18 +63,15 @@ SceneTestBox.prototype.onLoadObject = function(object) {
 	}
 
 	else if ( name.contains("Cliff") ) {
-		this.add(object);
 	}
 
 	else if ( name.contains("TreeTop") ) {
-		this.add(object);
 	}
 	else {
-		//this.add(object);
 	}
 };
 
-SceneTestBox.prototype.parseSceneCollada = function() {
+SceneCliff.prototype.parseSceneCollada = function() {
 	var that = this;
 
 	function traverseObj( object ) {
@@ -94,11 +88,21 @@ SceneTestBox.prototype.parseSceneCollada = function() {
 	}
 
 	var colladaScene = RES.models['cliff.dae'];
+	this.colladaScene = colladaScene;
+
+	// remove the "ignore" tag
+	for( var i = 0; i < colladaScene.children.length; i+=1 ) {
+		if ( colladaScene.children[i].name === "Ignore") {
+			colladaScene.remove(colladaScene.children[i]);
+			break;
+		}
+	}
+
 	this.add(colladaScene);
-	//traverseObj(colladaScene);
+	traverseObj(colladaScene);
 };
 
-SceneTestBox.prototype.update = function() {
+SceneCliff.prototype.update = function() {
 
 	if ( SETTINGS.debug ) {
 		APP.renderer.setClearColor( SETTINGS.clearColor, 1);

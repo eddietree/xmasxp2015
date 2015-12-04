@@ -40,3 +40,7 @@ SceneManager.prototype.draw = function() {
 		this.currScene.draw();
 	}
 };
+
+function GetCurrentScene(name) {
+	return APP.game.sceneManager.currScene;
+}
