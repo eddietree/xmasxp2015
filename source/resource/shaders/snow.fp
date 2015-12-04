@@ -6,7 +6,7 @@ varying vec3 vNormal;
 void main() {
 
 	vec3 lightDir = vec3(0,1,0);
-	vec3 color0 = pow(uColorSky, vec3(3.0));
+	vec3 color0 = pow(uColorSky, vec3(2.0));
 	vec3 color1 = vec3(1);
 
 	float phong = dot( lightDir, vNormal );

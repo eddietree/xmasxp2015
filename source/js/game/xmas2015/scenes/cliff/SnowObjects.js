@@ -34,7 +34,7 @@ SnowObjects.prototype.update = function() {
 
 	var time = APP.time;
 	var colorSky = new THREE.Color( SETTINGS.clearColor );
-	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);
+	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);//.multiplyScalar(0.5);
 
 	this.meshesSnow.forEach( function(mesh) {
 		var mat = mesh.material;
