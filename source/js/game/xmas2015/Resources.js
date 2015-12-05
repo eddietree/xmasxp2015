@@ -3,6 +3,7 @@ var Resources = function() {
 	// textures!
 	this.defTextures = {
 		'particle.png' : {},
+		//'perlin.jpg' : {},
 	};
 
 	// dae files
@@ -20,6 +21,7 @@ var Resources = function() {
 		'snow.vp', 'snow.fp',
 		'snowParticles.vp', 'snowParticles.fp',
 		'vignette.vp', 'vignette.fp',
+		'sunShaft.vp', 'sunShaft.fp',
 	];
 
 	this.shaders = {};
