@@ -10,8 +10,8 @@ SnowParticles.prototype.init = function() {
 
 	var makeGeo = function() {
 
-		var numParticles = 256;
-		var spread = v3( 70.0, 30.0, 15.0 );
+		var numParticles = 512;
+		var spread = v3( 70.0, 30.0, 20.0 );
 
 		var geometry = new THREE.Geometry();
 		for( var i = 0; i < numParticles; i+=1 ) { 
@@ -22,7 +22,9 @@ SnowParticles.prototype.init = function() {
 		}
 
 	    // add line object
-	    var material = new THREE.PointsMaterial({color:0xffffff});
+	    var tex = RES.textures['particle.png'];
+	    var material = new THREE.PointsMaterial({color:0xffffff, map:tex});
+	    material.transparent = true;
 	    var points = new THREE.Points(geometry, material);
 
 	   	this.add(points);

@@ -1,0 +1,26 @@
+uniform float uTime;
+
+varying float vTime;
+varying vec3 vNormal;
+varying vec3 vPosWorld;
+varying vec3 vPosWorldPreMove;
+varying float vMoveDelta;
+
+void main() {
+
+	vTime = uTime;
+	vNormal = normal;
+
+	vec3 pos = position;
+	vPosWorldPreMove = pos;
+
+	float moveDelta = sin(vTime + pos.x*0.2 - pos.z*0.2 + normal.y*50.0);
+	vMoveDelta = moveDelta;
+	pos += vNormal * moveDelta * 0.5;
+
+	vPosWorld = (modelMatrix * vec4(pos,1.0)).xyz;
+	
+  	gl_Position = projectionMatrix *
+                modelViewMatrix *
+                vec4(pos,1.0);
+}

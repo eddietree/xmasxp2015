@@ -2,7 +2,7 @@ var Resources = function() {
 
 	// textures!
 	this.defTextures = {
-		'cliff-test.png' : {},
+		'particle.png' : {},
 	};
 
 	// dae files
@@ -18,6 +18,7 @@ var Resources = function() {
 		'basic.vp', 'basic.fp',
 		'diamond.vp', 'diamond.fp',
 		'snow.vp', 'snow.fp',
+		'snowParticles.vp', 'snowParticles.fp',
 	];
 
 	this.shaders = {};
