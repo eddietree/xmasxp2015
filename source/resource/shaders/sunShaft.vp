@@ -30,7 +30,7 @@ void main() {
 	float xRot = x * cos(angle) - y * sin(angle);
 	float yRot = y * cos(angle) + x * sin(angle);
 	pos.xy = vec2(xRot, yRot);
-	pos.xyz += posRoot + vec3( -9.5, 0.0, 0.0);
+	pos.xyz += posRoot + vec3( -12.0, 0.0, 0.0);
 
 	vUV = position.xy;
 	vRandData =  randData;

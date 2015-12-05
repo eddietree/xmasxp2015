@@ -50,8 +50,8 @@ SceneCliff.prototype.onLoadObject = function(object) {
 	else if ( name.contains("Light") ) {
 
 		var light = object.children[0];
-		light.intensity = 5;
-		light.distance = 35;
+		light.intensity = 2;
+		light.distance = 29;
 
 		var geometry = new THREE.SphereGeometry( 5, 32, 32 );
 		var material = new THREE.MeshBasicMaterial( {color: light.color} );
