@@ -2,8 +2,8 @@ var Resources = function() {
 
 	// textures!
 	this.defTextures = {
+		'perlin.jpg' : {},
 		'particle.png' : {},
-		//'perlin.jpg' : {},
 	};
 
 	// dae files
@@ -93,37 +93,46 @@ Resources.prototype.loadTextures = function() {
 	for( var key in defs ) {
 		var val = defs[key];
 		var filename = key;
-		var filepath = 'resource/tex/' + filename;
-
-		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
-		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
-
-		var loader = new THREE.TextureLoader();
-		loader.load(
-
-			filepath, // resource URL
-
-			// Function when resource is loaded
-			function ( res ) {
-				LOG("Loaded Texture file: " + filepath );
-				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
-				that.textures[filename] = res;
-			},
-
-			// Function called when download progresses
-			function ( xhr ) {
-				loadingTrackedData.loadedBytes = xhr.loaded;
-				loadingTrackedData.totalSizeBytes = xhr.total;
-				//LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
-			},
-
-			// Function called when download progresses
-			function ( xhr ) {
-				LOG("ERROR loading Texture file: " + filepath );
-				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-			}
-		);
+		this.loadTexture(key);
 	}
+};
+
+Resources.prototype.loadTexture = function( filename ) {
+
+	var that = this;
+	var filepath = 'resource/tex/' + filename;
+
+	LOG(filename);
+
+	var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
+	this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
+
+	var loader = new THREE.TextureLoader();
+	loader.load(
+
+		filepath, // resource URL
+
+		// Function when resource is loaded
+		function ( res ) {
+			LOG("Loaded Texture file: " + filepath );
+			LOG(res);
+			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+			that.textures[filename] = res;
+		},
+
+		// Function called when download progresses
+		function ( xhr ) {
+			loadingTrackedData.loadedBytes = xhr.loaded;
+			loadingTrackedData.totalSizeBytes = xhr.total;
+			LOG( (xhr.loaded / xhr.total * 100) + '% loaded: ' + filename );
+		},
+
+		// Function called when download progresses
+		function ( xhr ) {
+			LOG("ERROR loading Texture file: " + filepath );
+			//console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+		}
+	);
 };
 
 Resources.prototype.loadModels = function() {
@@ -135,40 +144,46 @@ Resources.prototype.loadModels = function() {
 	for( var key in defs ) {
 		var val = defs[key];
 		var filename = key;
-		var filepath = 'resource/obj/' + filename;
-
-		var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
-		this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
-
-		var loader = new THREE.ColladaLoader();
-		loader.load(
-
-			filepath, // resource URL
-
-			// Function when resource is loaded
-			function ( res ) {
-				LOG("Loaded Collada file: " + filepath );
-				//LOG(res.scene);
-
-				loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
-				that.models[filename] = res.scene;
-			},
-
-			// Function called when download progresses
-			function ( xhr ) {
-				loadingTrackedData.loadedBytes = xhr.loaded;
-				loadingTrackedData.totalSizeBytes = xhr.total;
-
-				LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
-			},
-
-			// Function called when download progresses
-			function ( xhr ) {
-				LOG("ERROR loading Collada file: " + filepath );
-				LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
-			}
-		);
+		this.loadModel(filename);
 	}
+};
+
+Resources.prototype.loadModel = function( filename ) {
+
+	var that = this;
+	var filepath = 'resource/obj/' + filename;
+
+	var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
+	this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
+
+	var loader = new THREE.ColladaLoader();
+	loader.load(
+
+		filepath, // resource URL
+
+		// Function when resource is loaded
+		function ( res ) {
+			LOG("Loaded Collada file: " + filepath );
+			//LOG(res.scene);
+
+			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+			that.models[filename] = res.scene;
+		},
+
+		// Function called when download progresses
+		function ( xhr ) {
+			loadingTrackedData.loadedBytes = xhr.loaded;
+			loadingTrackedData.totalSizeBytes = xhr.total;
+
+			LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
+		},
+
+		// Function called when download progresses
+		function ( xhr ) {
+			LOG("ERROR loading Collada file: " + filepath );
+			LOG( (xhr.loaded / xhr.total * 100) + '% loaded' );
+		}
+	);
 };
 
 Resources.prototype.loadJSON = function() {
