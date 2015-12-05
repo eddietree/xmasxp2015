@@ -6,6 +6,10 @@ varying vec3 vPosWorld;
 varying vec3 vPosWorldPreMove;
 varying float vMoveDelta;
 
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
 void main() {
 
 	vTime = uTime;
@@ -14,9 +18,9 @@ void main() {
 	vec3 pos = position;
 	vPosWorldPreMove = pos;
 
-	float moveDelta = sin(vTime + pos.x*0.2 - pos.z*0.2 + normal.y*50.0);
+	float moveDelta = sin(vTime * 1.5 + rand(pos.xy)*0.5 + pos.x*0.5 - pos.z*0.1 + normal.y*50.0);
 	vMoveDelta = moveDelta;
-	pos += vNormal * moveDelta * 0.5;
+	pos += vNormal * moveDelta * 0.7;
 
 	vPosWorld = (modelMatrix * vec4(pos,1.0)).xyz;
 	
