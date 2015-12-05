@@ -15,10 +15,10 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.015,
 
-		vignetteAlpha: 0.25,
-		vignetteRadius: 0.7,
+		vignetteAlpha: 0.3,
+		vignetteRadius: 0.4,
 
 		ambientLightColor : 0x9691bb,
-		clearColor : 0x9ea2e3,
+		clearColor : 0x9ee3de,
 	};
 };
