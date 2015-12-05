@@ -10,7 +10,7 @@ SnowParticles.prototype.init = function() {
 
 	var makeGeo = function() {
 
-		var numParticles = 512;
+		var numParticles = 2048;
 		var spread = v3( 70.0, 30.0, 20.0 );
 
 		var geometry = new THREE.Geometry();

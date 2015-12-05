@@ -4,17 +4,47 @@ varying float vTime;
 varying float vDistToCamera;
 varying vec3 vPosWorld;
 
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float wrapf(float val, float minVal, float maxVal)
+{
+  val -= minVal;
+
+  float delta = maxVal - minVal;
+  if ( delta < 0.0001 ) return val;
+
+  return val - (delta* floor(val/delta)) + minVal;
+}
+
 void main() {
 
 	vec3 pos = position;
+
+	float rand0 = rand(pos.xy* 50.0);
+	float rand1 = rand(pos.yz*1000.3);
+	float rand2 = rand(pos.xz*3300.3);
+	vec2 dir = vec2(-1.0,1.0);
+
+	float time = uTime + rand0 * 500.0;
+	pos.xy -= time * mix( 0.5, 7.0, rand0 );
+	pos.xy += dir * sin(position.x + time * mix(0.1, 4.0, rand0)) * mix( 0.1, 0.6, rand2 );
+
+	vec3 bounds = vec3(70.0, 30.0, 20.0);
+	pos.xyz = vec3( 
+		wrapf( pos.x, -bounds.x, bounds.x), 
+		wrapf( pos.y, -bounds.y, bounds.y),
+		wrapf( pos.z, -bounds.z, bounds.z) );
 
 	vec3 posWorld = (modelMatrix * vec4(pos,1.0)).xyz;
 	vec3 vecToCamera = cameraPosition - posWorld;
 	float distToCamera = length(vecToCamera);
 
 	//float fogCoeff = clamp(distToCamera*0.003,0.0,1.0);
-	float fogCoeff = (1.0-smoothstep( 10.0, 100.0, distToCamera ));
-	gl_PointSize = fogCoeff * 15.0;
+	float sizeCoeff = sin( time * mix( 0.5, 3.0, rand2 ) + rand0 ) * 0.5 + 0.5;
+	float fogCoeff = (1.0-smoothstep( 10.0, 80.0, distToCamera ));
+	gl_PointSize = fogCoeff * 15.0 * sizeCoeff;
 	
 	vTime = uTime;
 	vPosWorld = posWorld;
