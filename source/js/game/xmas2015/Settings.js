@@ -15,7 +15,7 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.015,
 
-		clearColor : 0xcf8c78,
-		ambientLightColor : 0x404487,
+		ambientLightColor : 0x9691bb,
+		clearColor : 0x9ea2e3,
 	};
 };
