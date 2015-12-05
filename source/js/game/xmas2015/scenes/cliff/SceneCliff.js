@@ -13,6 +13,7 @@ SceneCliff.prototype.init = function() {
 	this.addSceneObj('SnowParticles', new SnowParticles());
 	this.addSceneObj('SnowObjects', new SnowObjects());
 	this.addSceneObj('Vignette', new Vignette());
+	this.addSceneObj('SunShaft', new SunShaft());
 
 	// ambient light
 	this.ambientLight = new THREE.AmbientLight( SETTINGS.ambientLightColor );
