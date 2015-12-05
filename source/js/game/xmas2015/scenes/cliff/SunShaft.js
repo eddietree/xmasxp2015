@@ -19,7 +19,7 @@ SunShaft.prototype.init = function() {
 SunShaft.prototype.initGeo = function() {
 	var geometry = new THREE.Geometry();
 
-	var numShafts = 8;
+	var numShafts = 1;
 	var posPivot = v3(0.0);
 	for( var i = 0; i < numShafts; i+=1 ) {
 
@@ -42,12 +42,16 @@ SunShaft.prototype.initGeo = function() {
 		geometry.faces.push( new THREE.Face3( index0, index2, index3, dataNormal ) );
 	}
 
+	var tex = RES.textures['perlin.png'];
+	tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+
 	var material = 
 		new THREE.ShaderMaterial({
 	    	vertexShader:   RES.shaders['sunShaft.vp'],
 	    	fragmentShader: RES.shaders['sunShaft.fp'],
 	    	uniforms: { 
 	    		uTime: {type: "f", value: 0.0},
+	    		uTex: {type: "t", value: tex},
 				//uSunShaftAlpha: {type: "f", value: SETTINGS.SunShaftAlpha},
 				//uSunShaftRadius: {type: "f", value: SETTINGS.SunShaftRadius},
 		    },

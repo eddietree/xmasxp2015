@@ -7,7 +7,7 @@ varying float vDistToCamera;
 
 void main() {
 
-  vec4 texColor = texture2D(uTex, gl_PointCoord);;
+  vec4 texColor = texture2D(uTex, gl_PointCoord);
 
   float fogCoeff = clamp(vDistToCamera*0.003,0.0,1.0);
   texColor.xyz = mix( texColor.xyz, uColorSky, fogCoeff );

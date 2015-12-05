@@ -2,7 +2,7 @@ var Resources = function() {
 
 	// textures!
 	this.defTextures = {
-		'perlin.jpg' : {},
+		'perlin.png' : {},
 		'particle.png' : {},
 	};
 
