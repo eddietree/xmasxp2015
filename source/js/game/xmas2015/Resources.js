@@ -19,6 +19,7 @@ var Resources = function() {
 		'diamond.vp', 'diamond.fp',
 		'snow.vp', 'snow.fp',
 		'snowParticles.vp', 'snowParticles.fp',
+		'vignette.vp', 'vignette.fp',
 	];
 
 	this.shaders = {};

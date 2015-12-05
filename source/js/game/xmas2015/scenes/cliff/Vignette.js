@@ -20,13 +20,23 @@ Vignette.prototype.initGeo = function() {
 	geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 	geometry.faces.push( new THREE.Face3( 0, 2, 3 ) );
 
+	var material = 
+		new THREE.ShaderMaterial({
+	    	vertexShader:   RES.shaders['vignette.vp'],
+	    	fragmentShader: RES.shaders['vignette.fp'],
+	    	uniforms: { 
+		        //uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
+		    },
+		});
+
     // add line object
-    var material = new THREE.MeshBasicMaterial({color:0xffffff});
+    //var material = new THREE.MeshBasicMaterial({color:0xffffff});
     material.depthTest = false;
-    //material.transparent = true;
+    material.transparent = true;
     //material.opacity = 0.25;
     var mesh  = new THREE.Mesh(geometry, material);
     mesh.renderOrder = 1;
+    mesh.frustumCulled = false;
 
     this.add(mesh);
 };
