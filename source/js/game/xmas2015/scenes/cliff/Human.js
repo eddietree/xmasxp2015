@@ -13,7 +13,7 @@ Human.prototype.init = function() {
 	LOG( meshesBody.length + " meshes found with 'Body' material");
 
 	meshesBody.forEach( function(mesh) {
-		mesh.material = new THREE.MeshBasicMaterial({color:0xffffbb});
+		//mesh.material = new THREE.MeshBasicMaterial({color:0xffffbb});
 		/*mesh.material =
 			new THREE.ShaderMaterial({
 		    	vertexShader:   RES.shaders['snow.vp'],
