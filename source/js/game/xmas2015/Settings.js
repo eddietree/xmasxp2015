@@ -15,6 +15,9 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.015,
 
+		vignetteAlpha: 0.25,
+		vignetteRadius: 0.7,
+
 		ambientLightColor : 0x9691bb,
 		clearColor : 0x9ea2e3,
 	};
