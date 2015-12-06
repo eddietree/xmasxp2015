@@ -42,7 +42,7 @@ Vignette.prototype.initGeo = function() {
     material.transparent = true;
     //material.opacity = 0.25;
     var mesh  = new THREE.Mesh(geometry, material);
-    mesh.renderOrder = 1;
+    mesh.renderOrder = 100;
     mesh.frustumCulled = false;
     this.material = material;
 

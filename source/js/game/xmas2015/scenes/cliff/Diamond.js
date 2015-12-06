@@ -43,8 +43,9 @@ Diamond.prototype.start = function() {
 };
 
 Diamond.prototype.update = function() {
+	this.position.copy(v3(5.0,5.0,0.0));
 	//this.position.setY( Math.sin(APP.time) * 1.0 );
-	this.rotation.set( APP.time * 1.0,0.0,0.0, 'XYZ' );
+	this.rotation.set( 0.0,APP.time * 0.5,0.0, 'XYZ' );
 
 	//this.material.uniforms.time.value = APP.time;
 };

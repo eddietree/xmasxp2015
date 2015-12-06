@@ -4,8 +4,8 @@
 		<contributor>
 			<authoring_tool>CINEMA4D 17.032 COLLADA Exporter</authoring_tool>
 		</contributor>
-		<created>2015-12-06T06:00:27Z</created>
-		<modified>2015-12-06T06:00:27Z</modified>
+		<created>2015-12-06T06:43:39Z</created>
+		<modified>2015-12-06T06:43:39Z</modified>
 		<unit/>
 		<up_axis>Y_UP</up_axis>
 	</asset>
@@ -1257,7 +1257,7 @@
 				</instance_geometry>
 			</node>
 			<node id="ID180" name="Diamond">
-				<translate sid="translate">5.82777 5.66344 -0.446046</translate>
+				<translate sid="translate">0 0 -0</translate>
 				<rotate sid="rotateY">0 1 0 -0</rotate>
 				<rotate sid="rotateX">1 0 0 0</rotate>
 				<rotate sid="rotateZ">0 0 1 -0</rotate>
