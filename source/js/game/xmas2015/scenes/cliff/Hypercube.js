@@ -1,6 +1,11 @@
 var Hypercube = function(firstName) {
 	SceneObj.call(this);
 	LOG("Creating Hypercube");
+
+	this.numTheta = 4;
+	this.numPhi = 2;
+
+	this.edgePos = [];
 };
 
 Hypercube.prototype = Object.create(SceneObj.prototype);
@@ -22,16 +27,12 @@ Hypercube.prototype.initGeo = function() {
 	var edgeDirX = [];
 	var edgeDirY = [];
 
-	var cubeRadius = 8;
-	var numTheta = 4;
-	var numPhi = 2;
+	var deltaTheta = 2.0 * Math.PI / this.numTheta;
+	var deltaPhi = Math.PI / this.numPhi;
 
-	var deltaTheta = 2.0 * Math.PI / numTheta;
-	var deltaPhi = Math.PI / numPhi;
-
-	for( var iPhi = 0; iPhi < numPhi; iPhi+=1 ) {
-		for( var iTheta = 0; iTheta < numTheta; iTheta+=1 ) {
-
+	// initialize spherical data
+	for( var iPhi = 0; iPhi < this.numPhi; iPhi+=1 ) {
+		for( var iTheta = 0; iTheta < this.numTheta; iTheta+=1 ) {
 			var theta = iTheta * deltaTheta;
 			var phi =  deltaPhi*0.5 + iPhi * deltaPhi;
 
@@ -39,12 +40,11 @@ Hypercube.prototype.initGeo = function() {
 			var sphericalDirX = sphericalPos;
 			var sphericalDirY = spherical(theta,phi + Math.PI*0.5);
 
-			edgeCenters.push(sphericalPos.multiplyScalar(cubeRadius));
+			edgeCenters.push(sphericalPos);
 			edgeDirX.push(sphericalDirX);
 			edgeDirY.push(sphericalDirY);
 		}
 	}
-
 
 	// copy to this
 	this.edgeCenters = edgeCenters;
@@ -55,10 +55,16 @@ Hypercube.prototype.initGeo = function() {
 
 	var geometry = new THREE.Geometry();
 
-	for( var i =0; i < edgeCenters.length-1; i+=1 ) {
+	//LOG( this.numTheta*this.numPhi*4);
+	for( var i = 0; i < this.numTheta*this.numPhi*4; i+=1 ) {
+		geometry.vertices.push( v3(randBetween(0.0,10.0), randBetween(0.0,10.0), randBetween(0.0,10.0)) );
+		this.edgePos.push(v3(0.0));
+	}
+
+	/*for( var i =0; i < edgeCenters.length-1; i+=1 ) {
 		geometry.vertices.push( edgeCenters[i] );
 		geometry.vertices.push( edgeCenters[i+1] );
-	}
+	}*/
 
 	/*var material = 
 		new THREE.ShaderMaterial({
@@ -87,8 +93,53 @@ Hypercube.prototype.initGeo = function() {
     //mesh.renderOrder = 1;
     //mesh.frustumCulled = false;
 
+    this.mesh = mesh;
     this.material = material;
     this.add(mesh);
+};
+
+Hypercube.prototype.updateVertPositions = function() {
+	var localRadius = 1.0;
+	var numEdgesPerCenter = 4;
+
+	for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
+
+		var edgeCenter = this.edgeCenters[i].clone().multiplyScalar(8);
+		var edgeDirX = this.edgeDirX[i];
+		var edgeDirY = this.edgeDirY[i];
+
+		for ( var iEdge = 0; iEdge < numEdgesPerCenter; iEdge+=1) {
+
+			var angle = APP.time + iEdge * 2.0 * Math.PI / numEdgesPerCenter;
+			var localDirX = Math.cos(angle);
+			var localDirY = Math.sin(angle);
+			
+			var posDirX = edgeDirX.clone();
+			var posDirY = edgeDirY.clone();
+			posDirX.multiplyScalar(localDirX*localRadius);
+			posDirY.multiplyScalar(localDirY*localRadius);
+
+			var posFinal = posDirX.clone();
+			posFinal.add(posDirY);
+			posFinal.add(edgeCenter);
+
+			this.edgePos[i*numEdgesPerCenter + iEdge].copy(posFinal);
+		}
+	}
+
+	var geometry = this.mesh.geometry;
+	var vertices = geometry.vertices;
+
+	for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
+		for ( var iEdge = 0; iEdge < numEdgesPerCenter; iEdge+=1) {
+
+			var index = i*numEdgesPerCenter + iEdge;
+			vertices[index].copy(this.edgePos[index]);
+		}
+	}
+
+	var geometry = this.mesh.geometry;
+	geometry.verticesNeedUpdate = true;
 };
 
 Hypercube.prototype.start = function() {
@@ -96,6 +147,7 @@ Hypercube.prototype.start = function() {
 };
 
 Hypercube.prototype.update = function() {
+	this.updateVertPositions();
 
 	var uniforms = this.material.uniforms;
 	//uniforms.uTime.value = APP.time;
