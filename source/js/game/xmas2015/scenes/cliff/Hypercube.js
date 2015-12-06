@@ -51,20 +51,16 @@ Hypercube.prototype.initGeo = function() {
 	this.edgeDirX = edgeDirX;
 	this.edgeDirY = edgeDirY;
 
-	LOG(edgeCenters);
-
 	var geometry = new THREE.Geometry();
 
-	//LOG( this.numTheta*this.numPhi*4);
 	for( var i = 0; i < this.numTheta*this.numPhi*4; i+=1 ) {
-		geometry.vertices.push( v3(randBetween(0.0,10.0), randBetween(0.0,10.0), randBetween(0.0,10.0)) );
+
+		for( j = 0; j<4; j+=1 ) {
+			geometry.vertices.push( v3(0.0, 0.0, 0.0) );
+		}
+
 		this.edgePos.push(v3(0.0));
 	}
-
-	/*for( var i =0; i < edgeCenters.length-1; i+=1 ) {
-		geometry.vertices.push( edgeCenters[i] );
-		geometry.vertices.push( edgeCenters[i+1] );
-	}*/
 
 	/*var material = 
 		new THREE.ShaderMaterial({
@@ -80,7 +76,7 @@ Hypercube.prototype.initGeo = function() {
 
     // add line object
     var material = new THREE.MeshBasicMaterial({color:0x000000});
-    var material = new THREE.LineBasicMaterial({color: 0x0000ff });
+    var material = new THREE.LineBasicMaterial({color: 0x000000 });
 
     // material properties
     //material.depthTest = false;
@@ -99,7 +95,7 @@ Hypercube.prototype.initGeo = function() {
 };
 
 Hypercube.prototype.updateVertPositions = function() {
-	var localRadius = 2.0;
+	var localRadius = 1.0;
 	var numEdgesPerCenter = 4;
 
 	for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
@@ -130,13 +126,49 @@ Hypercube.prototype.updateVertPositions = function() {
 	var geometry = this.mesh.geometry;
 	var vertices = geometry.vertices;
 
-	for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
+	function getIndex( edgeIndex, iRing ) {
+		return edgeIndex * 4 + iRing;
+	}
+
+	var vertIndexCurr = 0;
+
+	for( var iPhi = 0; iPhi < this.numPhi; iPhi+=1 ) {
+		for( var iTheta = 0; iTheta < this.numTheta; iTheta+=1 ) {
+			
+			var edgeIndexCurr = iPhi*this.numTheta + iTheta;
+
+			var edgeIndex0 = iPhi*this.numTheta + (edgeIndexCurr+1) % this.numTheta;
+			var edgeIndex1 = iPhi*this.numTheta + (this.numTheta + iTheta-1) % this.numTheta;
+			var edgeIndex2 = ((iPhi+1)%this.numPhi)*this.numTheta + iTheta;
+			var edgeIndex3 = edgeIndexCurr; // this should be the neighbor
+
+			for (var iRing=0; iRing<4; iRing+=1 ) {
+
+				var ringIndexCore = getIndex( edgeIndexCurr, iRing);
+				var neighborIndex0 = getIndex( edgeIndex0, iRing);
+				var neighborIndex1 = getIndex( edgeIndex1, iRing);
+				var neighborIndex2 = getIndex( edgeIndex2, iRing);
+				var neighborIndex3 = getIndex( edgeIndexCurr, (iRing+1)%4);
+
+				vertices[vertIndexCurr] = this.edgePos[ringIndexCore]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[neighborIndex0]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[ringIndexCore]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[neighborIndex1]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[ringIndexCore]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[neighborIndex2]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[ringIndexCore]; vertIndexCurr+=1;
+				vertices[vertIndexCurr] = this.edgePos[neighborIndex3]; vertIndexCurr+=1;
+			}
+		}
+	}
+
+	/*for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
 		for ( var iEdge = 0; iEdge < numEdgesPerCenter; iEdge+=1) {
 
 			var index = i*numEdgesPerCenter + iEdge;
 			vertices[index].copy(this.edgePos[index]);
 		}
-	}
+	}*/
 
 	var geometry = this.mesh.geometry;
 	geometry.verticesNeedUpdate = true;
