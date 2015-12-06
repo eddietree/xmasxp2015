@@ -10,8 +10,8 @@ SnowParticles.prototype.init = function() {
 
 	var makeGeo = function() {
 
-		var numParticles = 2048;
-		var spread = v3( 70.0, 30.0, 20.0 );
+		var numParticles = 3000;
+		var spread = v3(SETTINGS.snowParticleBounds.x, SETTINGS.snowParticleBounds.y, SETTINGS.snowParticleBounds.z);
 
 		var geometry = new THREE.Geometry();
 		for( var i = 0; i < numParticles; i+=1 ) { 
@@ -29,11 +29,15 @@ SnowParticles.prototype.init = function() {
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
+			        uBounds: {type: "v3", value: spread},
 			        uTex: {type: "t", value: tex},
+			        uParticleRadius: {type: "f", value:SETTINGS.snowParticleDiameter},
 			    },
 
 			});
 	    material.transparent = true;
+	    material.depthWrite = false;
+	    //material.depthTest = false;
 
 	    // add line object
 	    //var material = new THREE.PointsMaterial({color:0xffffff, map:tex});
