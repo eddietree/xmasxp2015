@@ -19,15 +19,41 @@ Hypercube.prototype.init = function() {
 Hypercube.prototype.initGeo = function() {
 
 	var edgeCenters = [];
+	var edgeDirX = [];
+	var edgeDirY = [];
 	var cubeRadius = 8;
 
-	for( var i = 0; i < 4; i+=1 ) {
-			
+	var numTheta = 4;
+	var numPhi = 2;
+	var deltaTheta = 2.0 * Math.PI / numTheta;
+	var deltaPhi = Math.PI / numPhi;
+
+
+	for( var iPhi = 0; iPhi < numPhi; iPhi+=1 ) {
+		for( var iTheta = 0; iTheta < numTheta; iTheta+=1 ) {
+
+			var theta = iTheta * deltaTheta;
+			var phi =  deltaPhi*0.5 + iPhi * deltaPhi;
+
+			var sphericalPos = spherical(theta,phi);
+			var sphericalDirX = sphericalPos;
+			var sphericalDirY = spherical(theta,phi + Math.PI*0.5);
+
+			edgeCenters.push(sphericalPos.multiplyScalar(cubeRadius));
+			edgeDirX.push(sphericalDirX);
+			edgeDirY.push(sphericalDirY);
+		}
 	}
 
+	LOG(edgeCenters);
+
 	var geometry = new THREE.Geometry();
-	geometry.vertices.push( v3(0.0) );
-	geometry.vertices.push( v3(10.0, 10.0, -10.0) );
+
+	for( var i =0; i < edgeCenters.length-1; i+=1 ) {
+		geometry.vertices.push( edgeCenters[i] );
+		geometry.vertices.push( edgeCenters[i+1] );
+	}
+	//LOG(geometry.vertices);
 
 	/*var material = 
 		new THREE.ShaderMaterial({
