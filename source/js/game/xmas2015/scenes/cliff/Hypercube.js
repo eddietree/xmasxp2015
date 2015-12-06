@@ -99,7 +99,7 @@ Hypercube.prototype.initGeo = function() {
 };
 
 Hypercube.prototype.updateVertPositions = function() {
-	var localRadius = 1.0;
+	var localRadius = 2.0;
 	var numEdgesPerCenter = 4;
 
 	for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
