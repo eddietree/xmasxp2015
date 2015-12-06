@@ -21,9 +21,14 @@ function clamp(minVal, maxVal, val)
 function spherical( theta, phi, radius ) {
 	radius = radius | 1.0;
 
-	var x = radius * Math.cos( theta ) * Math.sin(phi);
-	var z = radius * Math.sin( theta ) * Math.sin(phi);
-	var y = radius * Math.cos(phi);
+	var sinPhi = Math.sin(phi);
+	var cosPhi = Math.cos(phi);
+	var sinTheta = Math.sin(theta);
+	var cosTheta = Math.cos(theta);
+
+	var x = radius * cosTheta * sinPhi;
+	var z = radius * sinTheta * sinPhi;
+	var y = radius * cosPhi;
 
 	return v3(x,y,z);
 };
