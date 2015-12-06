@@ -8,6 +8,8 @@ SnowObjects.prototype.constructor = SnowObjects;
 
 SnowObjects.prototype.init = function() {
 
+	this.time = 0.0;
+
 	var colladaScene = RES.models['cliff.dae'];
 	var meshesSnow = getMeshesUsingMaterial( colladaScene, "Snow");
 	LOG( meshesSnow.length + " meshes found with 'Snow' material");
@@ -19,6 +21,7 @@ SnowObjects.prototype.init = function() {
 		    	fragmentShader: RES.shaders['snow.fp'],
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
+			        uMoveDelta: {type: "f", value: 1.0},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 			    },
 			});
@@ -32,14 +35,24 @@ SnowObjects.prototype.start = function() {
 
 SnowObjects.prototype.update = function() {
 
-	var time = APP.time;
+	this.time += APP.dt;
+	var time = this.time;
+
 	var colorSky = new THREE.Color( SETTINGS.clearColor );
 	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);//.multiplyScalar(0.5);
 
 	this.meshesSnow.forEach( function(mesh) {
+
+		// height
+		var snowHeightCoeff = SETTINGS.snowHeightCoeff;
+		if ( mesh.parent.name === "CliffTop" ) {
+			snowHeightCoeff = 0.12;
+		}
+
 		var mat = mesh.material;
 		mat.uniforms.uTime.value = time;
 		mat.uniforms.uColorSky.value = colorSky;
+		mat.uniforms.uMoveDelta.value = snowHeightCoeff;
 	});
 };
 

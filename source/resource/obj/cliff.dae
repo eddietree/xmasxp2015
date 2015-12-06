@@ -4,8 +4,8 @@
 		<contributor>
 			<authoring_tool>CINEMA4D 17.032 COLLADA Exporter</authoring_tool>
 		</contributor>
-		<created>2015-12-06T05:56:03Z</created>
-		<modified>2015-12-06T05:56:03Z</modified>
+		<created>2015-12-06T06:00:27Z</created>
+		<modified>2015-12-06T06:00:27Z</modified>
 		<unit/>
 		<up_axis>Y_UP</up_axis>
 	</asset>
@@ -958,13 +958,13 @@
 				<rotate sid="rotateX">1 0 0 0</rotate>
 				<rotate sid="rotateZ">0 0 1 -0</rotate>
 				<scale sid="scale">1 1 1</scale>
-				<node id="ID36" name="Polygon">
+				<node id="ID36" name="CliffTop">
 					<translate sid="translate">-0.0122156 0.00524869 -0</translate>
 					<rotate sid="rotateY">0 1 0 -0</rotate>
 					<rotate sid="rotateX">1 0 0 0</rotate>
 					<rotate sid="rotateZ">0 0 1 -1.74291</rotate>
 					<scale sid="scale">1 1 1</scale>
-					<node id="ID37" name="Polygon">
+					<node id="ID37" name="CliffTop">
 						<translate sid="translate">0 0 -0</translate>
 						<rotate sid="rotateY">0 1 0 -0</rotate>
 						<rotate sid="rotateX">1 0 0 0</rotate>
