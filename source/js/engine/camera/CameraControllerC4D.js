@@ -101,9 +101,10 @@ CameraControllerC4D.prototype.update = function() {
 	}
 
 	// radius
-	var x = this.posLookAt.x + this.radius * Math.cos( this.theta ) * Math.sin(this.phi);
-	var z = this.posLookAt.z + this.radius * Math.sin( this.theta ) * Math.sin(this.phi);
-	var y = this.posLookAt.y + this.radius * Math.cos(this.phi);
+	var sphericalPos = spherical( this.theta, this.phi, this.radius );
+	var x = this.posLookAt.x + sphericalPos.x;
+	var y = this.posLookAt.y + sphericalPos.y;
+	var z = this.posLookAt.z + sphericalPos.z;
 
 	this.cam.position.copy( v3(x,y,z) );
 	this.cam.lookAt( this.posLookAt );

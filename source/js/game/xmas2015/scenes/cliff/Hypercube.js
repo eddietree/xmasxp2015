@@ -17,33 +17,17 @@ Hypercube.prototype.init = function() {
 };
 
 Hypercube.prototype.initGeo = function() {
-	var geometry = new THREE.Geometry();
 
-	var numShafts = 1;
-	var posPivot = v3(0.0);
-	for( var i = 0; i < numShafts; i+=1 ) {
+	var edgeCenters = [];
+	var cubeRadius = 8;
 
-		var posZ = randBetween(-1.0, 1.0);
-
-		geometry.vertices.push( v3( 0.0, 0.0, posZ ) );
-		geometry.vertices.push( v3( 1.0, 0.0, posZ ) );
-		geometry.vertices.push( v3( 1.0, 1.0, posZ ) );
-		geometry.vertices.push( v3( 0.0, 1.0, posZ ) );
-
-		var faceIndexOffset = i * 4;
-		var index0 = faceIndexOffset + 0;
-		var index1 = faceIndexOffset + 1;
-		var index2 = faceIndexOffset + 2;
-		var index3 = faceIndexOffset + 3;
-
-		var dataNormal = v3( randBetween(0.0,1.0), randBetween(0.0,1.0), randBetween(0.0,1.0) );
-
-		geometry.faces.push( new THREE.Face3( index0, index1, index2, dataNormal ) );
-		geometry.faces.push( new THREE.Face3( index0, index2, index3, dataNormal ) );
+	for( var i = 0; i < 4; i+=1 ) {
+			
 	}
 
-	var tex = RES.textures['perlin.png'];
-	tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+	var geometry = new THREE.Geometry();
+	geometry.vertices.push( v3(0.0) );
+	geometry.vertices.push( v3(10.0, 10.0, -10.0) );
 
 	/*var material = 
 		new THREE.ShaderMaterial({
@@ -58,16 +42,24 @@ Hypercube.prototype.initGeo = function() {
 		});*/
 
     // add line object
-    var material = new THREE.MeshBasicMaterial({color:0xffffff});
+    var material = new THREE.MeshBasicMaterial({color:0x000000});
+
+    var material = new THREE.LineBasicMaterial({
+		color: 0x0000ff
+	});
+
+    // material properties
     //material.depthTest = false;
     //material.transparent = true;
     //material.blending = THREE.AdditiveBlending;
     //material.opacity = 0.25;
-    var mesh  = new THREE.Mesh(geometry, material);
+
+    // mesh
+    var mesh  = new THREE.Line(geometry, material);
     //mesh.renderOrder = 1;
     //mesh.frustumCulled = false;
-    this.material = material;
 
+    this.material = material;
     this.add(mesh);
 };
 

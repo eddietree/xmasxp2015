@@ -24,4 +24,6 @@ function spherical( theta, phi, radius ) {
 	var x = radius * Math.cos( theta ) * Math.sin(phi);
 	var z = radius * Math.sin( theta ) * Math.sin(phi);
 	var y = radius * Math.cos(phi);
+
+	return v3(x,y,z);
 };
