@@ -63,17 +63,19 @@ Hypercube.prototype.initGeo = function() {
 	}
 
 	function getFaceIndex( indexTheta, indexRing ) {
-		indexTheta = (numTheta+indexTheta)%numTheta;
-		indexRing = (numPerRings+indexRing)%numPerRing;
+		indexTheta = (numTheta + indexTheta)%numTheta;
+		indexRing = (numPerRing + indexRing)%numPerRing;
+
+		return indexTheta * numPerRing + indexRing;
 	}
 
-	// init faces
+	// init tru faces
 	for( var iTheta = 0; iTheta < this.numTheta; iTheta+=1 ) {
 		for( iRing = 0; iRing<numPerRing; iRing+=1 ) {
-			var index0 = 0;
-			var index1 = 1;
-			var index2 = 2;
-			var index3 = 3;
+			var index0 = getFaceIndex(iTheta, iRing);
+			var index1 = getFaceIndex(iTheta+1, iRing);
+			var index2 = getFaceIndex(iTheta+1, iRing+1);
+			var index3 = getFaceIndex(iTheta, iRing+1);
 
 			geoTris.faces.push( new THREE.Face3(index0,index1,index2) );
 			geoTris.faces.push( new THREE.Face3(index0,index2,index3) );
@@ -97,11 +99,12 @@ Hypercube.prototype.initGeo = function() {
 
     // material properties
     //material.depthTest = false;
-    //material.transparent = true;
     //material.blending = THREE.AdditiveBlending;
     this.materialTris = materialTris;
     this.materialTris.transparent = true;
     this.materialTris.opacity = 0.5;
+    this.materialTris.side = THREE.DoubleSide
+    this.materialTris.depthWrite = false;
     this.meshTris = new THREE.Mesh(geoTris, materialTris);
     this.add(this.meshTris);
 
@@ -116,7 +119,7 @@ Hypercube.prototype.initGeo = function() {
 Hypercube.prototype.updateVertPositions = function() {
 	var globalRadius = 8.0;
 	var localRadius = globalRadius * 0.7;
-	var time = APP.time * 0.2;
+	var time = APP.time * 0.5;
 
 	var numEdgesPerCenter = 4;
 	var deltaAngleRing = 2.0 * Math.PI / numEdgesPerCenter;
@@ -161,10 +164,12 @@ Hypercube.prototype.sendToGPU = function() {
 	var numRings = 4;
 	var numTheta = this.numTheta;
 
+	// tris
 	for( var i = 0; i < edgePos.length; i+=1 ) {
 		verticesTris[i].copy(edgePos[i]);
 	}
 
+	// lines
 	for( var iTheta = 0; iTheta < numTheta; iTheta+=1 ) {
 		
 		var edgeIndexCurr = iTheta;
