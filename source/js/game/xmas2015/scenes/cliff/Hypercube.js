@@ -21,13 +21,13 @@ Hypercube.prototype.initGeo = function() {
 	var edgeCenters = [];
 	var edgeDirX = [];
 	var edgeDirY = [];
-	var cubeRadius = 8;
 
+	var cubeRadius = 8;
 	var numTheta = 4;
 	var numPhi = 2;
+
 	var deltaTheta = 2.0 * Math.PI / numTheta;
 	var deltaPhi = Math.PI / numPhi;
-
 
 	for( var iPhi = 0; iPhi < numPhi; iPhi+=1 ) {
 		for( var iTheta = 0; iTheta < numTheta; iTheta+=1 ) {
@@ -45,6 +45,12 @@ Hypercube.prototype.initGeo = function() {
 		}
 	}
 
+
+	// copy to this
+	this.edgeCenters = edgeCenters;
+	this.edgeDirX = edgeDirX;
+	this.edgeDirY = edgeDirY;
+
 	LOG(edgeCenters);
 
 	var geometry = new THREE.Geometry();
@@ -53,7 +59,6 @@ Hypercube.prototype.initGeo = function() {
 		geometry.vertices.push( edgeCenters[i] );
 		geometry.vertices.push( edgeCenters[i+1] );
 	}
-	//LOG(geometry.vertices);
 
 	/*var material = 
 		new THREE.ShaderMaterial({
@@ -69,10 +74,7 @@ Hypercube.prototype.initGeo = function() {
 
     // add line object
     var material = new THREE.MeshBasicMaterial({color:0x000000});
-
-    var material = new THREE.LineBasicMaterial({
-		color: 0x0000ff
-	});
+    var material = new THREE.LineBasicMaterial({color: 0x0000ff });
 
     // material properties
     //material.depthTest = false;
