@@ -61,8 +61,8 @@ SceneCliff.prototype.onLoadObject = function(object) {
 		APP.debugObjs.add(sphere);
 
 		// point light helper
-		var pointLightHelper = new THREE.PointLightHelper( light, light.distance );
-		APP.debugObjs.add( pointLightHelper );
+		//var pointLightHelper = new THREE.PointLightHelper( light, light.distance );
+		//APP.debugObjs.add( pointLightHelper );
 	}
 
 	else if ( name.contains("Cliff") ) {

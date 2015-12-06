@@ -47,7 +47,7 @@ void main() {
 	//float fogCoeff = clamp(distToCamera*0.003,0.0,1.0);
 	float sizeCoeff = sin( time * mix( 0.5, 3.0, rand2 ) + rand0 ) * 0.5 + 0.5;
 	float fogCoeff = (1.0-smoothstep( 10.0, 80.0, distToCamera ));
-	gl_PointSize = fogCoeff * uParticleRadius * sizeCoeff;
+	gl_PointSize = fogCoeff * uParticleRadius * sizeCoeff * mix( 0.75, 1.0, rand1 ) ;
 	
 	vTime = uTime;
 	vPosWorld = posWorld;
