@@ -18,7 +18,7 @@ var Settings = function() {
 		vignetteAlpha: 0.3,
 		vignetteRadius: 0.4,
 
-		snowSpeed: 1.0,
+		snowSpeed: 2.5,
 		snowHeightCoeff: 1.0,
 
 		ambientLightColor : 0x9691bb,

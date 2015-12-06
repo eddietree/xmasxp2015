@@ -51,7 +51,7 @@ SceneCliff.prototype.onLoadObject = function(object) {
 
 		var light = object.children[0];
 		light.intensity = 2;
-		light.distance = 29;
+		light.distance = 27;
 
 		var geometry = new THREE.SphereGeometry( 5, 32, 32 );
 		var material = new THREE.MeshBasicMaterial( {color: light.color} );

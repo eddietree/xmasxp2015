@@ -28,6 +28,12 @@ SnowObjects.prototype.init = function() {
 	});
 
 	this.meshesSnow = meshesSnow;
+
+	if ( SETTINGS.debug ) {
+		var folder = APP.gui.addFolder("Snow Objects");
+		folder.add(SETTINGS, 'snowSpeed');
+		folder.add(SETTINGS, 'snowHeightCoeff', 0.0, 10.0);
+	}
 };
 
 SnowObjects.prototype.start = function() {
@@ -35,7 +41,7 @@ SnowObjects.prototype.start = function() {
 
 SnowObjects.prototype.update = function() {
 
-	this.time += APP.dt;
+	this.time += APP.dt * SETTINGS.snowSpeed;
 	var time = this.time;
 
 	var colorSky = new THREE.Color( SETTINGS.clearColor );

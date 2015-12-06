@@ -107,7 +107,7 @@ void main() {
 	vec3 vecToCameraNormalized = vecToCamera/distToCamera;
 
 	vec3 color0 = uColorSky;
-	vec3 color1 = mix(vec3(1.0), uColorSky, 0.2);
+	vec3 color1 = mix(vec3(1.0), uColorSky, 0.3);
 
 
 	float phong = dot( vecToLight, vNormal );
@@ -120,7 +120,7 @@ void main() {
 
 	// TODO: optimize this
 	if ( noise > 0.75)
-		color.xyz *= 5.5;
+		color.xyz = vec3(1.0);
 	else if ( noise < 0.0)
 		color.xyz *= 1.01;
 
