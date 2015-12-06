@@ -59,6 +59,7 @@ Hypercube.prototype.initGeo = function() {
 		}
 
 		this.edgePos.push(v3(0.0));
+		//geoTris.colors.push( color );
 		geoTris.vertices.push( v3(0.0, 0.0, 0.0) );
 	}
 
@@ -77,8 +78,26 @@ Hypercube.prototype.initGeo = function() {
 			var index2 = getFaceIndex(iTheta+1, iRing+1);
 			var index3 = getFaceIndex(iTheta, iRing+1);
 
-			geoTris.faces.push( new THREE.Face3(index0,index1,index2) );
-			geoTris.faces.push( new THREE.Face3(index0,index2,index3) );
+			var color0 = new THREE.Color();
+			var color1 = new THREE.Color();
+			var color2 = new THREE.Color();
+			var color3 = new THREE.Color();
+			color0.setHSL( randBetween(0.0,1.0), 1.0, 0.6);
+			color1.setHSL( randBetween(0.0,1.0), 1.0, 0.6);
+			color2.setHSL( randBetween(0.0,1.0), 1.0, 0.6);
+			color3.setHSL( randBetween(0.0,1.0), 1.0, 0.6);
+
+			var face0 = new THREE.Face3(index0,index1,index2);
+			var face1 = new THREE.Face3(index0,index2,index3);
+			face0.vertexColors[0] = color0;
+			face0.vertexColors[1] = color1;
+			face0.vertexColors[2] = color2;
+			face1.vertexColors[0] = color0;
+			face1.vertexColors[1] = color2;
+			face1.vertexColors[2] = color3;
+
+			geoTris.faces.push( face0 );
+			geoTris.faces.push( face1 );
 		}
 	}
 
@@ -95,18 +114,24 @@ Hypercube.prototype.initGeo = function() {
 		});*/
 
     // add line object
-    var materialTris = new THREE.MeshBasicMaterial({color:0x000000});
+    //var materialTris = new THREE.MeshBasicMaterial({color:0x000000});
+    var materialTris = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
 
     // material properties
     //material.depthTest = false;
-    //material.blending = THREE.AdditiveBlending;
     this.materialTris = materialTris;
     this.materialTris.transparent = true;
     this.materialTris.opacity = 0.5;
     this.materialTris.side = THREE.DoubleSide
     this.materialTris.depthWrite = false;
+    //this.materialTris.blending = THREE.MultiplyBlending;
     this.meshTris = new THREE.Mesh(geoTris, materialTris);
+    this.meshTris.renderOrder = 1;
     this.add(this.meshTris);
+
+    this.scale.multiplyScalar(0.35);
+    this.position.copy( v3(6.5,6.5,0.0));
+    this.rotation.set( Math.PI*0.5, 0.0, 0.0, 'XYZ');
 
     // mesh lines
     var materialLines = new THREE.LineBasicMaterial({color: 0xffffff });
@@ -119,7 +144,7 @@ Hypercube.prototype.initGeo = function() {
 Hypercube.prototype.updateVertPositions = function() {
 	var globalRadius = 8.0;
 	var localRadius = globalRadius * 0.7;
-	var time = APP.time * 0.5;
+	var time = -APP.time * 0.75;
 
 	var numEdgesPerCenter = 4;
 	var deltaAngleRing = 2.0 * Math.PI / numEdgesPerCenter;
