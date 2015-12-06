@@ -103,7 +103,10 @@ SceneCliff.prototype.parseSceneCollada = function() {
 	this.add(colladaScene);
 	traverseObj(colladaScene);
 
-	LOG(colladaScene);
+	if ( SETTINGS.debug ) {
+		LOG("Collada File:");
+		LOG(colladaScene);
+	}
 
 	var results = getMeshesUsingMaterial( colladaScene, "Snow");
 };

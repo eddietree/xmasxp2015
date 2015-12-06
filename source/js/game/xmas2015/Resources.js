@@ -102,7 +102,7 @@ Resources.prototype.loadTexture = function( filename ) {
 	var that = this;
 	var filepath = 'resource/tex/' + filename;
 
-	LOG(filename);
+	//LOG(filename);
 
 	var loadingTrackedData = {loadedBytes:0, totalSizeBytes: 1<<14};
 	this.loadingTrackedItems[this.loadingTrackedItems.length] = loadingTrackedData;
@@ -115,7 +115,7 @@ Resources.prototype.loadTexture = function( filename ) {
 		// Function when resource is loaded
 		function ( res ) {
 			LOG("Loaded Texture file: " + filepath );
-			LOG(res);
+			//LOG(res);
 			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
 			that.textures[filename] = res;
 		},
