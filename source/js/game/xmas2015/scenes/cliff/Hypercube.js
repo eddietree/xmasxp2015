@@ -85,7 +85,7 @@ Hypercube.prototype.initGeo = function() {
     //material.opacity = 0.25;
 
     // mesh
-    var mesh  = new THREE.Line(geometry, material);
+    var mesh  = new THREE.LineSegments(geometry, material);
     //mesh.renderOrder = 1;
     //mesh.frustumCulled = false;
 
@@ -95,7 +95,7 @@ Hypercube.prototype.initGeo = function() {
 };
 
 Hypercube.prototype.updateVertPositions = function() {
-	var localRadius = 1.0;
+	var localRadius = 1.5;
 	var numEdgesPerCenter = 4;
 
 	for( var i = 0; i < this.edgeCenters.length; i+=1 ) {
@@ -106,7 +106,10 @@ Hypercube.prototype.updateVertPositions = function() {
 
 		for ( var iEdge = 0; iEdge < numEdgesPerCenter; iEdge+=1) {
 
-			var angle = APP.time + iEdge * 2.0 * Math.PI / numEdgesPerCenter;
+			var coeff = 1.0;
+			//if ( i > 4 )  coeff = -1.0;
+
+			var angle = APP.time*coeff + iEdge * 2.0 * Math.PI / numEdgesPerCenter;
 			var localDirX = Math.cos(angle);
 			var localDirY = Math.sin(angle);
 			
