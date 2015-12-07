@@ -24,7 +24,7 @@ var Settings = function() {
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
 
-		hypercubeRadius : 2.1,
+		hypercubeRadius : 1.8,
 		hypercubeInnerCoeff : 0.75,
 		hypercubeMovementSpeed: 0.9,
 
