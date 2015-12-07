@@ -19,7 +19,7 @@ SunShaft.prototype.init = function() {
 SunShaft.prototype.initGeo = function() {
 	var geometry = new THREE.Geometry();
 
-	var numShafts = 1;
+	var numShafts = 2;
 	var posPivot = v3(0.0);
 	for( var i = 0; i < numShafts; i+=1 ) {
 

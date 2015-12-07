@@ -11,7 +11,7 @@ varying vec3 vRandData;
 
 void main() {
 
-	vec2 uv = vec2( vUV.x*0.5, vTime*0.05 );
+	vec2 uv = vec2( vUV.x*0.9, vTime*0.05 );
 	vec4 texColor = texture2D(uTex, uv);
 	
 	float shaftVal = pow(texColor.x, 2.0);
@@ -19,5 +19,5 @@ void main() {
 
 
 	//gl_FragColor = vec4(vUV,0.0,1.0);
-	gl_FragColor = vec4(vec3(1.0,1.0,0.8), shaftVal*0.5);
+	gl_FragColor = vec4(vec3(1.0,1.0,0.7), shaftVal*0.25);
 }
