@@ -99,6 +99,31 @@ Hypercube.prototype.initGeo = function() {
 			geoTris.faces.push( face0 );
 			geoTris.faces.push( face1 );
 		}
+
+		var index0 = getFaceIndex(iTheta, iRing);
+		var index1 = getFaceIndex(iTheta, iRing+1);
+		var index2 = getFaceIndex(iTheta, iRing+2);
+		var index3 = getFaceIndex(iTheta, iRing+3);
+		var color0 = new THREE.Color();
+		var color1 = new THREE.Color();
+		var color2 = new THREE.Color();
+		var color3 = new THREE.Color();
+		color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
+		color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
+		color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
+		color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
+
+		var face0 = new THREE.Face3(index0,index1,index2);
+		var face1 = new THREE.Face3(index0,index2,index3);
+		face0.vertexColors[0] = color0;
+		face0.vertexColors[1] = color1;
+		face0.vertexColors[2] = color2;
+		face1.vertexColors[0] = color0;
+		face1.vertexColors[1] = color2;
+		face1.vertexColors[2] = color3;
+
+		geoTris.faces.push( face0 );
+		geoTris.faces.push( face1 );
 	}
 
 	/*var material = 
