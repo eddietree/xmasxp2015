@@ -10,6 +10,11 @@ Hypercube.prototype = Object.create(SceneObj.prototype);
 Hypercube.prototype.constructor = Hypercube;
 
 Hypercube.prototype.init = function() {
+
+    //this.scale.multiplyScalar(0.3);
+    this.position.copy( v3(2.5,4.0,0.0));
+    this.rotation.set( Math.PI*0.5, 0.0, 0.0, 'XYZ');
+
 	this.initGeo();
 
 	// center sphere
@@ -161,10 +166,6 @@ Hypercube.prototype.initGeo = function() {
     this.meshTris = new THREE.Mesh(geoTris, materialTris);
     this.meshTris.renderOrder = 1;
     this.add(this.meshTris);
-
-    //this.scale.multiplyScalar(0.3);
-    this.position.copy( v3(2.5,4.0,0.0));
-    this.rotation.set( Math.PI*0.5, 0.0, 0.0, 'XYZ');
 
     // mesh lines
     var materialLines = new THREE.LineBasicMaterial({color: 0xffffff });
