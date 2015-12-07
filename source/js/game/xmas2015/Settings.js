@@ -2,7 +2,7 @@ var Settings = function() {
 
 	return {
 		debug : true,
-		showDebugObjects : true,
+		showDebugObjects : false,
 
 		cameraFOV: 50.0,
 		cameraStartPos : {x:6.82, y:2.1, z:36.95},
@@ -13,7 +13,7 @@ var Settings = function() {
 		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},
 
 		fogEnabled: true,
-		fogDensity: 0.015,
+		fogDensity: 0.0165,
 
 		vignetteAlpha: 0.3,
 		vignetteRadius: 0.4,

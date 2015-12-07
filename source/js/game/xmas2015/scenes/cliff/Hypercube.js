@@ -83,10 +83,10 @@ Hypercube.prototype.initGeo = function() {
 			var color1 = new THREE.Color();
 			var color2 = new THREE.Color();
 			var color3 = new THREE.Color();
-			color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
-			color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
-			color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
-			color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
+			color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.6,0.8));
+			color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.6,0.8));
+			color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.6,0.8));
+			color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.6,0.8));
 
 			var face0 = new THREE.Face3(index0,index1,index2);
 			var face1 = new THREE.Face3(index0,index2,index3);
