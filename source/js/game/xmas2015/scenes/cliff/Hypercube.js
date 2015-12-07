@@ -14,8 +14,9 @@ Hypercube.prototype.init = function() {
 
 	if ( SETTINGS.debug ) {
 		var folder = APP.gui.addFolder("Hypercube");
-		//folder.add(SETTINGS, 'debug');
-		//folder.add(SETTINGS, 'HypercubeRadius', 0.0, 1.0);
+		folder.add(SETTINGS, 'hypercubeRadius', 0.0, 10.0);
+		folder.add(SETTINGS, 'hypercubeInnerCoeff', 0.0, 1.0);
+		folder.add(SETTINGS, 'hypercubeMovementSpeed', 0.0, 1.0);
 	}
 };
 
@@ -82,10 +83,10 @@ Hypercube.prototype.initGeo = function() {
 			var color1 = new THREE.Color();
 			var color2 = new THREE.Color();
 			var color3 = new THREE.Color();
-			color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
-			color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
-			color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
-			color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
+			color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
+			color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
+			color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
+			color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.8));
 
 			var face0 = new THREE.Face3(index0,index1,index2);
 			var face1 = new THREE.Face3(index0,index2,index3);
@@ -108,10 +109,10 @@ Hypercube.prototype.initGeo = function() {
 		var color1 = new THREE.Color();
 		var color2 = new THREE.Color();
 		var color3 = new THREE.Color();
-		color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
-		color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
-		color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
-		color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,0.7));
+		color0.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,1.0));
+		color1.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,1.0));
+		color2.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,1.0));
+		color3.setHSL( randBetween(0.0,1.0), 1.0, randBetween(0.5,1.0));
 
 		var face0 = new THREE.Face3(index0,index1,index2);
 		var face1 = new THREE.Face3(index0,index2,index3);
@@ -155,7 +156,7 @@ Hypercube.prototype.initGeo = function() {
     this.add(this.meshTris);
 
     //this.scale.multiplyScalar(0.3);
-    this.position.copy( v3(6.5,6.5,0.0));
+    this.position.copy( v3(7.0,6.0,0.0));
     this.rotation.set( Math.PI*0.5, 0.0, 0.0, 'XYZ');
 
     // mesh lines
@@ -167,9 +168,9 @@ Hypercube.prototype.initGeo = function() {
 };
 
 Hypercube.prototype.updateVertPositions = function() {
-	var globalRadius = 2.0;
-	var localRadius = globalRadius * 0.75;
-	var time = -APP.time * 0.85;
+	var globalRadius = SETTINGS.hypercubeRadius;
+	var localRadius = globalRadius * SETTINGS.hypercubeInnerCoeff;
+	var time = APP.time * SETTINGS.hypercubeMovementSpeed;
 
 	var numEdgesPerCenter = 4;
 	var deltaAngleRing = 2.0 * Math.PI / numEdgesPerCenter;
