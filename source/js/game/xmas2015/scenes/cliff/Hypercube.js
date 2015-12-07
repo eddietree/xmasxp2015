@@ -12,6 +12,13 @@ Hypercube.prototype.constructor = Hypercube;
 Hypercube.prototype.init = function() {
 	this.initGeo();
 
+	// center sphere
+	var geometry = new THREE.SphereGeometry( 0.4, 4, 1 );
+	var material = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+	var sphere = new THREE.Mesh( geometry, material );
+	this.add(sphere);
+
+
 	if ( SETTINGS.debug ) {
 		var folder = APP.gui.addFolder("Hypercube");
 		folder.add(SETTINGS, 'hypercubeRadius', 0.0, 10.0);

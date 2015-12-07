@@ -25,7 +25,7 @@ var Settings = function() {
 		snowParticleDiameter: 20.0,
 
 		hypercubeRadius : 1.8,
-		hypercubeInnerCoeff : 0.75,
+		hypercubeInnerCoeff : 0.65,
 		hypercubeMovementSpeed: 0.9,
 
 		ambientLightColor : 0x9691bb,
