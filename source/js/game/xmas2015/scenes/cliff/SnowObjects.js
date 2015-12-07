@@ -49,15 +49,21 @@ SnowObjects.prototype.update = function() {
 
 	this.meshesSnow.forEach( function(mesh) {
 
+		var colorSkyCurr = colorSky;
+
 		// height
 		var snowHeightCoeff = SETTINGS.snowHeightCoeff;
 		if ( mesh.parent.name === "CliffTop" ) {
 			snowHeightCoeff = 0.12;
 		}
+		else if ( mesh.parent.name.contains("TreeSnow") ) {
+			snowHeightCoeff = 0.02;	
+			colorSkyCurr = v3(1.0,1.0,1.0).lerp( colorSky, 0.45);
+		}
 
 		var mat = mesh.material;
 		mat.uniforms.uTime.value = time;
-		mat.uniforms.uColorSky.value = colorSky;
+		mat.uniforms.uColorSky.value = colorSkyCurr;
 		mat.uniforms.uMoveDelta.value = snowHeightCoeff;
 	});
 };
