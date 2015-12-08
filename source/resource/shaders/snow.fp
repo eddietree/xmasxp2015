@@ -1,4 +1,5 @@
 uniform vec3 uColorSky;
+uniform vec3 uColorSnow;
 
 varying float vTime;
 varying vec3 vNormal;
@@ -107,7 +108,7 @@ void main() {
 	vec3 vecToCameraNormalized = vecToCamera/distToCamera;
 
 	vec3 color0 = uColorSky;
-	vec3 color1 = mix(vec3(1.0), uColorSky, 0.3);
+	vec3 color1 = mix(uColorSnow, uColorSky, 0.3);
 
 
 	float phong = dot( vecToLight, vNormal );

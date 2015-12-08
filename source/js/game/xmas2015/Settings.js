@@ -21,7 +21,9 @@ var Settings = function() {
 		snowSpeed: 2.6,
 		snowHeightCoeff: 1.0,
 		snowColor: 0xffffff,
-		snowColorDark: 0x000000,
+		snowColorDark: 0xf485a2,
+		snowParticleColor: 0xffffff,
+		snowParticleColorDark: 0x000000,
 
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
@@ -36,7 +38,7 @@ var Settings = function() {
 		hypercubeMovementSpeed: 0.95,
 
 		ambientLightColor : 0x9691bb,
-		ambientLightColorDark: 0xa46161,
+		ambientLightColorDark: 0x425175,
 		clearColor : 0x9ee3de,
 		clearColorDark : 0x4e3e64,
 	};

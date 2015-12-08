@@ -20,12 +20,15 @@ SnowObjects.prototype.init = function() {
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
 			        uMoveDelta: {type: "f", value: 1.0},
+			        uColorSnow: {type: "v3", value: v3(SETTINGS.snowColor)},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 			    },
 			});
 	});
 
 	this.meshesSnow = meshesSnow;
+	this.colorSky = new THREE.Color( SETTINGS.clearColor );
+	this.colorSnow = new THREE.Color( SETTINGS.clearColor );
 
 	if ( SETTINGS.debug ) {
 		var folder = APP.gui.addFolder("Snow Objects");
@@ -43,6 +46,9 @@ SnowObjects.prototype.update = function() {
 
 	var colorSky = new THREE.Color( SETTINGS.clearColor );
 	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);//.multiplyScalar(0.5);
+	
+	this.colorSnow.setHex(SETTINGS.snowColor);
+	var that = this;
 
 	this.meshesSnow.forEach( function(mesh) {
 
@@ -61,6 +67,7 @@ SnowObjects.prototype.update = function() {
 		var mat = mesh.material;
 		mat.uniforms.uTime.value = time;
 		mat.uniforms.uColorSky.value = colorSkyCurr;
+		mat.uniforms.uColorSnow.value = v3(that.colorSnow.r, that.colorSnow.g, that.colorSnow.b);
 		mat.uniforms.uMoveDelta.value = snowHeightCoeff;
 	});
 };

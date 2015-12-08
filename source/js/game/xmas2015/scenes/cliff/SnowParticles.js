@@ -28,7 +28,7 @@ SnowParticles.prototype.init = function() {
 		    	fragmentShader: RES.shaders['snowParticles.fp'],
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
-			        uColorSnow: {type: "v3", value: v3(SETTINGS.snowColor)},
+			        uColorSnow: {type: "v3", value: v3(SETTINGS.snowParticleColor)},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 			        uBounds: {type: "v3", value: spread},
 			        uWindDir: {type: "v3", value: v3(SETTINGS.snowParticleWindDir.x, SETTINGS.snowParticleWindDir.y, SETTINGS.snowParticleWindDir.z)},
@@ -60,7 +60,7 @@ SnowParticles.prototype.start = function() {
 SnowParticles.prototype.update = function() {
 
 	this.colorSky.setHex( SETTINGS.clearColor );
-	this.colorSnow.setHex( SETTINGS.snowColor );
+	this.colorSnow.setHex( SETTINGS.snowParticleColor );
 
 	var uniforms = this.material.uniforms;
 	uniforms.uTime.value = APP.time * SETTINGS.snowParticleWindSpeed;
