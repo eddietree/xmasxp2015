@@ -61,7 +61,7 @@ Vignette.prototype.update = function() {
 
 	var uniforms = this.material.uniforms;
 
-	SETTINGS.fadeAlpha = lerp(SETTINGS.fadeAlpha,0.0, 0.02);
+	SETTINGS.fadeAlpha = lerp(SETTINGS.fadeAlpha,0.0, 0.025);
 	this.fadeColor.setHex(SETTINGS.fadeColor);
 
 	uniforms.uVignetteAlpha.value = SETTINGS.vignetteAlpha;
