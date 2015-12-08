@@ -59,9 +59,8 @@ SnowParticles.prototype.start = function() {
 
 SnowParticles.prototype.update = function() {
 
-	//this.colorSky.setHex( SETTINGS.clearColor );
-	this.colorSky = new THREE.Color( SETTINGS.clearColor );
-	this.colorSnow = new THREE.Color( SETTINGS.snowColor );
+	this.colorSky.setHex( SETTINGS.clearColor );
+	this.colorSnow.setHex( SETTINGS.snowColor );
 
 	var uniforms = this.material.uniforms;
 	uniforms.uTime.value = APP.time * SETTINGS.snowParticleWindSpeed;
