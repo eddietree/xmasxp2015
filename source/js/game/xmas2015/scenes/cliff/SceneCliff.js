@@ -15,6 +15,7 @@ SceneCliff.prototype.init = function() {
 	this.addSceneObj('Vignette', new Vignette());
 	this.addSceneObj('SunShaft', new SunShaft());
 	this.addSceneObj('Human', new Human());
+	this.addSceneObj('Ribbons', new Ribbons());
 	this.addSceneObj('Hypercube', new Hypercube());
 
 	// ambient light
