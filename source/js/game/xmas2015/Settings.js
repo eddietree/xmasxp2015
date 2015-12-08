@@ -26,7 +26,7 @@ var Settings = function() {
 
 		hypercubeRadius : 1.8,
 		hypercubeInnerCoeff : 0.65,
-		hypercubeMovementSpeed: 0.9,
+		hypercubeMovementSpeed: 0.95,
 
 		ambientLightColor : 0x9691bb,
 		clearColor : 0x9ee3de,

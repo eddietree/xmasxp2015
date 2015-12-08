@@ -53,6 +53,7 @@ Ribbons.prototype.initGeo = function() {
 	    	fragmentShader: RES.shaders['ribbons.fp'],
 	    	uniforms: { 
 	    		uTime: {type: "f", value: 0.0},
+	    		uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 	    		//uTex: {type: "t", value: tex},
 				//uRibbonsAlpha: {type: "f", value: SETTINGS.RibbonsAlpha},
 				//uRibbonsRadius: {type: "f", value: SETTINGS.RibbonsRadius},
@@ -80,8 +81,12 @@ Ribbons.prototype.start = function() {
 
 Ribbons.prototype.update = function() {
 
+	var colorSky = new THREE.Color( SETTINGS.clearColor );
+	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);//.multiplyScalar(0.5);
+
 	var uniforms = this.material.uniforms;
 	uniforms.uTime.value = APP.time;
+	uniforms.uColorSky.value = colorSky;
 	//uniforms.uRibbonsAlpha.value = SETTINGS.RibbonsAlpha;
 	//uniforms.uRibbonsRadius.value = SETTINGS.RibbonsRadius;
 };
