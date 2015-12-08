@@ -121,7 +121,7 @@ void main() {
 
 	// TODO: optimize this
 	if ( noise > 0.75)
-		color.xyz = vec3(1.0);
+		color.xyz *= 1.65;
 	else if ( noise < 0.0)
 		color.xyz *= 1.01;
 
