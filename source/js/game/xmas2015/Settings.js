@@ -12,6 +12,9 @@ var Settings = function() {
 		cameraC4dPhi: 1.5,
 		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},
 
+		cameraC4dThetaRange: 0.5,
+		cameraC4dPhiRange: 0.5,
+
 		fogEnabled: true,
 		fogDensity: 0.0165,
 

@@ -7,8 +7,6 @@ var CameraControllerC4D = function() {
 	this.posLookAt = v3(SETTINGS.cameraC4dPosLookAt.x, SETTINGS.cameraC4dPosLookAt.y, SETTINGS.cameraC4dPosLookAt.z);
 
 	this.mouseState = "idle";
-	this.mousePosPrev = {x:0,y:0};
-	this.mousePos = {x:0,y:0};
 
 	this.cam = APP.camera;
 };
@@ -28,8 +26,6 @@ CameraControllerC4D.prototype.initControls = function() {
 		if ( !e.altKey ) return;
 
 		var button = e.button;
-		that.mousePos = {x:e.x,y:e.y};
-		that.mousePosPrev = {x:e.x,y:e.y};
 
 		if ( button === 0 ) {
 			that.mouseState = "downBtnRotate";
@@ -41,17 +37,12 @@ CameraControllerC4D.prototype.initControls = function() {
 
 	window.addEventListener("mouseup", function(e) {
 		var button = e.button;
-		that.mousePosPrev = {x:0,y:0};
 		that.mouseState = "idle";
 	});
 
 	window.addEventListener("mousemove", function(e) {
 		
 		if ( that.mouseState != "idle" ) {
-			that.mousePosPrev.x = that.mousePos.x;
-			that.mousePosPrev.y = that.mousePos.y;
-			that.mousePos.x = e.x;
-			that.mousePos.y = e.y;
 		}
 	});
 
@@ -108,14 +99,11 @@ CameraControllerC4D.prototype.update = function() {
 
 	this.cam.position.copy( v3(x,y,z) );
 	this.cam.lookAt( this.posLookAt );
-
-	this.mousePosPrev.x = this.mousePos.x;
-	this.mousePosPrev.y = this.mousePos.y;
 };
 
 CameraControllerC4D.prototype.updatePan = function() {
-	var mousePosRelX = this.mousePos.x - this.mousePosPrev.x;
-	var mousePosRelY = this.mousePos.y - this.mousePosPrev.y;
+	var mousePosRelX = APP.mouseRel.x;
+	var mousePosRelY = APP.mouseRel.y;
 
 	var camQuat = this.cam.quaternion;
 	var camUp = v3(0.0,1.0,0.0).applyQuaternion(camQuat);
@@ -132,8 +120,8 @@ CameraControllerC4D.prototype.updatePan = function() {
 
 CameraControllerC4D.prototype.updateRotation = function() {
 
-	var mousePosRelX = this.mousePos.x - this.mousePosPrev.x;
-	var mousePosRelY = this.mousePos.y - this.mousePosPrev.y;
+	var mousePosRelX = APP.mouseRel.x;
+	var mousePosRelY = APP.mouseRel.y;
 
 	this.theta += mousePosRelX*0.025;
 	this.phi = clamp( this.phi - mousePosRelY*0.02, -Math.PI*0.5, Math.PI*0.5)

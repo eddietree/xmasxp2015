@@ -8,6 +8,8 @@ App.prototype = {
 		this.fps = 60.0;
 		this.dt = 1.0/this.fps;
 		this.mouse = v2(0.0);
+		this.mousePrev = v2(0.0);
+		this.mouseRel = v2(0.0);
 		this.mouseNormalized = v2(0.0);
 
 		// scene
@@ -48,8 +50,9 @@ App.prototype = {
 		window.addEventListener( 'mousemove', function(event) {
 			var mouseXNorm = ( event.clientX / window.innerWidth ) * 2 - 1;
 			var mouseYNorm = - ( event.clientY / window.innerHeight ) * 2 + 1;	
+			var mouseCurr = v2(event.clientX, event.clientY);
 
-			that.mouse = v2(event.clientX, event.clientY);
+			that.mouse = mouseCurr;
 			that.mouseNormalized = v2(mouseXNorm, mouseYNorm);
 		});
 	},
@@ -67,6 +70,13 @@ App.prototype = {
 
 		if ( this.game )
 			this.game.update();
+
+
+		this.mouseRel.copy(this.mouse);//
+		this.mouseRel.sub(this.mousePrev);
+		this.mousePrev.copy(this.mouse);
+
+		LOG(this.mouseRel);
 	},
 
 	draw: function() {
