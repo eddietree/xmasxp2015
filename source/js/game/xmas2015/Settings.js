@@ -19,7 +19,9 @@ var Settings = function() {
 		vignetteRadius: 0.4,
 
 		snowSpeed: 2.6,
+		snowSpeedDark: 1.0,
 		snowHeightCoeff: 1.0,
+		snowHeightCoeffDark: 5.0,
 		snowColor: 0xffffff,
 		snowColorDark: 0xf485a2,
 		snowParticleColor: 0xffffff,
