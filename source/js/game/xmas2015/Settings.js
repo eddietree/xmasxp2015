@@ -29,6 +29,8 @@ var Settings = function() {
 		hypercubeMovementSpeed: 0.95,
 
 		ambientLightColor : 0x9691bb,
+		ambientLightColorDark: 0xb66262,
 		clearColor : 0x9ee3de,
+		clearColorDark : 0x2c2331,
 	};
 };

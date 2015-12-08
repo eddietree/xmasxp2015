@@ -10,6 +10,7 @@ SceneCliff.prototype.init = function() {
 	this.parseSceneCollada();
 	
 	//this.addSceneObj('TestBox', new TestBox());
+	this.addSceneObj('LightDark', new LightDark());
 	this.addSceneObj('SnowParticles', new SnowParticles());
 	this.addSceneObj('SnowObjects', new SnowObjects());
 	this.addSceneObj('Vignette', new Vignette());

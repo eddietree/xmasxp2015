@@ -1,10 +1,10 @@
-var Hypercube = function(firstName) {
+var Hypercube = function(doRaycast) {
 	SceneObj.call(this);
 	LOG("Creating Hypercube");
 
 	this.numTheta = 4;
 	this.edgePos = [];
-	this.doRaycast = true;
+	this.doRaycast = doRaycast | true;
 	this.isHovering = false;
 	this.hoverLerped = 0.0;
 };
@@ -29,11 +29,27 @@ Hypercube.prototype.init = function() {
 	this.innerSphere = sphere;
 	this.add(sphere);
 
+	var that = this;
+
 	if ( SETTINGS.debug ) {
 		var folder = APP.gui.addFolder("Hypercube");
 		folder.add(SETTINGS, 'hypercubeRadius', 0.0, 10.0);
 		folder.add(SETTINGS, 'hypercubeInnerCoeff', 0.0, 1.0);
 		folder.add(SETTINGS, 'hypercubeMovementSpeed', 0.0, 1.0);
+	}
+
+	// handle raycast stuff
+	if ( this.doRaycast ) {
+		window.addEventListener("mousedown", function(e) {
+			if ( e.altKey ) return;
+
+			// left click
+			if ( e.button == 0 ) {
+				if ( that.isHovering ) {
+					that.onClicked();
+				}
+			}
+		});
 	}
 };
 
@@ -301,6 +317,12 @@ Hypercube.prototype.onBeginHover = function() {
 
 Hypercube.prototype.onEndHover = function() {
 	$('#canvas').css('cursor', 'default');
+};
+
+Hypercube.prototype.onClicked = function() {
+	LOG("Clicked on Hypercube!");
+
+	GetObj("LightDark").onToggle();
 };
 
 Hypercube.prototype.updateRaycasts = function() {
