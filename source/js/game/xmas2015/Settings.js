@@ -23,7 +23,8 @@ var Settings = function() {
 		snowHeightCoeff: 1.0,
 		snowHeightCoeffDark: 5.0,
 		snowColor: 0xffffff,
-		snowColorDark: 0xf485a2,
+		//snowColorDark: 0xf485a2,
+		snowColorDark: 0x000000,
 		snowParticleColor: 0xffffff,
 		snowParticleColorDark: 0x1676ff,
 
@@ -40,7 +41,7 @@ var Settings = function() {
 		hypercubeMovementSpeed: 0.95,
 
 		ambientLightColor : 0x9691bb,
-		ambientLightColorDark: 0x425175,
+		ambientLightColorDark: 0x303134,
 		clearColor : 0x9ee3de,
 		clearColorDark : 0x4e3e64,
 	};

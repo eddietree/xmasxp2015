@@ -61,7 +61,7 @@ SnowObjects.prototype.update = function() {
 		}
 		else if ( mesh.parent.name.contains("TreeSnow") ) {
 			snowHeightCoeff = 0.02;	
-			colorSkyCurr = v3(1.0,1.0,1.0).lerp( colorSky, 0.45);
+			colorSkyCurr.lerp( colorSky, 0.45);
 		}
 
 		var mat = mesh.material;

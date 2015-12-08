@@ -345,7 +345,7 @@ Hypercube.prototype.updateRaycasts = function() {
 	this.hoverLerped = lerp( this.hoverLerped, currHovering?1.0:0.0, currHovering?0.15:0.09 );
 
 	// scale
-	var scaleVal = lerp(1.0, 1.75, this.hoverLerped);
+	var scaleVal = lerp(1.0, 1.8, this.hoverLerped);
 	this.scale.set( scaleVal, scaleVal, scaleVal );
 
 	// offset
