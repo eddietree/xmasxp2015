@@ -15,14 +15,16 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.0165,
 
+		// vignette
 		vignetteAlpha: 0.3,
-		vignetteAlphaDark: 0.5,
+		vignetteAlphaDark: 0.4,
 		vignetteRadius: 0.4,
-		vignetteRadiusDark: 0.7,
+		vignetteRadiusDark: 0.0,
 
 		ribbonAlpha:1.0,
 		ribbonAlphaDark:-0.5,
 
+		// snow
 		snowSpeed: 2.6,
 		snowSpeedDark: 1.0,
 		snowHeightCoeff: 1.0,
@@ -30,9 +32,10 @@ var Settings = function() {
 		snowColor: 0xffffff,
 		//snowColorDark: 0xf485a2,
 		snowColorDark: 0x000000,
+
+		// snow paritlces
 		snowParticleColor: 0xffffff,
 		snowParticleColorDark: 0x1676ff,
-
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
 		snowParticleDiameterDark: 40.0,
@@ -40,6 +43,12 @@ var Settings = function() {
 		snowParticleWindSpeedDark: 0.7,
 		snowParticleWindDir: {x:-1.5,y:-1.0,z:0.0},
 		snowParticleWindDirDark: {x:0.0,y:1.0,z:0.0},
+
+		mainLightIntensity: 2.0,
+		mainLightIntensityDark: 20.0,
+
+		mainLightDistance: 27.0,
+		mainLightDistanceDark: 10.0,
 
 		hypercubeRadius : 1.8,
 		hypercubeInnerCoeff : 0.65,

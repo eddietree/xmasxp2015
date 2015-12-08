@@ -138,9 +138,9 @@ SceneCliff.prototype.update = function() {
 
 SceneCliff.prototype.updateObjs = function() {
 
-	if ( this.mainLight ) {
-		var hypercube = GetObj("Hypercube");
 
-		this.mainLight.intensity = lerp( 2.0, 4.0, hypercube.hoverLerped);
+	if ( this.mainLight ) {
+		this.mainLight.intensity = SETTINGS.mainLightIntensity;
+		this.mainLight.distance = SETTINGS.mainLightDistance;
 	}
 };
