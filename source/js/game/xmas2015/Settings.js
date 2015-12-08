@@ -15,6 +15,7 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.0165,
 
+		// fade
 		fadeAlpha:0.0,
 		fadeColor:0xffffff,
 		fadeColorDark:0xffffff,

@@ -322,6 +322,7 @@ Hypercube.prototype.onEndHover = function() {
 Hypercube.prototype.onClicked = function() {
 	LOG("Clicked on Hypercube!");
 
+	this.isHovering = false;
 	GetObj("LightDark").onToggle();
 };
 
@@ -336,13 +337,14 @@ Hypercube.prototype.updateRaycasts = function() {
 
 	if ( this.isHovering && !currHovering ) {
 		this.onEndHover();
+		this.isHovering = currHovering;
 	}
 	else if ( !this.isHovering && currHovering ) {
 		this.onBeginHover();
+		this.isHovering = currHovering;
 	}
 
-	this.isHovering = currHovering;
-	this.hoverLerped = lerp( this.hoverLerped, currHovering?1.0:0.0, currHovering?0.15:0.09 );
+	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, this.isHovering?0.15:0.09 );
 
 	// scale
 	var scaleVal = lerp(1.0, 1.8, this.hoverLerped);
