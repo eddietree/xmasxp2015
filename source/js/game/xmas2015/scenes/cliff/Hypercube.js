@@ -16,13 +16,18 @@ Hypercube.prototype.init = function() {
     this.rotation.set( Math.PI*0.5, 0.0, 0.0, 'XYZ');
 
 	this.initGeo();
+	this.initRaycastGeo();
+	this.raycaster = new THREE.Raycaster();
+
+	this.isHovering = false;
+	this.hoverLerped = 0.0;
 
 	// center sphere
 	var geometry = new THREE.SphereGeometry( 0.4, 4, 1 );
 	var material = new THREE.MeshBasicMaterial( {color: 0xffffff} );
 	var sphere = new THREE.Mesh( geometry, material );
+	this.innerSphere = sphere;
 	this.add(sphere);
-
 
 	if ( SETTINGS.debug ) {
 		var folder = APP.gui.addFolder("Hypercube");
@@ -175,6 +180,24 @@ Hypercube.prototype.initGeo = function() {
     this.add(this.meshLines);
 };
 
+Hypercube.prototype.initRaycastGeo = function() {
+
+	// center sphere
+	var geometry = new THREE.BoxGeometry( 3.6, 2.0, 3.6 );
+	var material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+	material.transparent = true;
+	material.opacity = 0.0;
+	material.depthTest = false;
+	material.depthWrite = false;
+	
+	var sphere = new THREE.Mesh( geometry, material );
+	sphere.rotation.set( 0.0, Math.PI*0.25, 0.0, 'XYZ');
+	//sphere.visible = false;
+	
+	this.collisionSphere = sphere;
+	this.add(sphere);
+};
+
 Hypercube.prototype.updateVertPositions = function() {
 	var globalRadius = SETTINGS.hypercubeRadius;
 	var localRadius = globalRadius * SETTINGS.hypercubeInnerCoeff;
@@ -266,6 +289,29 @@ Hypercube.prototype.update = function() {
 	//uniforms.uTime.value = APP.time;
 	//uniforms.uHypercubeAlpha.value = SETTINGS.HypercubeAlpha;
 	//uniforms.uHypercubeRadius.value = SETTINGS.HypercubeRadius;
+
+	this.updateRaycasts();
+};
+
+Hypercube.prototype.updateRaycasts = function() {
+
+	// check raycast
+	var raycaster = new THREE.Raycaster();
+	raycaster.setFromCamera( APP.mouseNormalized, APP.camera );	
+	var intersects = raycaster.intersectObject( this.collisionSphere, true );
+
+	// update hovering coeff
+	this.isHovering = intersects.length > 0;
+	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, 0.15 );
+
+	var scaleVal = lerp(1.0, 1.75, this.hoverLerped);
+	this.scale.set( scaleVal, scaleVal, scaleVal );
+
+	var colorVal = 1.0 - this.hoverLerped;
+	this.innerSphere.material.color.setRGB( colorVal,colorVal,colorVal );
+	//this.scale.multiplyScalar( 1.0 );
+
+	APP.time += (this.hoverLerped*2.5) * APP.dt;
 };
 
 Hypercube.prototype.draw = function() {

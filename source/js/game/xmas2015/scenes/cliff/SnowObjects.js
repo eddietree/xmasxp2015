@@ -8,8 +8,6 @@ SnowObjects.prototype.constructor = SnowObjects;
 
 SnowObjects.prototype.init = function() {
 
-	this.time = 0.0;
-
 	var colladaScene = RES.models['cliff.dae'];
 	var meshesSnow = getMeshesUsingMaterial( colladaScene, "Snow");
 	LOG( meshesSnow.length + " meshes found with 'Snow' material");
@@ -41,8 +39,7 @@ SnowObjects.prototype.start = function() {
 
 SnowObjects.prototype.update = function() {
 
-	this.time += APP.dt * SETTINGS.snowSpeed;
-	var time = this.time;
+	var time = APP.time* SETTINGS.snowSpeed;
 
 	var colorSky = new THREE.Color( SETTINGS.clearColor );
 	colorSky = v3(colorSky.r, colorSky.g, colorSky.b);//.multiplyScalar(0.5);

@@ -18,6 +18,10 @@ function clamp(minVal, maxVal, val)
 	return Math.max(minVal, Math.min(val, maxVal));
 }
 
+function lerp( a, b, coeff ) {
+	return a + (b-a) * coeff;	
+}
+
 function spherical( theta, phi, radius ) {
 	radius = radius | 1.0;
 

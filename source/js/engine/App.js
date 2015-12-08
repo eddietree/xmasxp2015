@@ -7,6 +7,8 @@ App.prototype = {
 		this.time = 0.0;
 		this.fps = 60.0;
 		this.dt = 1.0/this.fps;
+		this.mouse = v2(0.0);
+		this.mouseNormalized = v2(0.0);
 
 		// scene
 		this.scene = new THREE.Scene();
@@ -41,6 +43,15 @@ App.prototype = {
 		} else {
 			dat.GUI.toggleHide();
 		}
+
+		var that = this;
+		window.addEventListener( 'mousemove', function(event) {
+			var mouseXNorm = ( event.clientX / window.innerWidth ) * 2 - 1;
+			var mouseYNorm = - ( event.clientY / window.innerHeight ) * 2 + 1;	
+
+			that.mouse = v2(event.clientX, event.clientY);
+			that.mouseNormalized = v2(mouseXNorm, mouseYNorm);
+		});
 	},
 
 	startGame : function() {

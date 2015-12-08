@@ -18,7 +18,7 @@ var Settings = function() {
 		vignetteAlpha: 0.3,
 		vignetteRadius: 0.4,
 
-		snowSpeed: 2.5,
+		snowSpeed: 2.6,
 		snowHeightCoeff: 1.0,
 
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
