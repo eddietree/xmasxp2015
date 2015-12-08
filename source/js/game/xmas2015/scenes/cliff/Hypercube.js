@@ -295,6 +295,14 @@ Hypercube.prototype.update = function() {
 	}
 };
 
+Hypercube.prototype.onBeginHover = function() {
+	$('#canvas').css('cursor', 'pointer');
+};
+
+Hypercube.prototype.onEndHover = function() {
+	$('#canvas').css('cursor', 'default');
+};
+
 Hypercube.prototype.updateRaycasts = function() {
 
 	// check raycast
@@ -302,8 +310,17 @@ Hypercube.prototype.updateRaycasts = function() {
 	var intersects = this.raycaster.intersectObject( this.collisionSphere, true );
 
 	// update hovering coeff
-	this.isHovering = intersects.length > 0;
-	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, this.isHovering?0.15:0.09 );
+	var currHovering = intersects.length > 0;
+
+	if ( this.isHovering && !currHovering ) {
+		this.onEndHover();
+	}
+	else if ( !this.isHovering && currHovering ) {
+		this.onBeginHover();
+	}
+
+	this.isHovering = currHovering;
+	this.hoverLerped = lerp( this.hoverLerped, currHovering?1.0:0.0, currHovering?0.15:0.09 );
 
 	// scale
 	var scaleVal = lerp(1.0, 1.75, this.hoverLerped);
