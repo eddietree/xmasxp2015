@@ -1,6 +1,8 @@
 var Vignette = function(firstName) {
 	SceneObj.call(this);
 	LOG("Creating Vignette");
+
+	this.fadeColor = new THREE.Color(SETTINGS.fadeColor);
 };
 
 Vignette.prototype = Object.create(SceneObj.prototype);
@@ -59,10 +61,13 @@ Vignette.prototype.update = function() {
 
 	var uniforms = this.material.uniforms;
 
+	SETTINGS.fadeAlpha = lerp(SETTINGS.fadeAlpha,0.0, 0.02);
+	this.fadeColor.setHex(SETTINGS.fadeColor);
+
 	uniforms.uVignetteAlpha.value = SETTINGS.vignetteAlpha;
 	uniforms.uVignetteRadius.value = SETTINGS.vignetteRadius;
 	uniforms.uFadeAlpha.value = SETTINGS.fadeAlpha;
-	uniforms.uFadeColor.value.set(v3(0.0));
+	uniforms.uFadeColor.value.set(this.fadeColor.r,this.fadeColor.g,this.fadeColor.b);
 };
 
 Vignette.prototype.draw = function() {

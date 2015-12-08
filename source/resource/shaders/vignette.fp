@@ -12,8 +12,9 @@ void main() {
 	//filterColor = vec4(0.0,0.0,0.0, vigCoeff);
 	filterColor = mix( filterColor, vec4(0.0,0.0,0.0,1.0), vigCoeff );
 
-	//filterColor.xyz = mix( filterColor.xyz, uFadeColor.xyz, uFadeAlpha );
-	//filterColor.w = mix( filterColor.w, 1.0-uFadeAlpha, uFadeAlpha );
+	filterColor.xyz = mix( filterColor.xyz, uFadeColor.xyz, uFadeAlpha );
+	filterColor.w = mix( filterColor.w, uFadeAlpha, uFadeAlpha );
+	//filterColor.w = 1.0;
 
   	gl_FragColor = filterColor; 
 }

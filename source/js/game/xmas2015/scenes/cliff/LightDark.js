@@ -70,4 +70,6 @@ LightDark.prototype.onToggle = function() {
 	else if ( this.state === "DARK" ) {
 		this.enableModeLight();
 	}
+
+	SETTINGS.fadeAlpha = 1.0;
 };
