@@ -51,6 +51,7 @@ SunShaft.prototype.initGeo = function() {
 	    	fragmentShader: RES.shaders['sunShaft.fp'],
 	    	uniforms: { 
 	    		uTime: {type: "f", value: 0.0},
+	    		uShaftAlpha: {type: "f", value: SETTINGS.sunshaftAlpha},
 	    		uTex: {type: "t", value: tex},
 				//uSunShaftAlpha: {type: "f", value: SETTINGS.SunShaftAlpha},
 				//uSunShaftRadius: {type: "f", value: SETTINGS.SunShaftRadius},
@@ -79,6 +80,7 @@ SunShaft.prototype.update = function() {
 
 	var uniforms = this.material.uniforms;
 	uniforms.uTime.value = APP.time;
+	uniforms.uShaftAlpha.value = SETTINGS.sunshaftAlpha;
 	//uniforms.uSunShaftAlpha.value = SETTINGS.SunShaftAlpha;
 	//uniforms.uSunShaftRadius.value = SETTINGS.SunShaftRadius;
 };

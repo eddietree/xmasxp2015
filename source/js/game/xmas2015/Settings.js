@@ -15,6 +15,9 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.0165,
 
+		sunshaftAlpha:0.2,
+		sunshaftAlphaDark:0.2,
+
 		// vignette
 		vignetteAlpha: 0.3,
 		vignetteAlphaDark: 0.4,
