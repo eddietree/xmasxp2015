@@ -28,6 +28,7 @@ SnowParticles.prototype.init = function() {
 		    	fragmentShader: RES.shaders['snowParticles.fp'],
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
+			        uColorSnow: {type: "v3", value: v3(SETTINGS.snowColor)},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 			        uBounds: {type: "v3", value: spread},
 			        uWindDir: {type: "v3", value: v3(SETTINGS.snowParticleWindDir.x, SETTINGS.snowParticleWindDir.y, SETTINGS.snowParticleWindDir.z)},
@@ -45,6 +46,7 @@ SnowParticles.prototype.init = function() {
 	    var points = new THREE.Points(geometry, material);
 	    this.material = material;
 	    this.colorSky = new THREE.Color( SETTINGS.clearColor );
+	    this.colorSnow = new THREE.Color( SETTINGS.clearColor );
 
 	   	this.add(points);
 	};
@@ -59,10 +61,12 @@ SnowParticles.prototype.update = function() {
 
 	//this.colorSky.setHex( SETTINGS.clearColor );
 	this.colorSky = new THREE.Color( SETTINGS.clearColor );
+	this.colorSnow = new THREE.Color( SETTINGS.snowColor );
 
 	var uniforms = this.material.uniforms;
 	uniforms.uTime.value = APP.time * SETTINGS.snowParticleWindSpeed;
 	uniforms.uColorSky.value.set( this.colorSky.r, this.colorSky.g, this.colorSky.b);
+	uniforms.uColorSnow.value.set( this.colorSnow.r, this.colorSnow.g, this.colorSnow.b);
 	uniforms.uParticleRadius.value = SETTINGS.snowParticleDiameter;
 	uniforms.uWindDir.value = v3(SETTINGS.snowParticleWindDir.x, SETTINGS.snowParticleWindDir.y, SETTINGS.snowParticleWindDir.z);
 };
