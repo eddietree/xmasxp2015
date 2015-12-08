@@ -22,6 +22,7 @@ var Resources = function() {
 		'snowParticles.vp', 'snowParticles.fp',
 		'vignette.vp', 'vignette.fp',
 		'sunShaft.vp', 'sunShaft.fp',
+		'ribbons.vp', 'ribbons.fp',
 	];
 
 	this.shaders = {};
