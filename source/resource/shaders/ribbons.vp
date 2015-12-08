@@ -7,6 +7,7 @@
 "uniform vec3 cameraPosition;",
 */
 
+uniform float uAlpha;
 uniform float uTime;
 uniform vec3 uColorSky;
 
@@ -19,7 +20,7 @@ void main() {
 	//pos.y += sin(uTime + pos.x) * 10.0;
 
 	vec3 colorFinal = uColorSky;
-	colorFinal += (vec3(sin(uTime*5.0+(pos.x+pos.y)*1.5)) * 0.015);
+	colorFinal += (vec3(sin(uTime*5.0+(pos.x+pos.y)*1.5)) * 0.015*uAlpha);
 
 	vColor = colorFinal;//
 	vNormal = normal;

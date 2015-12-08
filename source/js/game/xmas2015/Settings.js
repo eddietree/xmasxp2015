@@ -16,7 +16,12 @@ var Settings = function() {
 		fogDensity: 0.0165,
 
 		vignetteAlpha: 0.3,
+		vignetteAlphaDark: 0.5,
 		vignetteRadius: 0.4,
+		vignetteRadiusDark: 0.7,
+
+		ribbonAlpha:1.0,
+		ribbonAlphaDark:-0.5,
 
 		snowSpeed: 2.6,
 		snowSpeedDark: 1.0,
