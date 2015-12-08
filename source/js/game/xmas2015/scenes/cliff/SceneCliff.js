@@ -54,6 +54,10 @@ SceneCliff.prototype.onLoadObject = function(object) {
 		light.intensity = 2;
 		light.distance = 27;
 
+		if (this.mainLight == null) {
+			this.mainLight = light;
+		}
+
 		var geometry = new THREE.SphereGeometry( 5, 32, 32 );
 		var material = new THREE.MeshBasicMaterial( {color: light.color} );
 		var sphere = new THREE.Mesh( geometry, material );
@@ -124,5 +128,15 @@ SceneCliff.prototype.update = function() {
 		}
 	}
 
+	this.updateObjs();
 	Scene.prototype.update.call(this);
+};
+
+SceneCliff.prototype.updateObjs = function() {
+
+	if ( this.mainLight ) {
+		var hypercube = GetObj("Hypercube");
+
+		this.mainLight.intensity = lerp( 2.0, 4.0, hypercube.hoverLerped);
+	}
 };

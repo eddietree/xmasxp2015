@@ -5,6 +5,8 @@ var Hypercube = function(firstName) {
 	this.numTheta = 4;
 	this.edgePos = [];
 	this.doRaycast = true;
+	this.isHovering = false;
+	this.hoverLerped = 0.0;
 };
 
 Hypercube.prototype = Object.create(SceneObj.prototype);
@@ -19,9 +21,6 @@ Hypercube.prototype.init = function() {
 	this.initGeo();
 	this.initRaycastGeo();
 	this.raycaster = new THREE.Raycaster();
-
-	this.isHovering = false;
-	this.hoverLerped = 0.0;
 
 	// center sphere
 	var geometry = new THREE.SphereGeometry( 0.4, 4, 1 );
