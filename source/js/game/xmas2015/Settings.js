@@ -23,7 +23,7 @@ var Settings = function() {
 		snowColor: 0xffffff,
 		snowColorDark: 0xf485a2,
 		snowParticleColor: 0xffffff,
-		snowParticleColorDark: 0x000000,
+		snowParticleColorDark: 0x1676ff,
 
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,

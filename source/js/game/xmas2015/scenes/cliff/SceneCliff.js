@@ -35,6 +35,7 @@ SceneCliff.prototype.initGui = function() {
 	folder.addColor(SETTINGS, 'ambientLightColor').listen();
 	folder.addColor(SETTINGS, 'clearColor').listen();
 	folder.addColor(SETTINGS, 'snowColor').listen();
+	folder.addColor(SETTINGS, 'snowParticleColor').listen();
 
 	if ( APP.scene.fog ) {
 		folder.add(SETTINGS, 'fogDensity', 0.01, 0.1).listen();
