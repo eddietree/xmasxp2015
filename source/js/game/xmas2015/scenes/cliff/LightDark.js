@@ -27,6 +27,47 @@ LightDark.prototype.update = function() {
 LightDark.prototype.draw = function() {
 };
 
+LightDark.prototype.enableModeLight = function() {
+	this.state = "LIGHT";
+
+	LOG("LIGHT ON");
+	this.toggleLightDark();
+};
+
+LightDark.prototype.enableModeDark = function() {
+	this.state = "DARK";
+
+	
+
+	LOG("DARK ON");
+	this.toggleLightDark();
+};
+
+LightDark.prototype.toggleLightDark = function() {
+
+	var suffixDark = "Dark";
+
+	for(var key in SETTINGS) { 
+
+		var keyDark = key+suffixDark;
+
+		if ( !key.contains(suffixDark) && SETTINGS.hasOwnProperty(keyDark) ) {
+	   		LOG(key + " : " + SETTINGS[key]);
+	   		
+	   		var temp = SETTINGS[key];
+			SETTINGS[key] = SETTINGS[keyDark];
+			SETTINGS[keyDark] = temp;
+		}
+	}
+};
+
 LightDark.prototype.onToggle = function() {
 	LOG("LightDark.onToggle()");
+
+	if ( this.state === "LIGHT") {
+		this.enableModeDark();
+	} 
+	else if ( this.state === "DARK" ) {
+		this.enableModeLight();
+	}
 };

@@ -32,11 +32,11 @@ SceneCliff.prototype.init = function() {
 SceneCliff.prototype.initGui = function() {
 	var folder = APP.gui.addFolder("Environment");
 
-	folder.addColor(SETTINGS, 'ambientLightColor');
-	folder.addColor(SETTINGS, 'clearColor');
+	folder.addColor(SETTINGS, 'ambientLightColor').listen();
+	folder.addColor(SETTINGS, 'clearColor').listen();
 
 	if ( APP.scene.fog ) {
-		folder.add(SETTINGS, 'fogDensity', 0.01, 0.1);
+		folder.add(SETTINGS, 'fogDensity', 0.01, 0.1).listen();
 	}
 };
 

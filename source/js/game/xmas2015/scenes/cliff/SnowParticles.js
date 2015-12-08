@@ -30,6 +30,7 @@ SnowParticles.prototype.init = function() {
 			        uTime: {type: "f", value: 0.0},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
 			        uBounds: {type: "v3", value: spread},
+			        uWindDir: {type: "v3", value: v3(SETTINGS.snowParticleWindDir.x, SETTINGS.snowParticleWindDir.y, SETTINGS.snowParticleWindDir.z)},
 			        uTex: {type: "t", value: tex},
 			        uParticleRadius: {type: "f", value:SETTINGS.snowParticleDiameter},
 			    },
@@ -59,7 +60,8 @@ SnowParticles.prototype.update = function() {
 
 	var uniforms = this.material.uniforms;
 	uniforms.uTime.value = APP.time;
-	uniforms.uColorSky.value = v3(colorSky.r, colorSky.g, colorSky.b);;
+	uniforms.uColorSky.value = v3(colorSky.r, colorSky.g, colorSky.b);
+	uniforms.uWindDir.value = v3(SETTINGS.snowParticleWindDir.x, SETTINGS.snowParticleWindDir.y, SETTINGS.snowParticleWindDir.z);
 };
 
 SnowParticles.prototype.draw = function() {

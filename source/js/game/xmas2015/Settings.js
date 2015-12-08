@@ -23,14 +23,16 @@ var Settings = function() {
 
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
+		snowParticleWindDir: {x:-1.5,y:-1.0,z:0.0},
+		snowParticleWindDirDark: {x:0.0,y:1.0,z:0.0},
 
 		hypercubeRadius : 1.8,
 		hypercubeInnerCoeff : 0.65,
 		hypercubeMovementSpeed: 0.95,
 
 		ambientLightColor : 0x9691bb,
-		ambientLightColorDark: 0xb66262,
+		ambientLightColorDark: 0xa46161,
 		clearColor : 0x9ee3de,
-		clearColorDark : 0x2c2331,
+		clearColorDark : 0x4e3e64,
 	};
 };
