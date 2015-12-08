@@ -4,6 +4,7 @@ var Hypercube = function(firstName) {
 
 	this.numTheta = 4;
 	this.edgePos = [];
+	this.doRaycast = true;
 };
 
 Hypercube.prototype = Object.create(SceneObj.prototype);
@@ -290,26 +291,28 @@ Hypercube.prototype.update = function() {
 	//uniforms.uHypercubeAlpha.value = SETTINGS.HypercubeAlpha;
 	//uniforms.uHypercubeRadius.value = SETTINGS.HypercubeRadius;
 
-	this.updateRaycasts();
+	if ( this.doRaycast ) {
+		this.updateRaycasts();
+	}
 };
 
 Hypercube.prototype.updateRaycasts = function() {
 
 	// check raycast
-	var raycaster = new THREE.Raycaster();
-	raycaster.setFromCamera( APP.mouseNormalized, APP.camera );	
-	var intersects = raycaster.intersectObject( this.collisionSphere, true );
+	this.raycaster.setFromCamera( APP.mouseNormalized, APP.camera );	
+	var intersects = this.raycaster.intersectObject( this.collisionSphere, true );
 
 	// update hovering coeff
 	this.isHovering = intersects.length > 0;
-	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, 0.15 );
+	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, this.isHovering?0.15:0.09 );
 
+	// scale
 	var scaleVal = lerp(1.0, 1.75, this.hoverLerped);
 	this.scale.set( scaleVal, scaleVal, scaleVal );
 
+	// offset
 	var colorVal = 1.0 - this.hoverLerped;
 	this.innerSphere.material.color.setRGB( colorVal,colorVal,colorVal );
-	//this.scale.multiplyScalar( 1.0 );
 
 	APP.time += (this.hoverLerped*2.5) * APP.dt;
 };
