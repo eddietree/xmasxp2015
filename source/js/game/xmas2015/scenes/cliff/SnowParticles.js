@@ -59,8 +59,9 @@ SnowParticles.prototype.update = function() {
 	var colorSky = new THREE.Color( SETTINGS.clearColor );
 
 	var uniforms = this.material.uniforms;
-	uniforms.uTime.value = APP.time;
+	uniforms.uTime.value = APP.time * SETTINGS.snowParticleWindSpeed;
 	uniforms.uColorSky.value = v3(colorSky.r, colorSky.g, colorSky.b);
+	uniforms.uParticleRadius.value = SETTINGS.snowParticleDiameter;
 	uniforms.uWindDir.value = v3(SETTINGS.snowParticleWindDir.x, SETTINGS.snowParticleWindDir.y, SETTINGS.snowParticleWindDir.z);
 };
 

@@ -20,9 +20,14 @@ var Settings = function() {
 
 		snowSpeed: 2.6,
 		snowHeightCoeff: 1.0,
+		snowColor: 0xffffff,
+		snowColorDark: 0x000000,
 
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
+		snowParticleDiameterDark: 20.0,
+		snowParticleWindSpeed: 1.0,
+		snowParticleWindSpeedDark: 0.7,
 		snowParticleWindDir: {x:-1.5,y:-1.0,z:0.0},
 		snowParticleWindDirDark: {x:0.0,y:1.0,z:0.0},
 
