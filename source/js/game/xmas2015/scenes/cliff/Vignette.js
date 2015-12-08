@@ -33,6 +33,8 @@ Vignette.prototype.initGeo = function() {
 	    	uniforms: { 
 				uVignetteAlpha: {type: "f", value: SETTINGS.vignetteAlpha},
 				uVignetteRadius: {type: "f", value: SETTINGS.vignetteRadius},
+				uFadeAlpha: {type: "f", value: SETTINGS.fadeAlpha},
+				uFadeColor: {type: "v3", value: v3(0.0)},
 		    },
 		});
 
@@ -56,8 +58,11 @@ Vignette.prototype.start = function() {
 Vignette.prototype.update = function() {
 
 	var uniforms = this.material.uniforms;
+
 	uniforms.uVignetteAlpha.value = SETTINGS.vignetteAlpha;
 	uniforms.uVignetteRadius.value = SETTINGS.vignetteRadius;
+	uniforms.uFadeAlpha.value = SETTINGS.fadeAlpha;
+	uniforms.uFadeColor.value.set(v3(0.0));
 };
 
 Vignette.prototype.draw = function() {

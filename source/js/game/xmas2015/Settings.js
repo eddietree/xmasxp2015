@@ -15,6 +15,11 @@ var Settings = function() {
 		fogEnabled: true,
 		fogDensity: 0.0165,
 
+		fadeAlpha:1.0,
+		fadeAlphaDark:0.0,
+		fadeColor:{x:0.0,y:0.0,z:0.0},
+		fadeColorDark:{x:0.0,y:0.0,z:0.0},
+
 		sunshaftAlpha:0.2,
 		sunshaftAlphaDark:0.2,
 
