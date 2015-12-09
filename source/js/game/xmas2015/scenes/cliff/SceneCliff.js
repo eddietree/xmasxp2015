@@ -122,14 +122,12 @@ SceneCliff.prototype.parseSceneCollada = function() {
 
 SceneCliff.prototype.update = function() {
 
-	if ( SETTINGS.debug ) {
-		APP.renderer.setClearColor( SETTINGS.clearColor, 1);
-		this.ambientLight.color.setHex( SETTINGS.ambientLightColor );
+	APP.renderer.setClearColor( SETTINGS.clearColor, 1);
+	this.ambientLight.color.setHex( SETTINGS.ambientLightColor );
 
-		if ( APP.scene.fog ) { 
-			APP.scene.fog.density = SETTINGS.fogDensity; 
-			APP.scene.fog.color.setHex(SETTINGS.clearColor);
-		}
+	if ( APP.scene.fog ) { 
+		APP.scene.fog.density = SETTINGS.fogDensity; 
+		APP.scene.fog.color.setHex(SETTINGS.clearColor);
 	}
 
 	this.updateObjs();
