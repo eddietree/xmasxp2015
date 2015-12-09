@@ -8,7 +8,7 @@ var Settings = function() {
 		cameraStartPos : {x:6.82, y:2.1, z:36.95},
 
 		cameraC4dRadius: 35.0,
-		cameraC4dRadiusIntro: 80.0,
+		cameraC4dRadiusIntro: 70.0,
 		cameraC4dTheta: 7.7,
 		cameraC4dPhi: 1.5,
 		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},

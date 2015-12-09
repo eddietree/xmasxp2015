@@ -3,7 +3,6 @@ var CameraControllerC4D = function() {
 
 	this.phi = SETTINGS.cameraC4dPhi;
 	this.theta = SETTINGS.cameraC4dTheta;
-	this.radius = SETTINGS.cameraC4dRadius;
 	this.posLookAt = v3(SETTINGS.cameraC4dPosLookAt.x, SETTINGS.cameraC4dPosLookAt.y, SETTINGS.cameraC4dPosLookAt.z);
 
 	this.mouseState = "idle";
@@ -17,15 +16,6 @@ CameraControllerC4D.prototype.constructor = CameraControllerC4D;
 CameraControllerC4D.prototype.init = function() {
 	this.initSettings();
 	this.initControls();
-
- 	this.radius = SETTINGS.cameraC4dRadiusIntro;
-	var tween = new TWEEN.Tween(this)
-		.to({
-			radius : SETTINGS.cameraC4dRadius
-		}, 2000)
-		//.delay(1000)
-		.easing(TWEEN.Easing.Cubic.Out)
-		.start();
 };
 
 CameraControllerC4D.prototype.initControls = function() {
@@ -57,7 +47,7 @@ CameraControllerC4D.prototype.initControls = function() {
 
 	window.addEventListener("wheel", function(e) {
 		if ( !e.altKey ) return;
-		that.radius = clamp( 1.0, 100.0, that.radius + e.deltaY*0.015 );
+		SETTINGS.cameraC4dRadius = clamp( 1.0, 100.0, SETTINGS.cameraC4dRadius + e.deltaY*0.015 );
 	});
 };
 
@@ -68,7 +58,7 @@ CameraControllerC4D.prototype.initSettings = function() {
 		this.debugStr = {posLookAt:"(0,0,0)"};
 
 		var folder = APP.gui.addFolder("Camera C4D");
-		folder.add( this, 'radius' ).listen();
+		folder.add( SETTINGS, 'cameraC4dRadius' ).listen();
 		folder.add( this, 'theta' ).listen();
 		folder.add( this, 'phi' ).listen();
 		folder.add( this.debugStr, 'posLookAt' ).listen();
@@ -104,7 +94,7 @@ CameraControllerC4D.prototype.update = function() {
 	this.updateAutomatic();
 
 	// radius
-	var sphericalPos = spherical( this.theta, this.phi, this.radius );
+	var sphericalPos = spherical( this.theta, this.phi, SETTINGS.cameraC4dRadius );
 	var x = this.posLookAt.x + sphericalPos.x;
 	var y = this.posLookAt.y + sphericalPos.y;
 	var z = this.posLookAt.z + sphericalPos.z;
@@ -137,7 +127,7 @@ CameraControllerC4D.prototype.updatePan = function() {
 	var camUp = v3(0.0,1.0,0.0).applyQuaternion(camQuat);
 	var camRight = v3(-1.0,0.0,0.0).applyQuaternion(camQuat);
 
-	var pan = v2(mousePosRelX * this.radius * 0.03, mousePosRelY * this.radius * 0.03);
+	var pan = v2(mousePosRelX * SETTINGS.cameraC4dRadius * 0.03, mousePosRelY * SETTINGS.cameraC4dRadius * 0.03);
 	var deltaUp = camUp.multiplyScalar(pan.y);
 	var deltaRight = camRight.multiplyScalar(pan.x);
 	var posChange = deltaUp.add(deltaRight);
