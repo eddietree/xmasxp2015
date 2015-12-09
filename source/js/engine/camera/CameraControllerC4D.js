@@ -78,18 +78,21 @@ CameraControllerC4D.prototype.initSettings = function() {
 CameraControllerC4D.prototype.update = function() {
 	if ( SETTINGS.debug ) {
 		this.debugStr.posLookAt = "{x:" + Math.round(100*this.posLookAt.x)/100 + ", y:"+ Math.round(100*this.posLookAt.y)/100 + ", z:"+ Math.round(100*this.posLookAt.z)/100 + "}";
-	}
-	if ( this.mouseState === "downBtnRotate") {
-		this.updateRotation();
+	
+		if ( this.mouseState === "downBtnRotate") {
+			this.updateRotation();
+		}
+
+		if ( this.mouseState === "downBtnPan") {
+			this.updatePan();
+		}
+
+		if ( this.lookAtSphere ) {
+			this.lookAtSphere.position.copy( this.posLookAt );
+		}
 	}
 
-	if ( this.mouseState === "downBtnPan") {
-		this.updatePan();
-	}
-
-	if ( this.lookAtSphere ) {
-		this.lookAtSphere.position.copy( this.posLookAt );
-	}
+	this.updateAutomatic();
 
 	// radius
 	var sphericalPos = spherical( this.theta, this.phi, this.radius );
@@ -99,6 +102,22 @@ CameraControllerC4D.prototype.update = function() {
 
 	this.cam.position.copy( v3(x,y,z) );
 	this.cam.lookAt( this.posLookAt );
+};
+
+CameraControllerC4D.prototype.updateAutomatic = function() {
+	var mousePosRelX = -APP.mouseRel.x*0.00015;
+	var mousePosRelY = -APP.mouseRel.y*0.00015;
+
+	var thetaGoal = clamp( SETTINGS.cameraC4dTheta-SETTINGS.cameraC4dThetaRange, SETTINGS.cameraC4dTheta+SETTINGS.cameraC4dThetaRange, this.theta+mousePosRelX );
+	var phiGoal = clamp( SETTINGS.cameraC4dPhi-SETTINGS.cameraC4dPhiRange, SETTINGS.cameraC4dPhi+SETTINGS.cameraC4dPhiRange, this.phi - mousePosRelY );
+
+	this.theta = lerp( this.theta, thetaGoal, 1.0 );
+	this.phi = lerp( this.phi, phiGoal, 1.0 );
+
+	if ( Math.abs(mousePosRelX)+Math.abs(mousePosRelY) < 1 ) {
+		this.theta = lerp(this.theta, SETTINGS.cameraC4dTheta, 0.02 );
+		this.phi = lerp(this.phi, SETTINGS.cameraC4dPhi, 0.02 );
+	}
 };
 
 CameraControllerC4D.prototype.updatePan = function() {
@@ -123,8 +142,8 @@ CameraControllerC4D.prototype.updateRotation = function() {
 	var mousePosRelX = APP.mouseRel.x;
 	var mousePosRelY = APP.mouseRel.y;
 
-	this.theta += mousePosRelX*0.025;
-	this.phi = clamp( this.phi - mousePosRelY*0.02, -Math.PI*0.5, Math.PI*0.5)
+	this.theta += mousePosRelX*0.01;
+	this.phi = clamp( this.phi - mousePosRelY*0.01, -Math.PI*0.5, Math.PI*0.5)
 };
 
 CameraControllerC4D.prototype.start = function() {

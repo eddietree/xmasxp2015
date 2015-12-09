@@ -75,8 +75,6 @@ App.prototype = {
 		this.mouseRel.copy(this.mouse);//
 		this.mouseRel.sub(this.mousePrev);
 		this.mousePrev.copy(this.mouse);
-
-		LOG(this.mouseRel);
 	},
 
 	draw: function() {

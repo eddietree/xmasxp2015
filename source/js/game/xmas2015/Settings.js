@@ -7,13 +7,13 @@ var Settings = function() {
 		cameraFOV: 50.0,
 		cameraStartPos : {x:6.82, y:2.1, z:36.95},
 
-		cameraC4dRadius: 38.0,
+		cameraC4dRadius: 35.0,
 		cameraC4dTheta: 7.7,
 		cameraC4dPhi: 1.5,
 		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},
 
-		cameraC4dThetaRange: 0.5,
-		cameraC4dPhiRange: 0.5,
+		cameraC4dThetaRange: 0.2,
+		cameraC4dPhiRange: 0.3,
 
 		fogEnabled: true,
 		fogDensity: 0.0165,
