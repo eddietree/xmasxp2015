@@ -324,6 +324,8 @@ Hypercube.prototype.onClicked = function() {
 
 	this.isHovering = false;
 	GetObj("LightDark").onToggle();
+
+	this.hoverLerped = 0.0;
 };
 
 Hypercube.prototype.updateRaycasts = function() {
@@ -344,14 +346,15 @@ Hypercube.prototype.updateRaycasts = function() {
 		this.isHovering = currHovering;
 	}
 
-	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, this.isHovering?0.15:0.09 );
+	this.hoverLerped = lerp( this.hoverLerped, this.isHovering?1.0:0.0, this.isHovering?0.15:0.03 );
 
 	// scale
 	var scaleVal = lerp(1.0, 1.8, this.hoverLerped);
 	this.scale.set( scaleVal, scaleVal, scaleVal );
 
 	// offset
-	var colorVal = 1.0 - this.hoverLerped;
+	var lightState = GetObj("LightDark").state;
+	var colorVal = (lightState==="LIGHT") ? (1.0 - this.hoverLerped) : (this.hoverLerped);
 	this.innerSphere.material.color.setRGB( colorVal,colorVal,colorVal );
 
 	APP.time += (this.hoverLerped*2.5) * APP.dt;
