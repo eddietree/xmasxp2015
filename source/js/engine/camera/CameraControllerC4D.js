@@ -17,6 +17,15 @@ CameraControllerC4D.prototype.constructor = CameraControllerC4D;
 CameraControllerC4D.prototype.init = function() {
 	this.initSettings();
 	this.initControls();
+
+ 	this.radius = SETTINGS.cameraC4dRadiusIntro;
+	var tween = new TWEEN.Tween(this)
+		.to({
+			radius : SETTINGS.cameraC4dRadius
+		}, 2000)
+		//.delay(1000)
+		.easing(TWEEN.Easing.Cubic.Out)
+		.start();
 };
 
 CameraControllerC4D.prototype.initControls = function() {
