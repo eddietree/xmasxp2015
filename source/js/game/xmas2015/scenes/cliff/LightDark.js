@@ -16,14 +16,15 @@ LightDark.prototype.init = function() {
 		//folder.add(SETTINGS, 'LightDarkRadius', 0.0, 1.0);
 	}
 
-	this.sndLight = RES.audio['lull'];
-	this.sndDark = RES.audio['vex'];
+	this.sndLoopLight = RES.audio['lull'];
+	this.sndLoopDark = RES.audio['vex'];
+	this.sndPing = RES.audio['ping'];
 };
 
 LightDark.prototype.start = function() {
 
-	this.sndLight.play();
-	this.sndLight.fade(0.0, 1.0, 2000);
+	this.sndLoopLight.play();
+	this.sndLoopLight.fade(0.0, 1.0, 2000);
 };
 
 LightDark.prototype.update = function() {
@@ -38,24 +39,23 @@ LightDark.prototype.enableModeLight = function() {
 	LOG("LIGHT ON");
 	this.toggleLightDark();
 
-	this.sndDark.stop();
-	this.sndLight.play();
+	this.sndLoopDark.stop();
+	this.sndLoopLight.play();
 };
 
 LightDark.prototype.enableModeDark = function() {
 	this.state = "DARK";
 
-	
-
 	LOG("DARK ON");
 	this.toggleLightDark();
 
-	this.sndDark.play();
-	this.sndLight.stop();
+	this.sndLoopDark.play();
+	this.sndLoopLight.stop();
 };
 
 LightDark.prototype.toggleLightDark = function() {
 
+	this.sndPing.play();
 	var suffixDark = "Dark";
 
 	for(var key in SETTINGS) { 
@@ -63,7 +63,9 @@ LightDark.prototype.toggleLightDark = function() {
 		var keyDark = key+suffixDark;
 
 		if ( !key.contains(suffixDark) && SETTINGS.hasOwnProperty(keyDark) ) {
-	   		LOG(key + " : " + SETTINGS[key]);
+			if ( SETTINGS.debug ) {
+	   			LOG(key + " : " + SETTINGS[key]);
+	   		}
 	   		
 	   		var temp = SETTINGS[key];
 			SETTINGS[key] = SETTINGS[keyDark];
