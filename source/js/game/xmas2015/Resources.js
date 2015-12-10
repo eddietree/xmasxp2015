@@ -15,6 +15,11 @@ var Resources = function() {
 		'Settings.json',
 	];
 
+	this.defAudio = {
+		'lull' : { urls:['resource/audio/lull.ogg'], filesize: 1085, volume:1.0, loop:true },
+		'vex' : { urls:['resource/audio/vex.ogg'], filesize: 914, volume:1.0, loop:true },
+	};
+
 	this.defShaders = [
 		'basic.vp', 'basic.fp',
 		'diamond.vp', 'diamond.fp',
@@ -208,8 +213,41 @@ Resources.prototype.loadJSON = function() {
 	});
 };
 
+Resources.prototype.loadAudioDef = function( key ) {
+
+	var that = this;
+	var defs = this.defAudio;
+	var val = defs[key];
+
+	var loadingTrackedData = {loadedBytes:0, totalSizeBytes: val.filesize};
+	that.loadingTrackedItems[that.loadingTrackedItems.length] = loadingTrackedData;
+
+	var sound = new Howl({
+		urls: val.urls,
+		autoplay: false,
+		loop: true,
+		volume: val.volume | 1.0,
+		onload: function() {
+			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
+			that.audio[key] = sound;
+
+			LOG("Loaded audio file: " + key);
+			LOG(sound);
+		}
+	});
+}
+
 Resources.prototype.loadAudio = function() {
-	// TODO:
+	var defs = this.defAudio;
+	//var that = this;
+
+	for( var key in defs ) {
+		//var val = defs[key];
+		this.loadAudioDef(key);
+
+		//LOG(filename);
+		//this.loadModel(filename);
+	};
 };
 
 Resources.prototype.loadShaders = function() {
