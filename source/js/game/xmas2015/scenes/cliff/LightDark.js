@@ -15,10 +15,15 @@ LightDark.prototype.init = function() {
 		//folder.add(SETTINGS, 'LightDarkAlpha', 0.0, 1.0);
 		//folder.add(SETTINGS, 'LightDarkRadius', 0.0, 1.0);
 	}
+
+	this.sndLight = RES.audio['lull'];
+	this.sndDark = RES.audio['vex'];
 };
 
 LightDark.prototype.start = function() {
 
+	this.sndLight.play();
+	this.sndLight.fade(0.0, 1.0, 2000);
 };
 
 LightDark.prototype.update = function() {
@@ -32,6 +37,9 @@ LightDark.prototype.enableModeLight = function() {
 
 	LOG("LIGHT ON");
 	this.toggleLightDark();
+
+	this.sndDark.stop();
+	this.sndLight.play();
 };
 
 LightDark.prototype.enableModeDark = function() {
@@ -41,6 +49,9 @@ LightDark.prototype.enableModeDark = function() {
 
 	LOG("DARK ON");
 	this.toggleLightDark();
+
+	this.sndDark.play();
+	this.sndLight.stop();
 };
 
 LightDark.prototype.toggleLightDark = function() {

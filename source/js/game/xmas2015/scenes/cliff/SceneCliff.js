@@ -142,10 +142,9 @@ SceneCliff.prototype.updateObjs = function() {
 };
 
 SceneCliff.prototype.start = function() {
+	LOG("SceneCliff.start()");
+
 	Scene.prototype.start.call(this);
-
-	LOG("STARTTTT");
-
 	SETTINGS.fadeAlpha = 1.0;
 
 	var tween = new TWEEN.Tween(SETTINGS)

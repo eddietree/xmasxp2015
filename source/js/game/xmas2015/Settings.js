@@ -52,7 +52,7 @@ var Settings = function() {
 		snowParticleDiameter: 20.0,
 		snowParticleDiameterDark: 40.0,
 		snowParticleWindSpeed: 1.0,
-		snowParticleWindSpeedDark: 0.7,
+		snowParticleWindSpeedDark: 0.8,
 		snowParticleWindDir: {x:-1.5,y:-1.0,z:0.0},
 		snowParticleWindDirDark: {x:0.0,y:1.0,z:0.0},
 
