@@ -1,7 +1,7 @@
 var Settings = function() {
 
 	return {
-		debug : true,
+		debug : false,
 		showDebugObjects : false,
 
 		cameraFOV: 50.0,
@@ -18,6 +18,9 @@ var Settings = function() {
 
 		fogEnabled: true,
 		fogDensity: 0.0165,
+
+		// sound
+		mute : false,
 
 		// fade
 		fadeAlpha:0.0,

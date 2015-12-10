@@ -74,6 +74,21 @@ Game.prototype.start = function() {
 	APP.camera.position.z = SETTINGS.cameraStartPos.z;
 
 	this.sceneManager.changeSceneTo('SceneCliff');
+
+	if ( SETTINGS.mute ) {
+		Howler.mute();
+	}
+
+	// handle muting
+	$( "#mutebtn" ).click(function() {
+		SETTINGS.mute = !SETTINGS.mute;
+
+		if ( SETTINGS.mute ) {
+			Howler.mute();
+		} else {
+			Howler.unmute();
+		}
+	});
 };
 
 Game.prototype.update = function() {
