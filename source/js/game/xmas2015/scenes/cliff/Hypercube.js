@@ -40,6 +40,8 @@ Hypercube.prototype.init = function() {
 
 	// handle raycast stuff
 	if ( this.doRaycast ) {
+		this.sndCharging = RES.audio["charging"];
+
 		window.addEventListener("mousedown", function(e) {
 			if ( e.altKey ) return;
 
@@ -313,16 +315,21 @@ Hypercube.prototype.update = function() {
 
 Hypercube.prototype.onBeginHover = function() {
 	$('#canvas').css('cursor', 'pointer');
+
+	this.sndCharging.play();
 };
 
 Hypercube.prototype.onEndHover = function() {
 	$('#canvas').css('cursor', 'default');
+
+	this.sndCharging.stop();
 };
 
 Hypercube.prototype.onClicked = function() {
 	LOG("Clicked on Hypercube!");
 
 	this.isHovering = false;
+	this.sndCharging.stop();
 	GetObj("LightDark").onToggle();
 
 	this.hoverLerped = 0.0;

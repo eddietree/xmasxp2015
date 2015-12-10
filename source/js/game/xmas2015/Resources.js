@@ -16,9 +16,10 @@ var Resources = function() {
 	];
 
 	this.defAudio = {
-		'lull' : { urls:['resource/audio/lull.ogg'], filesize: 1085, volume:1.0, loop:true },
-		'vex' : { urls:['resource/audio/vex.ogg'], filesize: 914, volume:1.0, loop:true },
-		'ping' : { urls:['resource/audio/ping.ogg'], filesize: 7, volume:1.0, loop:false },
+		'lull' : { urls:['resource/audio/lull.ogg'], filesize: 1085000, volume:1.0, loop:true },
+		'vex' : { urls:['resource/audio/vex.ogg'], filesize: 914000, volume:1.0, loop:true },
+		'ping' : { urls:['resource/audio/ping.ogg'], filesize: 7000, volume:1.0, loop:false },
+		'charging' : { urls:['resource/audio/charging.ogg'], filesize: 81000, volume:0.2, loop:true },
 	};
 
 	this.defShaders = [
@@ -223,11 +224,12 @@ Resources.prototype.loadAudioDef = function( key ) {
 	var loadingTrackedData = {loadedBytes:0, totalSizeBytes: val.filesize};
 	that.loadingTrackedItems[that.loadingTrackedItems.length] = loadingTrackedData;
 
+	LOG(val);
 	var sound = new Howl({
 		urls: val.urls,
 		autoplay: false,
 		loop: val.loop | false,
-		volume: val.volume | 1.0,
+		volume: val.volume,
 		onload: function() {
 			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
 			that.audio[key] = sound;
