@@ -26,7 +26,9 @@ SceneCliff.prototype.init = function() {
 	APP.renderer.setClearColor( SETTINGS.clearColor, 1);
 	if ( SETTINGS.fogEnabled) APP.scene.fog = new THREE.FogExp2( SETTINGS.clearColor, 0.03 );
 
-	this.initGui();
+	if ( SETTINGS.debug ) {
+		this.initGui();
+	}
 };
 
 SceneCliff.prototype.initGui = function() {

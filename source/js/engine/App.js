@@ -28,8 +28,8 @@ App.prototype = {
 		this.debugObjs = new THREE.Object3D();
 
 		// gui
-		this.gui = new dat.GUI();
 		if ( SETTINGS.debug  ) {
+			this.gui = new dat.GUI();
 
 			// add debug objs into scene
 			this.scene.add(this.debugObjs);
