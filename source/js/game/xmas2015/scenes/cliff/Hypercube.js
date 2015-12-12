@@ -4,7 +4,7 @@ var Hypercube = function(doRaycast) {
 
 	this.numTheta = 4;
 	this.edgePos = [];
-	this.doRaycast = doRaycast | true;
+	this.doRaycast = doRaycast === undefined ? true : doRaycast;
 	this.isHovering = false;
 	this.hoverLerped = 0.0;
 };

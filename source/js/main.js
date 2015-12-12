@@ -11,10 +11,15 @@ $(window).load(function() {
 	APP = new App();
 	APP.init();
 
-
 	// preload resources
 	RES = new Resources();
 	RES.load();
+
+	// create hypercube
+	var hypercube = new Hypercube(false);
+	hypercube.init();
+	hypercube.position.copy( v3(0.0) );
+	APP.scene.add(hypercube);
 
 	var onResourcesLoaded = function() {
 
@@ -32,8 +37,11 @@ $(window).load(function() {
 	var waitForFinish = function() {
 
 		// if finished loaded, call the callback
-		if ( RES.isLoadingFinished() ) {
+		if ( !SETTINGS.debugForceLoading && RES.isLoadingFinished() ) {
 			onResourcesLoaded();
+
+			APP.scene.remove(hypercube);
+			hypercube = null;
 		}
 
 		// still loading..
@@ -41,6 +49,8 @@ $(window).load(function() {
 			requestAnimationFrame(waitForFinish);
 
 			// TODO: draw scene
+			hypercube.update();
+			APP.update();
 			APP.draw();
 
 			var percent = RES.getPercentageLoaded();
