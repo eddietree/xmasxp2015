@@ -7,6 +7,7 @@ var Hypercube = function(doRaycast) {
 	this.doRaycast = doRaycast === undefined ? true : doRaycast;
 	this.isHovering = false;
 	this.hoverLerped = 0.0;
+	this.tweenClick = null;
 };
 
 Hypercube.prototype = Object.create(SceneObj.prototype);
@@ -332,6 +333,18 @@ Hypercube.prototype.onClicked = function() {
 	this.isHovering = false;
 	this.sndCharging.stop();
 	GetObj("LightDark").onToggle();
+
+	if ( this.tweenClick !== null ) {
+		this.tweenClick.stop();
+	}
+
+	var posFinalY = 4.0;
+	this.position.setY(posFinalY + 6.0);
+
+	this.tweenClick = new TWEEN.Tween(this.position)
+		.to({y : posFinalY }, 800)
+		.easing(TWEEN.Easing.Elastic.Out)
+		.start();
 
 	this.hoverLerped = 0.0;
 };
