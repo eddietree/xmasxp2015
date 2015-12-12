@@ -104,8 +104,10 @@ CameraControllerC4D.prototype.update = function() {
 };
 
 CameraControllerC4D.prototype.updateAutomatic = function() {
-	var mousePosRelX = -APP.mouseRel.x*0.00015;
-	var mousePosRelY = -APP.mouseRel.y*0.00015;
+	var mouseMaxRange = 30.0;
+	var mouseMoveCoeff = 0.00015;
+	var mousePosRelX = -clamp(-mouseMaxRange,mouseMaxRange,APP.mouseRel.x)*mouseMoveCoeff;
+	var mousePosRelY = -clamp(-mouseMaxRange,mouseMaxRange,APP.mouseRel.y)*mouseMoveCoeff;
 
 	var thetaGoal = clamp( SETTINGS.cameraC4dTheta-SETTINGS.cameraC4dThetaRange, SETTINGS.cameraC4dTheta+SETTINGS.cameraC4dThetaRange, this.theta+mousePosRelX );
 	var phiGoal = clamp( SETTINGS.cameraC4dPhi-SETTINGS.cameraC4dPhiRange, SETTINGS.cameraC4dPhi+SETTINGS.cameraC4dPhiRange, this.phi - mousePosRelY );
