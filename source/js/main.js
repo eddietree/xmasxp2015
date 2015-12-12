@@ -18,8 +18,12 @@ $(window).load(function() {
 	// create hypercube
 	var hypercube = new Hypercube(false);
 	hypercube.init();
-	hypercube.position.copy( v3(0.0, 0.5, 1.0) );
+	hypercube.position.copy( v3(0.0, 0.0, 0.0) );
+	//hypercube.
 	APP.scene.add(hypercube);
+	var hypercubeInnerCoeff = SETTINGS.hypercubeInnerCoeff;
+	var hypercubeMovementSpeed = SETTINGS.hypercubeMovementSpeed;
+	var hypercubeRadius = SETTINGS.hypercubeRadius;
 
 	var onResourcesLoaded = function() {
 
@@ -40,6 +44,11 @@ $(window).load(function() {
 		if ( !(SETTINGS.debugForceLoading && SETTINGS.debug) && RES.isLoadingFinished() ) {
 			onResourcesLoaded();
 
+			// reset some settings
+			SETTINGS.hypercubeInnerCoeff = hypercubeInnerCoeff;
+			SETTINGS.hypercubeMovementSpeed = hypercubeMovementSpeed;
+			SETTINGS.hypercubeRadius = hypercubeRadius;
+
 			APP.scene.remove(hypercube);
 			hypercube = null;
 		}
@@ -48,12 +57,17 @@ $(window).load(function() {
 		else {
 			requestAnimationFrame(waitForFinish);
 
-			// TODO: draw scene
+			// draw scene
 			hypercube.update();
 			APP.update();
 			APP.draw();
 
+			//var percent = clamp(0.0,1.0, APP.time * 0.1);//RES.getPercentageLoaded();
 			var percent = RES.getPercentageLoaded();
+			SETTINGS.hypercubeInnerCoeff = lerp( 0.3, 0.8, percent );
+			SETTINGS.hypercubeMovementSpeed = lerp( 1.0, 2.5, percent);
+			SETTINGS.hypercubeRadius = lerp( SETTINGS.hypercubeRadius, hypercubeRadius, 0.04);
+
 			var numTrackedItems = RES.getNumTrackedItems();
 			LOG("Number of tracked items: " + numTrackedItems);
 			LOG("Percent loaded: " + percent);		

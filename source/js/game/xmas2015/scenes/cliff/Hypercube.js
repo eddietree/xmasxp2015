@@ -31,11 +31,11 @@ Hypercube.prototype.init = function() {
 
 	var that = this;
 
-	if ( SETTINGS.debug ) {
+	if ( SETTINGS.debug && this.doRaycast ) {
 		var folder = APP.gui.addFolder("Hypercube");
-		folder.add(SETTINGS, 'hypercubeRadius', 0.0, 10.0);
-		folder.add(SETTINGS, 'hypercubeInnerCoeff', 0.0, 1.0);
-		folder.add(SETTINGS, 'hypercubeMovementSpeed', 0.0, 1.0);
+		folder.add(SETTINGS, 'hypercubeRadius', 0.0, 10.0).listen();
+		folder.add(SETTINGS, 'hypercubeInnerCoeff', 0.0, 1.0).listen();
+		folder.add(SETTINGS, 'hypercubeMovementSpeed', 0.0, 1.0).listen();
 	}
 
 	// handle raycast stuff
