@@ -23,7 +23,6 @@ function lerp( a, b, coeff ) {
 }
 
 function spherical( theta, phi, radius ) {
-	radius = radius | 1.0;
 
 	var sinPhi = Math.sin(phi);
 	var cosPhi = Math.cos(phi);

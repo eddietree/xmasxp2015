@@ -64,15 +64,16 @@ Hypercube.prototype.initGeo = function() {
 	var numTheta = this.numTheta;
 
 	var deltaTheta = 2.0 * Math.PI / this.numTheta;
+	var sphericalBaseRadius = 1.0;
 
 	// initialize spherical data
 		for( var iTheta = 0; iTheta < this.numTheta; iTheta+=1 ) {
 			var theta = iTheta * deltaTheta;
 			var phi =  Math.PI*0.5;
 
-			var sphericalPos = spherical(theta,phi);
+			var sphericalPos = spherical(theta,phi, sphericalBaseRadius);
 			var sphericalDirX = sphericalPos;
-			var sphericalDirY = spherical(theta,phi + Math.PI*0.5);
+			var sphericalDirY = spherical(theta,phi + Math.PI*0.5, sphericalBaseRadius);
 
 			edgeCenters.push(sphericalPos);
 			edgeDirX.push(sphericalDirX);

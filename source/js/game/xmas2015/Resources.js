@@ -228,7 +228,7 @@ Resources.prototype.loadAudioDef = function( key ) {
 	var sound = new Howl({
 		urls: val.urls,
 		autoplay: false,
-		loop: val.loop | false,
+		loop: val.loop === undefined ? false : val.loop,
 		volume: val.volume,
 		onload: function() {
 			loadingTrackedData.loadedBytes = loadingTrackedData.totalSizeBytes;
