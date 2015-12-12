@@ -22,7 +22,7 @@ App.prototype = {
 		// renderer
 		this.renderer = new THREE.WebGLRenderer({canvas: canvas });
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
-		this.renderer.setClearColor(0xAAAAAA, 1);
+		this.renderer.setClearColor(0x9ee3de, 1);
 		document.body.appendChild(this.renderer.domElement);
 
 		this.debugObjs = new THREE.Object3D();

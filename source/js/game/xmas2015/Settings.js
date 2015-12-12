@@ -1,8 +1,8 @@
 var Settings = function() {
 
 	return {
-		debug : false,
-		debugForceLoading : false,
+		debug : true,
+		debugForceLoading : true,
 		showDebugObjects : false,
 
 		cameraFOV: 50.0,
