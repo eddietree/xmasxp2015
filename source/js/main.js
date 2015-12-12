@@ -18,7 +18,7 @@ $(window).load(function() {
 	// create hypercube
 	var hypercube = new Hypercube(false);
 	hypercube.init();
-	hypercube.position.copy( v3(0.0, 0.0, 0.0) );
+	hypercube.position.copy( v3(0.0, 0.0, -5.0) );
 	//hypercube.
 	APP.scene.add(hypercube);
 	var hypercubeInnerCoeff = SETTINGS.hypercubeInnerCoeff;
