@@ -19,7 +19,6 @@ $(window).load(function() {
 	var hypercube = new Hypercube(false);
 	hypercube.init();
 	hypercube.position.copy( v3(0.0, 0.0, -5.0) );
-	//hypercube.
 	APP.scene.add(hypercube);
 	var hypercubeInnerCoeff = SETTINGS.hypercubeInnerCoeff;
 	var hypercubeMovementSpeed = SETTINGS.hypercubeMovementSpeed;

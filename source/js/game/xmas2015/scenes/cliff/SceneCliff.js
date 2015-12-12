@@ -149,21 +149,13 @@ SceneCliff.prototype.start = function() {
 	Scene.prototype.start.call(this);
 	SETTINGS.fadeAlpha = 1.0;
 
-	var tween = new TWEEN.Tween(SETTINGS)
-		.to({
-			fadeAlpha : 0.0
-		}, 4000)
-		//.delay(1000)
-		.easing(TWEEN.Easing.Cubic.Out)
-		.start();
-
-
+	// camera dally in
 	var idleRadius = SETTINGS.cameraC4dRadius;
 	SETTINGS.cameraC4dRadius = SETTINGS.cameraC4dRadiusIntro;
 	var tween = new TWEEN.Tween(SETTINGS)
 		.to({
 			cameraC4dRadius : idleRadius
-		}, 3000)
+		}, 3500)
 		//.delay(1000)
 		.easing(TWEEN.Easing.Cubic.Out)
 		.start();
