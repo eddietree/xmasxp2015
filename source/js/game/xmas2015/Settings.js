@@ -61,10 +61,10 @@ var Settings = function() {
 		snowParticleWindDirDark: {x:0.0,y:1.0,z:0.0},
 
 		mainLightIntensity: 2.0,
-		mainLightIntensityDark: 20.0,
+		mainLightIntensityDark: 5.0,
 
 		mainLightDistance: 27.0,
-		mainLightDistanceDark: 10.0,
+		mainLightDistanceDark: 6.0,
 
 		hypercubeRadius : 1.8,
 		hypercubeInnerCoeff : 0.65,

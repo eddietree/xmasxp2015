@@ -19,6 +19,9 @@ LightDark.prototype.init = function() {
 	this.sndLoopLight = RES.audio['lull'];
 	this.sndLoopDark = RES.audio['vex'];
 	this.sndPing = RES.audio['ping'];
+
+	this.snowCliff = getMeshByName(RES.models['cliff.dae'], "IceCliff");
+	this.human = getMeshByName(RES.models['cliff.dae'], "Human");
 };
 
 LightDark.prototype.start = function() {
@@ -55,6 +58,7 @@ LightDark.prototype.enableModeDark = function() {
 
 LightDark.prototype.toggleLightDark = function() {
 
+	this.snowCliff.visible = !this.snowCliff.visible;
 	this.sndPing.play();
 	var suffixDark = "Dark";
 
