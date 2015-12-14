@@ -58,7 +58,7 @@ LightDark.prototype.enableModeDark = function() {
 
 LightDark.prototype.toggleLightDark = function() {
 
-	this.snowCliff.visible = !this.snowCliff.visible;
+	//this.snowCliff.visible = !this.snowCliff.visible;
 	this.sndPing.play();
 	var suffixDark = "Dark";
 
