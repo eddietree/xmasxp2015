@@ -13,6 +13,7 @@ var gulp = require('gulp'),
 	runSequence = require('run-sequence'),
 	inject = require('gulp-inject');
 	concat = require('gulp-concat');
+	uglify = require('gulp-uglify');
 
 var reload = browserSync.reload;
 
@@ -85,6 +86,7 @@ gulp.task('build-js-final', function() {
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(concat(distFile))
+		.pipe(uglify())
 		.pipe(gulp.dest(pathsDst.js));
 });
 
@@ -150,7 +152,7 @@ gulp.task('default', function(callback) {
 
 	runSequence(
 		'build-clean', 
-		['build-scss', 'build-js', 'build-resource'],
+		['build-scss', 'build-js-final', 'build-resource'],
 		'build-html',
 		'serve',
 		callback
