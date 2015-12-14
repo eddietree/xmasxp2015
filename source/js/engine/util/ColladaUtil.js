@@ -16,7 +16,7 @@ function getMeshesUsingMaterial( rootDae, matName ) {
 
 	traverseObj(rootDae);
 	return result;
-};
+}
 
 function getMeshByName( rootDae, objectName ) {
 
@@ -37,4 +37,4 @@ function getMeshByName( rootDae, objectName ) {
 	}
 
 	return traverseObj(rootDae);
-};
+}

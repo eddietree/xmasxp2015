@@ -60,7 +60,7 @@ SceneCliff.prototype.onLoadObject = function(object) {
 		light.intensity = 2;
 		light.distance = 27;
 
-		if (this.mainLight == null) {
+		if (this.mainLight === null) {
 			this.mainLight = light;
 		}
 

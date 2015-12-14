@@ -144,7 +144,7 @@ CameraControllerC4D.prototype.updateRotation = function() {
 	var mousePosRelY = APP.mouseRel.y;
 
 	this.theta += mousePosRelX*0.01;
-	this.phi = clamp( this.phi - mousePosRelY*0.01, -Math.PI*0.5, Math.PI*0.5)
+	this.phi = clamp( this.phi - mousePosRelY*0.01, -Math.PI*0.5, Math.PI*0.5);
 };
 
 CameraControllerC4D.prototype.start = function() {

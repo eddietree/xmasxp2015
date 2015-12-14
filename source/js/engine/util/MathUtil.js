@@ -34,4 +34,4 @@ function spherical( theta, phi, radius ) {
 	var y = radius * cosPhi;
 
 	return v3(x,y,z);
-};
+}
