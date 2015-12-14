@@ -12,6 +12,7 @@ var gulp = require('gulp'),
 	clean = require('gulp-clean'),
 	runSequence = require('run-sequence'),
 	inject = require('gulp-inject');
+	concat = require('gulp-concat');
 
 var reload = browserSync.reload;
 
@@ -72,6 +73,21 @@ gulp.task('build-js', function() {
 		.pipe(gulp.dest(pathsDst.js));
 });
 
+gulp.task('build-js-final', function() {
+
+	// pipe libs
+	gulp.src(pathsSrc.lib).pipe(gulp.dest(pathsDst.lib));
+
+	var distFile = "dist.js";
+
+	// pipe js
+	return gulp.src(pathsSrc.js)
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(concat(distFile))
+		.pipe(gulp.dest(pathsDst.js));
+});
+
 gulp.task('build-scss', function() {
 	return gulp.src(pathsSrc.scss)
 		.pipe(sass())
@@ -93,11 +109,24 @@ gulp.task('build-clean', function() {
 
 gulp.task('build', function(callback) {
 	runSequence(
-		'build-clean', ['build-scss', 'build-js'],
+		'build-clean', 
+		['build-scss', 'build-js', 'build-resource'],
 		'build-html',
 		callback
 	);
 });
+
+gulp.task('build-final', function(callback) {
+	runSequence(
+		'build-clean', 
+		['build-scss', 'build-js-final', 'build-resource'],
+		'build-html',
+		callback
+	);
+});
+
+
+
 
 // configure which files to watch and what tasks to use on file changes
 // and handles reload

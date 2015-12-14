@@ -18,7 +18,7 @@ var Resources = function() {
 	this.defAudio = {
 		'lull' : { urls:['resource/audio/lull.ogg'], filesize: 1085000, volume:1.0, loop:true },
 		'vex' : { urls:['resource/audio/vex.ogg'], filesize: 914000, volume:1.0, loop:true },
-		'ping' : { urls:['resource/audio/ping.ogg'], filesize: 7000, volume:1.0, loop:false },
+		'ping' : { urls:['resource/audio/ping.ogg'], filesize: 7000, volume:0.75, loop:false },
 		'charging' : { urls:['resource/audio/charging.ogg'], filesize: 81000, volume:0.1, loop:true },
 	};
 
@@ -238,7 +238,7 @@ Resources.prototype.loadAudioDef = function( key ) {
 			LOG(sound);
 		}
 	});
-}
+};
 
 Resources.prototype.loadAudio = function() {
 	var defs = this.defAudio;
@@ -250,7 +250,7 @@ Resources.prototype.loadAudio = function() {
 
 		//LOG(filename);
 		//this.loadModel(filename);
-	};
+	}
 };
 
 Resources.prototype.loadShaders = function() {
