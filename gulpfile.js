@@ -152,7 +152,7 @@ gulp.task('default', function(callback) {
 
 	runSequence(
 		'build-clean', 
-		['build-scss', 'build-js-final', 'build-resource'],
+		['build-scss', 'build-js', 'build-resource'],
 		'build-html',
 		'serve',
 		callback
