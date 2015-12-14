@@ -22,10 +22,26 @@ canvas {
 }
 
 #mute {
-display: inline;
+  display: inline;
   position:fixed;
   right:5px;
   bottom:5px;
   z-index:1;
   opacity: 0.6;
+}
+
+#info {
+  font-family: Arial;
+  display: inline;
+  position:fixed;
+  right:8px;
+  bottom:8px;
+  z-index:1;
+}
+
+#info a {
+  opacity: 0.6;
+  color: black;
+  font-size: 18px;
+  margin-left: 0.4em;
 }
