@@ -41,7 +41,7 @@ var Settings = function() {
 		ribbonAlphaDark:-0.5,
 
 		// snow
-		snowSpeed: 2.6,
+		snowSpeed: 2.0,
 		snowSpeedDark: 1.0,
 		snowHeightCoeff: 1.0,
 		snowHeightCoeffDark: 5.0,

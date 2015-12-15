@@ -116,8 +116,9 @@ CameraControllerC4D.prototype.updateAutomatic = function() {
 	this.phi = lerp( this.phi, phiGoal, 1.0 );
 
 	if ( Math.abs(mousePosRelX)+Math.abs(mousePosRelY) < 1 ) {
-		this.theta = lerp(this.theta, SETTINGS.cameraC4dTheta, 0.02 );
-		this.phi = lerp(this.phi, SETTINGS.cameraC4dPhi, 0.02 );
+		var bounceBackLerp = 0.015;
+		this.theta = lerp(this.theta, SETTINGS.cameraC4dTheta, bounceBackLerp );
+		this.phi = lerp(this.phi, SETTINGS.cameraC4dPhi, bounceBackLerp );
 	}
 };
 
