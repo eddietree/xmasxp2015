@@ -119,7 +119,10 @@ SceneCliff.prototype.parseSceneCollada = function() {
 		LOG(colladaScene);
 	}
 
-	var results = getMeshesUsingMaterial( colladaScene, "Snow");
+	// make face white
+	var results = getMeshesUsingMaterial( colladaScene, "Face");
+	var resultsFaceMesh = results[0];
+	resultsFaceMesh.material = new THREE.MeshBasicMaterial({color:0xffffff});
 };
 
 SceneCliff.prototype.update = function() {
