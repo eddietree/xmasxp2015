@@ -20,7 +20,7 @@ App.prototype = {
 		this.camera.position.z = 15;
 
 		// renderer
-		this.renderer = new THREE.WebGLRenderer({canvas: canvas });
+		this.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias:SETTINGS.antiAliasing });
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
 		this.renderer.setClearColor(0x9ee3de, 1);
 		document.body.appendChild(this.renderer.domElement);

@@ -4,6 +4,7 @@ var Settings = function() {
 		debug : false,
 		debugForceLoading : false,
 		showDebugObjects : false,
+		antiAliasing : true,
 
 		cameraFOV: 50.0,
 		cameraStartPos : {x:6.82, y:2.1, z:36.95},
