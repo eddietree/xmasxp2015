@@ -51,10 +51,10 @@ var Settings = function() {
 
 		// snow paritlces
 		snowParticleColor: 0xffffff,
-		snowParticleColorDark: 0x1676ff,
+		snowParticleColorDark: 0x2179f7,
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
-		snowParticleDiameterDark: 35.0,
+		snowParticleDiameterDark: 40.0,
 		snowParticleWindSpeed: 1.0,
 		snowParticleWindSpeedDark: 0.8,
 		snowParticleWindDir: {x:-1.5,y:-1.0,z:0.0},
