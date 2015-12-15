@@ -8,7 +8,7 @@ var Settings = function() {
 		cameraFOV: 50.0,
 		cameraStartPos : {x:6.82, y:2.1, z:36.95},
 
-		cameraC4dRadius: 40.0,
+		cameraC4dRadius: 35.0,
 		cameraC4dRadiusIntro: 70.0,
 		cameraC4dTheta: 7.7,
 		cameraC4dPhi: 1.5,
