@@ -39,6 +39,7 @@ SnowParticles.prototype.init = function() {
 			});
 	    material.transparent = true;
 	    material.depthWrite = false;
+	    //material.blending = THREE.AdditiveBlending;
 	    //material.depthTest = false;
 
 	    // add line object

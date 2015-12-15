@@ -33,7 +33,7 @@ var Settings = function() {
 
 		// vignette
 		vignetteAlpha: 0.3,
-		vignetteAlphaDark: 0.4,
+		vignetteAlphaDark: 0.5,
 		vignetteRadius: 0.4,
 		vignetteRadiusDark: 0.0,
 
@@ -51,7 +51,7 @@ var Settings = function() {
 
 		// snow paritlces
 		snowParticleColor: 0xffffff,
-		snowParticleColorDark: 0x2179f7,
+		snowParticleColorDark: 0x106ff7,
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
 		snowParticleDiameterDark: 40.0,
