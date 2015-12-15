@@ -16,7 +16,7 @@ Hypercube.prototype.constructor = Hypercube;
 Hypercube.prototype.init = function() {
 
     //this.scale.multiplyScalar(0.3);
-    this.position.copy( v3(2.5,4.0,0.0));
+    this.position.copy( v3(2.6,4.1,0.0));
     this.rotation.set( Math.PI*0.5, 0.0, 0.0, 'XYZ');
 
 	this.initGeo();

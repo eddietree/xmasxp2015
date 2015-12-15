@@ -66,7 +66,7 @@ var Settings = function() {
 		mainLightDistance: 27.0,
 		mainLightDistanceDark: 6.0,
 
-		hypercubeRadius : 1.8,
+		hypercubeRadius : 1.6,
 		hypercubeInnerCoeff : 0.65,
 		hypercubeMovementSpeed: 0.95,
 
