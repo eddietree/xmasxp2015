@@ -105,7 +105,7 @@ CameraControllerC4D.prototype.update = function() {
 
 CameraControllerC4D.prototype.updateAutomatic = function() {
 	var mouseMaxRange = 30.0;
-	var mouseMoveCoeff = 0.0003;
+	var mouseMoveCoeff = 0.0004;
 	var mousePosRelX = -clamp(-mouseMaxRange,mouseMaxRange,APP.mouseRel.x)*mouseMoveCoeff;
 	var mousePosRelY = -clamp(-mouseMaxRange,mouseMaxRange,APP.mouseRel.y)*mouseMoveCoeff;
 

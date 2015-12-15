@@ -14,7 +14,7 @@ var Settings = function() {
 		cameraC4dPhi: 1.5,
 		cameraC4dPosLookAt: {x:2.93, y:0.95, z:-0.33},
 
-		cameraC4dThetaRange: 0.2,
+		cameraC4dThetaRange: 0.3,
 		cameraC4dPhiRange: 0.3,
 
 		fogEnabled: true,
@@ -54,7 +54,7 @@ var Settings = function() {
 		snowParticleColorDark: 0x1676ff,
 		snowParticleBounds:  {x:100.0, y:40.0, z:30.0 },
 		snowParticleDiameter: 20.0,
-		snowParticleDiameterDark: 40.0,
+		snowParticleDiameterDark: 35.0,
 		snowParticleWindSpeed: 1.0,
 		snowParticleWindSpeedDark: 0.8,
 		snowParticleWindDir: {x:-1.5,y:-1.0,z:0.0},
