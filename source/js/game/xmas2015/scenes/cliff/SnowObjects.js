@@ -19,6 +19,7 @@ SnowObjects.prototype.init = function() {
 		    	fragmentShader: RES.shaders['snow.fp'],
 		    	uniforms: { 
 			        uTime: {type: "f", value: 0.0},
+			        uPhongCoeff: {type: "f", value: 1.0},
 			        uMoveDelta: {type: "f", value: 1.0},
 			        uColorSnow: {type: "v3", value: v3(SETTINGS.snowColor)},
 			        uColorSky: {type: "v3", value: v3(SETTINGS.clearColor)},
@@ -50,9 +51,12 @@ SnowObjects.prototype.update = function() {
 	this.colorSnow.setHex(SETTINGS.snowColor);
 	var that = this;
 
+	var isLight = GetObj("LightDark").state === "LIGHT";
+
 	this.meshesSnow.forEach( function(mesh) {
 
 		var colorSkyCurr = colorSky;
+		var phongCoeff = 1.0;
 
 		// height
 		var snowHeightCoeff = SETTINGS.snowHeightCoeff;
@@ -61,6 +65,7 @@ SnowObjects.prototype.update = function() {
 		}
 		else if ( mesh.parent.name.contains("TreeSnow") ) {
 			snowHeightCoeff = 0.02;	
+			phongCoeff = isLight ? 0.0 : 1.0;	
 			colorSkyCurr.lerp( colorSky, 0.45);
 		}
 
@@ -69,6 +74,7 @@ SnowObjects.prototype.update = function() {
 		mat.uniforms.uColorSky.value = colorSkyCurr;
 		mat.uniforms.uColorSnow.value = v3(that.colorSnow.r, that.colorSnow.g, that.colorSnow.b);
 		mat.uniforms.uMoveDelta.value = snowHeightCoeff;
+		mat.uniforms.uPhongCoeff.value = phongCoeff;
 	});
 };
 
